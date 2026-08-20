@@ -17,6 +17,9 @@ init:
     image flickering noise1 = "mods/simple_happiness_mod_efim/images/anim/simple_happiness_flickering1.png"
     image flickering noise2 = "mods/simple_happiness_mod_efim/images/anim/simple_happiness_flickering2.png"
     image flickering noise3 = "mods/simple_happiness_mod_efim/images/anim/simple_happiness_flickering3.png"
+    image fullscreen_flickering noise1 = "mods/simple_happiness_mod_efim/images/anim/simple_happiness_fullscreen_flickering_1.png"
+    image fullscreen_flickering noise2 = "mods/simple_happiness_mod_efim/images/anim/simple_happiness_fullscreen_flickering_2.png"
+    image fullscreen_flickering noise3 = "mods/simple_happiness_mod_efim/images/anim/simple_happiness_fullscreen_flickering_3.png"
 
     image bg prologue_backdrop = "mods/simple_happiness_mod_efim/images/backdrop/simple_happiness_prologue_backdrop.png"
     image bg prologue_monitor_cactus = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_prologue_monitor_cactus.png"
@@ -24,15 +27,34 @@ init:
     image bg prologue_bus_ent = "mods/simple_happiness_mod_efim/images/anim/simple_happiness_prologue_bus_ent.jpg"
     image bg prologue_bus_ent2 = "mods/simple_happiness_mod_efim/images/anim/simple_happiness_prologue_bus_ent2.jpg"
     image bg ext_storage_day = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_ext_storage_day.png"
+    image bg ext_storage_sunset = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_ext_storage_sunset.png"
     image bg int_warehouse_day = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_warehouse_day.png"
+    image bg int_dining_hall_people_sunset = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_dining_hall_people_sunset.png"
+    image bg d1_rena_sleep = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_d1_rena.jpg"
 
     image cg bus_view_left = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_out_bus_view_left.png"
     image cg bus_view_right = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_out_bus_view_right.png"
+    image cg d1_sleep_nothingness = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_d1_sleep_nothingness.jpg"
+    image cg d1_food_normal_sunset = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d1_food_normal_sunset.png"
+
     image sl veryfar = "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_veryfar_normal.png"
     image sl naked smile = "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_naked_smile.png"
 
+    image mt nightdress normal = "mods/simple_happiness_mod_efim/images/sp/mt/simple_happiness_mt_1_nightdress_normal.png"
+    image mt nightdress sad = "mods/simple_happiness_mod_efim/images/sp/mt/simple_happiness_mt_1_nightdress_sad.png"
+    image mt nightdress grin = "mods/simple_happiness_mod_efim/images/sp/mt/simple_happiness_mt_3_nightdress_grin.png"
+
+    image obhod none = "mods/simple_happiness_mod_efim/images/sp/obhod/simple_happiness_obhod_0.png"
+    image obhod one = "mods/simple_happiness_mod_efim/images/sp/obhod/simple_happiness_obhod_1.png"
+    image obhod two = "mods/simple_happiness_mod_efim/images/sp/obhod/simple_happiness_obhod_2.png"
+    image obhod three = "mods/simple_happiness_mod_efim/images/sp/obhod/simple_happiness_obhod_3.png"
+    image obhod full = "mods/simple_happiness_mod_efim/images/sp/obhod/simple_happiness_obhod_full.png"
+
     # Инициализация звуков
     $ smoking_cigaret = "mods/simple_happiness_mod_efim/sounds/sfx/smoking_cigaret.mp3"
+
+    # Персонажи
+    define pis = Character(name=u"Пионеры", color="#ffffff", what_color="#f1d076")
 
 
 # == РАБОЧИЕ ЛЕЙБЛЫ ==
@@ -78,12 +100,19 @@ label custom_day_screen(day_num, title):
 
 # == АНИМАЦИИ ==
 
-# Мерцание экрана
+# Мерцание экрана монитора
 transform screen_flickering:
-    alpha 1.0
-    linear 0.1 alpha 0.3
-    linear 0.1 alpha 0.9
     linear 0.05 alpha 0.2
+    linear 0.1 alpha 0.9
+    linear 0.05 alpha 0.3
+    linear 0.15 alpha 1.0
+    repeat
+
+# Мерцание экрана
+transform fullscreen_flickering:
+    linear 0.05 alpha 0.2
+    linear 0.1 alpha 0.9
+    linear 0.05 alpha 0.3
     linear 0.15 alpha 1.0
     repeat
 
@@ -1498,3 +1527,963 @@ label simple_happiness_mod_day1:
     "Ощущения были как в молодости, когда приходилось гаситься, и постоянно озираться, чтобы ни дай Бог, не спалил никто."
     "..."
     "Потушив окурок, и выкинув его подальше в траву, я откинулся, и закрыл глаза."
+
+    show blink
+
+    stop music fadeout 2.0
+    pause(1.0)
+    play music music_list["reminiscences"] fadein 3.0 volume 0.4
+
+    call to_nvl_mode
+
+    "Хех, вот те раз."
+    "Оказался неизвестно {i}где{/i}, неизвестно {i}когда{/i} и {i}как{/i}, и пожалуйста, развалился в гамачке, потягивая сигаретку, наслаждаюсь тёплым летним днём и пением птичек…"
+    "Нет, тут точно что-то не чисто. И с этим местом, и со мной."
+    "Может, меня накачали чем-то, что я так осмелел?"
+    "..."
+    "Очередные пространные рассуждения начали уносить меня в глубины подсознания, и скоро я задремал…"
+    "..."
+
+    stop ambience fadeout 2.0
+    stop music fadeout 2.0
+    pause(1.0)
+    play music music_list["sparkles"] fadein 3.0 volume 0.4
+
+    nvl clear
+
+    "Снилась мне какая-то неразбериха."
+    "Один из тех случаев, когда сложно выудить какие-то осязаемые моменты из сна, а все воспоминания представлены скорее в виде ощущений…"
+
+    call to_adv_mode
+
+    hide blink
+    show fullscreen_flickering noise1 at fullscreen_flickering
+    show fullscreen_flickering noise2 at fullscreen_flickering
+    show fullscreen_flickering noise3 at fullscreen_flickering
+    show bg ext_bus_night
+    with dissolve
+    
+    pause(0.5)
+
+    "Помню автобус..."
+
+    show bg ext_camp_entrance_night
+    with dissolve
+    
+    pause(0.5)
+
+    "Ворота в лагерь..."
+
+    play sound sfx_scary_sting
+
+    show bg d1_rena_sleep
+    with dissolve
+    
+    pause(0.5)
+
+    "Какую-то страшную ебаку..."
+    "И..."
+
+    show cg d1_sleep_nothingness
+    with dissolve
+
+    hide fullscreen_flickering noise1
+    hide fullscreen_flickering noise2
+    hide fullscreen_flickering noise3
+
+    "Пустоту."
+    "Всеобъемлющую, всепоглощающую."
+    "И такую тягучую, плотную, неприятную, от которой никак не получается освободиться…"
+
+    stop music fadeout 5.0
+
+    sl "Семён! {w}Семён! {w}Сёма, блин, проснись!"
+    th "Что?"
+
+    $ sunset_time()
+    $ persistent.sprite_time = "sunset"
+
+    play ambience ambience_camp_center_evening fadein 5.0 volume 0.75
+
+    hide cg
+    show bg ext_house_of_mt_sunset
+    with dissolve
+    show sl pioneer smile
+
+    pause(1.0)
+
+    "Я продрал глаза. Передо мной стояла Славя."
+    me "Что? Что происходит?"
+    
+    show sl pioneer laugh with good_dspr
+
+    sl "Аха-ха, ну ты даёшь!"
+    sl "Продрых пол дня, и спрашиваешь, что происходит."
+    sl "Вечер уже, Семён, время ужина."
+
+    show sl pioneer smile with dspr
+
+    "Я поднялся с гамака, покачиваясь."
+    me "Ужин — это хорошо… {w}А ты чего тут?"
+    sl "Я хотела к Ольге Дмитриевне зайти, спросить, будет ли она на ужине. {w}Ну, и-и…"
+
+    show sl pioneer shy with dspr
+
+    "Славя, кажется, немного замялась."
+    sl "Хотела спросить у неё, куда тебя заселили… {w}Чтобы потом в гости зайти…"
+    sl "Ты же был бы не против?"
+    th "Вот те раз. Эта девочка явно что-то замышляет… {w}А вот плохое, или доброе – вопрос."
+    "Я улыбнулся, и ответил."
+    me "Ну конечно, был бы не против! {w}Твоей компании я всегда за."
+    me "А вожатая ушла, незадолго после того, как я к ней явился. И да, жить я буду у неё, говорит, мест нет."
+
+    show sl pioneer surprise with good_dspr
+
+    "Славя округлила свои, и без того большие глаза."
+    sl "Ого! Ну, это даже хорошо, знаешь. У неё хороший домик, не как у всех остальных. И место приятное."
+    me "Да, думаю не зря Ольга Дмитриевна его выбрала. {w}О, а вот кстати, она."
+
+    show mt pioneer normal panama at left
+    with good_dspr
+
+    mt "Славя, ты тут какими судьбами?"
+
+    show sl pioneer smile with dspr
+
+    sl "А я хотела узнать вот, ждать вас на ужине или нет."
+    mt "Да, я буду. Сейчас как раз горн прозвучит, так что, можно уже выдвигаться."
+
+    show mt pioneer smile panama with dspr
+
+    mt "Кстати, Семён. {w}Руководство всё одобрило, так что мы с тобой теперь официально сожители!"
+    th "Спасибо, хоть не пара."
+    "Я улыбнулся, и сказал."
+    me "Рад слышать! {w}Ну что, может пойдём ужинать?"
+    mt "Да, идёмте."
+    "Втроём мы двинулись в сторону столовой."
+    "..."
+
+    show bg ext_dining_hall_away_sunset with dissolve2
+
+    play music music_list["dance_of_fireflies"] fadein 3.0 volume 0.75
+
+    "Пока мы шли, прозвучал горн, а на подходе к столовой, помимо меньшей толпы пионеров, я заметил, что начало вечереть."
+
+    show mt pioneer normal panama with dspr
+
+    mt "Вы пока заходите, получайте пайку, я вас отмечу. А мне надо поговорить с вожатыми других отрядов."
+    sl "Хорошо."
+
+    show mt pioneer normal panama at walk_away_left
+
+    "..."
+
+    hide mt
+
+    stop ambience fadeout 2.0
+
+    show bg int_dining_hall_people_sunset with dissolve2
+
+    "Мы зашли в помещение."
+
+    play ambience ambience_dining_hall_full fadein 1.0
+
+    "В этот раз народу и правда успело набежать меньше, так что мы могли выбрать столик, за который сесть."
+    me "Давай вон туда, в уголок."
+    sl "Давай."
+    "Мы взяли свои порции, и сели за стол."
+
+    hide sl
+    show sl pioneer normal at right
+    with good_dspr
+
+    "Не успели мы пожелать друг другу приятного аппетита, как к нам подошла какая-то пионерка с волосами василькового цвета."
+
+    show un pioneer shy at fleft
+    with long_dspr
+
+    unp "Славя, привет. К вам можно?"
+
+    show sl pioneer smile with dspr
+
+    sl "Да, Лена, конечно! Садись."
+
+    show un pioneer normal at left
+    with good_dspr
+
+    "Она села."
+    sl "Знакомься, это Семён, наш новенький. Только сегодня приехал."
+    me "Здравствуй."
+
+    show un pioneer shy with dspr
+
+    un "Привет…"
+    th "А она немногословна. Или стесняется?"
+
+    show un pioneer smile with dspr
+
+    "..."
+    "Мы приступили к трапезе."
+
+    show cg d1_food_normal_sunset with dissolve
+
+    "В этот раз хотелось есть сильнее, так что я накинулся сразу на всё."
+    "И ужин не разочаровал."
+    "Давали пюре с котлетой (правда её состав так и остался для меня загадкой) и горошком, а также стакан морса."
+    th "А повара тут и правда умеют готовить, Славя не соврала."
+    "..."
+    "Я был настолько увлечён едой, что даже не сразу заметил, как Лена, что-то робко спрашивает у Слави."
+
+    hide cg d1_food_normal_sunset with dissolve
+
+    pause(0.5)
+
+    un "... весь день?"
+    
+    show sl pioneer smile2 with dspr
+
+    sl "Да я почти с самого утра Семёну помогала, потом на кухню."
+
+    show sl pioneer smile with dspr
+
+    sl "Повара просили помочь заготовить фарш по рецепту мамы, который я с собой привезла."
+    sl "Ну а дальше в сад, немного цветами занялась."
+
+    show un pioneer shy with dspr
+
+    un "Да… Ты вообще отдыхаешь?"
+    sl "Ты же знаешь, Лена, для меня отдых это смена деятельности."
+    un "Да…"
+    "Остаток ужина мы провели молча, лишь изредка я и Славя перекидывались парой фраз."
+    "..."
+
+    stop music fadeout 3.0
+    stop ambience fadeout 3.0
+
+    show bg ext_dining_hall_near_sunset with dissolve2
+
+    show un pioneer normal
+    show sl pioneer smile
+    with dspr
+
+    "Мы вышли из столовой."
+
+    play ambience ambience_camp_center_evening fadein 2.0 volume 0.75
+    play music music_list["raindrops"] fadein 3.0 volume 0.7
+
+    "На улице уже порядком посвежело, и я вдохнул приятный вечерний летний воздух."
+
+    show sl pioneer smile2 at center
+    with good_dspr
+
+    sl "Слушай, Семён."
+    me "Да?"
+    sl "Ты сейчас что-нибудь собирался делать?"
+    sl "Мы хотели с Леной пойти к ней в домик, она ещё несколько дней назад обещала продолжить учить меня рисовать."
+    th "Она у меня что, разрешения спрашивает?"
+    me "Ого, Лена, ты рисуешь?"
+
+    show sl pioneer smile
+    show un pioneer shy
+    with dspr
+
+    un "Ну, да-а… {w}Хотя у меня не очень получается, но всем, почему-то, нравится."
+    me "Хм. Я не видел, но уверен, что рисуешь ты отлично."
+
+    show un pioneer smile with dspr
+
+    me "Во всяком случае, не смею задерживать, дамы. {w}Приятного вечера!"
+    sl "Пока, Семён! М-м-м… {w}Уже, наверное, до завтра?"
+    me "До завтра, Славя. Ещё обязательно увидимся!"
+    th "Если меня опять куда-нибудь не забросит."
+    un "Пока!"
+
+    show sl pioneer smile at walk_away_left
+    show un pioneer smile at walk_away_left
+
+    "Девушки ушли, а я ещё некоторое время стоял, облокотившись на перилла крыльца столовой, и вкушал чистый воздух."
+
+    hide sl
+    hide un
+
+    stop music fadeout 1.0
+    pause (1.0)
+    play sound sfx_punch_medium volume 1.0
+    pause(1.0)
+    play music music_list["doomed_to_be_defeated"] volume 1.0
+
+    th "Ч-что за!??"
+    "Я начал оборачиваться, сжимая кулаки, и готовый принять свою смерть."
+    "Но..."
+
+    show dv pioneer laugh close at center
+    with good_dspr
+
+    "Передо мной стояла Алиса, заливающаяся смехом."
+
+    stop music fadeout 1.0
+
+    dv "А-ха-ха! Видел бы ты свою рожу, ха-ха-ха! Попался всё-таки!"
+    "Я выдохнул, и разжав кулаки, тоже несколько раз хохотнул, но скорее нервно."
+    me "Алиса, блин! До инфаркта доведешь!"
+
+    show dv pioneer smile with dspr
+
+    dv "Да, ладно-ладно, не кипятись, шутка же!"
+    me "Ну и шутки у тебя…"
+    "Я окончательно успокоился, и спросил."
+
+    play music music_list["get_to_know_me_better"] fadein 3.0 volume 0.8
+
+    me "Ты что-то хотела?"
+
+    show dv pioneer normal with dspr
+
+    dv "Да… {w}Но для начала отойдем в сторону."
+
+    show dv pioneer normal at cleft
+    with good_dspr
+
+    "Мы отошли."
+
+    show dv pioneer grin with dspr
+
+    dv "Ты помнишь про свой долг?"
+    th "Ёбана мать, что бы она ни задумала, мне это уже не нравится."
+    me "Д-да."
+    dv "Так вот..."
+
+    show dv pioneer smile with dspr
+
+    dv "Я знаю, что у тебя есть... {i}Сигареты{/i}."
+    "Последнее слово она произнесла шёпотом."
+    th "Что? Как?"
+    "Этот же вопрос я задал ей."
+    "Глупо было отнекиваться, она явно не блефовала, я это чувствовал."
+    dv "А когда ты пришёл на пристань, и мы заговорили, я запах почувствовала."
+    th "Ну конечно. А жвачку из дома я как раз и не взял."
+    me "Кхм, ну… Да, есть. {w}Ты хочешь покурить?"
+    "Прямо задал вопрос я. Алиса тоже не стала играть."
+
+    show dv pioneer grin with dspr
+
+    dv "Да. {w}Одна сигарета, и твой должок закрыт."
+    me "Хорошо. Но при одном условии. {w}Ты дашь мне жвачку. Пару ломтиков."
+    th "Не знаю, откуда я был уверен, что она у неё есть."
+    th "Нно Алиса походила на бунтарку, которая лет, этак, десять назад, сошла бы за контингент, обитающий у подъезда, и сидящий на корточках."
+    th "Ну, или на панкуху."
+
+    show dv pioneer smile with dspr
+
+    dv "Э, ты какой хитрый. {w}Это уже не отработка долга получается, а обмен."
+    me "Но сигареты тебе все равно более достать негде. {w}Думай."
+    dv "Ла-адно, посмотрим ещё как сигарета мне понравится. {w}Пошли за склад."
+    "Я внутренне рассмеялся."
+    "Давно уже было то время, когда мне приходилось прятаться ото всех, чтобы покурить."
+    me "Ну пойдём… {w}Конспираторша."
+    "..."
+
+    stop ambience fadeout 2.0
+
+    pause(0.5)
+
+    show bg ext_storage_sunset with dissolve2
+
+    "Мы пришли к складу, в котором я днем получал одежду, и зашли немного за угол."
+
+    play ambience ambience_forest_evening fadein 3.0
+
+    show dv pioneer normal with good_dspr
+
+    dv "Ну, не тяни кота за одно место! {w}Доставай!"
+    me "Эка ты, какая нетерпеливая! Сейчас, подожди."
+    "Я достал из кармана пачку сигарет, и зажигалку. Достал одну себе и одну Алисе."
+
+    show dv pioneer surprise with dspr
+
+    dv "Ого! Кэмэл? {w}Ты где их достал, это ж заграничные!"
+    me "Секрет фирмы, о как!"
+    "Я вставил сигарету в зубы."
+
+    show dv pioneer smile with dspr
+
+    me "Давай я тебе подкурю."
+
+    play sound sfx_match_candle
+    queue sound smoking_cigaret
+
+    "Мы раскурили сигареты, и молча стояли, пускали дым."
+    "На удивление, Алиса не кашляла и даже не морщилась, как это обычно происходит у неопытных курильщиков."
+    me "А ты, я смотрю, курильщица со стажем? {w}Вон как тянешь, и не кашляешь."
+
+    queue sound smoking_cigaret
+
+    show dv pioneer normal with dspr
+
+    "Алиса выпустила дым после затяжки."
+    dv "Ну, не то что бы прям со стажем."
+    dv "Но после, Беломор Канала, знаешь, тут и кашлять не от чего."
+
+    show dv pioneer smile with dspr
+
+    dv "Отличные сигареты!"
+    "Докурили мы в тишине."
+    me "Ну что, долг отработан?"
+
+    show dv pioneer guilty with good_dspr
+
+    dv "Даже с лихвой, знаешь. {w}Мне теперь даже неудобно, как-то. {w}Такие дорогие сигареты у тебя вытянула."
+    dv "А знаешь? {w}Забирай всю пачку жвачки, тут штук шесть ещё осталось. Сейчас, только одну возьму."
+
+    show dv pioneer normal with half_good_dspr
+
+    "Алиса ловким движением вынула одну серебрянку, раскрыла её и положила в рот."
+    "Оставшееся она протянула мне."
+    "Я принял жвачку, и пока доставал себе, сказал, смотря на Алису."
+
+    play sound sfx_cigarette_pack_crumple volume 0.4
+
+    me "Спасибо. {w}А кстати, тут возможно вообще сигареты-то достать?"
+    me "Мои рано или поздно закончатся."
+
+    show dv pioneer smile with dspr
+
+    dv "Ну-у… {w}Пацаны у водителей заказывают, которые еду в столовую привозят из ближайшей деревни."
+    dv "Сами мы туда не добежим, далековато. Иногда просят и более…"
+
+    show dv pioneer grin with dspr
+    pause(0.5)
+
+    dv "Изысканные вещи, если ты понимаешь о чем я."
+    "Я улыбнулся."
+    me "Ага… Ну получается, как договоришься?"
+
+    show dv pioneer smile with dspr
+
+    dv "Получается так. {w}Ну что, пойдем обратно? Пока нас не потеряли."
+    me "Почапали."
+
+    stop ambience fadeout 3.0
+
+    show dv pioneer normal at right
+    with long_dspr
+
+    show bg ext_dining_hall_away_sunset with dissolve2
+
+    "На обратном пути я переваривал информацию, которую только что узнал."
+
+    play ambience ambience_camp_center_evening fadein 3.0
+
+    "Во-первых, в лагере появляются люди кроме тех, что уже здесь. Это хорошо."
+    "Во-вторых, судя по словам Алисы, в относительной близости есть населённый пункт. Это тоже хорошо."
+
+    show bg ext_square_sunset with dissolve
+
+    "И в-третьих, разжиться запрещёнкой тут всё-таки можно."
+    "Это тоже хорошо, в особенности, если не получится никак реализовать первые два пункта."
+
+    show dv pioneer smile at cright
+    with good_dspr
+
+    dv "Мы на площади."
+    "Алиса вывела меня из раздумий."
+    dv "Так, ну мне налево. А тебе? {w}Где живешь?"
+    me "Поверишь, нет? {w}С вожатой. {w}В домике Ольги Дмитриевны."
+    "С некоторой долей непонятной гордости сказал я."
+
+    show dv pioneer grin with good_dspr
+
+    dv "М-м, вот оно как. Ну ты смотри, Оля наша горячая штучка."
+    dv "А чтобы кому-то удавалось Изделие из резины №2 тут заполучить, я такого не слышала."
+    dv "Хотя, может в медпункте есть?"
+    "Я уставился на неё глазами по пять рублей."
+    th "Или в этом времени правильно говорить «по пять копеек»?"
+    me "Ну ты блин, {w}придумаешь тоже…"
+    dv "А что? Она у нас молодая, красивая. {w}Ты тоже ничего."
+
+    show dv pioneer smile with dspr
+
+    "Алиса сверкнула глазками."
+    me "Спасибо за комплимент, но мы знакомы же пару часов! {w}Ох молодёжь, ох нравы!"
+
+    show dv pioneer laugh with dspr
+
+    dv "Аха-ха, ладно тебе, моралист. Шутка юмора!"
+    
+    show dv pioneer smile with dspr
+
+    dv "Ладно, бывай!"
+    me "Пока!"
+
+    show dv pioneer normal at walk_away_left
+
+    stop music fadeout 2.0
+
+    "Я остался один на площади."
+    "Судя по освещённости, время было ещё не позднее."
+    "И опять вопрос, чем бы заняться?"
+
+    hide dv
+
+    play music music_list["two_glasses_of_melancholy"] fadein 2.0 volume 0.75
+
+    th "А почему я вообще должен чем-то заняться? Я вполне заслужил отдых."
+    th "Вот сейчас сяду на лавочку, и буду отдыхать."
+    "Решительно направившись в сторону ближайшей, и сев на неё, я уставился на небо."
+    "Ночь уже постепенно начала вступать в права, но всё ещё боролась с вечерним заревом."
+    "Те редкие минуты, когда всё вокруг ещё неплохо освещено, но на небе уже проглядывают редкие звезды."
+    th "Хорошо тут. Дышится легко, и энергии много. Я как будто помолодел лет на 8, хех."
+
+    stop music fadeout 1.0
+
+    mip "Ой, привет! А я тебя раньше не видела!"
+    "Я опустил взгляд."
+
+    show mi pioneer normal far with long_dspr
+
+    th "Так. А это что ещё за импортный пионер?"
+
+    play music music_list["so_good_to_be_careless"] fadein 1.0 volume 0.9
+
+    "Передо мной стояла пионерка. Волосы её были лазурные, скорее даже, цвета морской волны."
+    "И приятное на вид, с явными азиатскими чертами лицо."
+
+    show mi pioneer smile with dspr
+
+    mip "Привет, меня Мику зовут! Правда-правда, никто не верит, но меня правда так зовут! А всё, потому что у меня папа из Японии, а мама русская. Вот и получилась я. Но я вообще уже давно в Союзе живу, даже вот, пионером стала!"
+    th "Ох ё, кроет как из пулемёта. Меня аж чуть со скамейки не перевернуло."
+
+    show mi pioneer normal with dspr
+
+    me "Привет! Семён, будем знакомы. Присаживайся, в ногах правды нет, как говорится."
+    "Я немного подвинулся, уступая девушке место."
+    mi "Ой, спасибо! Хотя ты знаешь, я уже собиралась идти дела заканчивать, и ко сну готовиться, но можно и посидеть, поболтать пару минут!"
+
+    hide mi
+    show mi pioneer normal close at right
+    with good_dspr
+
+    me "Ага… Так ты из Японии, говоришь?"
+
+    show mi pioneer smile with dspr
+
+    mi "Ну, вообще, мы оттуда уехали, когда я ещё маленькая была, почти ничего не помню, но папа у меня туда часто командируется!"
+    mi "Он у меня мосты строит, он этот, инжир!"
+    "Я прыснул."
+    me "Извини, аха… Ха, извини. Ты, наверное, хотела сказать «инженер»?"
+
+    show mi pioneer shy with good_dspr
+
+    "Мику немного покраснела."
+
+    mi "О-ха-ё, да, точно, ин-же-нер!"
+    mi "Хи-хи, ничего страшного, я не обижаюсь!"
+
+    show mi pioneer smile with good_dspr
+
+    mi "Я в семье просто на двух языках разговариваю, с мамой на русском, а с папой на японском, ну, иногда наоборот, просто я оба языка знаю, чтобы не забыть, небольшая практика, вот."
+    mi "А так как сначала я росла всё-таки в Японии, можно сказать, что родной у меня японский, а не русский, поэтому русские слова я иногда путаю."
+    "Говорила она, конечно, очень быстро, но интересно."
+    "Всегда любопытно пообщаться с человеком из другой страны."
+    "Тем более в такой… {i}Необычной{/i}, по крайней мере, для меня, обстановке."
+    "Да и голос у неё был приятный. Что-то он мне даже напоминал. Но вот что?"
+    me "Ух ты, а это интересно. А можешь сказать что-нибудь на японском?"
+
+    show mi pioneer normal with good_dspr
+
+    mi "{font=mods/simple_happiness_mod_efim/gui/fonts/NotoSansJP-Regular.ttf}私たちの音楽クラブへようこそ!{/font} (watashitachi no ongaku kurabu he yokoso!)."
+
+    show mi pioneer smile with good_dspr
+
+    me "Ох ё! {w}Ничего не понял, но звучит красиво! А что это значит?"
+
+    show mi pioneer laugh with dspr
+
+    mi "Хи-хи, а это ты завтра узнаешь!"
+
+    show mi pioneer happy with dspr
+
+    mi "Ты же новенький да? Я видела тебя со Славей, как вы шли от остановки, но не подошла, была занята."
+    me "Да, я сегодня приехал. А почему завтра?"
+
+    show mi pioneer smile with dspr
+
+    mi "Вот завтра и узнаешь!"
+
+    show mi pioneer normal far with long_dspr
+
+    "Девушка вскочила, и поправив хвостики, продолжила."
+    mi "Прости пожалуйста, но я побежала, очень срочно идти надо!"
+    mi "Завтра увидимся, Семён!"
+    me "Пока…"
+
+    show mi pioneer normal far at walk_away_right
+
+    "Успел только я кинуть в след."
+
+    stop music fadeout 2.0
+    stop ambience fadeout 3.0
+
+    th "Да, девочка ураган прямо. Только словесный."
+
+    $ night_time()
+
+    show bg ext_square_night with dissolve
+
+    $ persistent.sprite_time = "night"
+
+    pause(2.0)
+
+    play ambience ambience_camp_center_night fadein 2.0 volume 0.9
+    play music music_list["trapped_in_dreams"] fadein 3.0 volume 0.75
+
+    th "Похоже, темнеет. Ну, значит и мне пора."
+    "Я встал со скамейки, и направился к домику."
+    "..."
+
+    show bg ext_house_of_mt_night with dissolve3
+
+    "Через несколько минут я уже был на пороге. Внутри горел свет."
+    "Перед тем как заходить, я постучал."
+
+    play sound sfx_knock_door7_polite volume 0.8
+
+    "Через несколько секунд раздался голос."
+    mt "Войдите!"
+
+    show bg int_house_of_mt_night with dissolve
+
+    show mt nightdress normal at cright
+    with long_dspr
+
+    stop ambience fadeout 1.0
+
+    "Я зашел внутрь. Вожатая уже была переодета в ночнушку."
+
+    play ambience ambience_camp_center_night fadein 1.0 volume 0.5
+
+    mt "Семён, наконец-то пришёл. {w}Нагулялся? {w}Закрой дверь на щеколду."
+
+    play sound sfx_lock_close volume 0.6
+
+    "Я закрыл и ответил."
+    me "Да. Так, походил немного, лагерь посмотрел. Здорово здесь."
+    mt "Это верно. {w}Вот что, Семён."
+    mt "Так как ты тут теперь живешь, вот."
+
+    play sound sfx_keys_rattle volume 0.9
+
+    "Она достала из кармана ключ и передала мне."
+
+    show mt nightdress grin with dspr
+
+    mt "Это второй ключ от нашего домика, первый у меня. Теперь ты полноправный жилец."
+    "Она улыбнулась."
+    me "Здорово, спасибо!"
+
+    show mt nightdress normal with dspr
+
+    mt "Не за что."
+    mt "Так, ну всё, время позднее."
+    mt "А завтра понедельник, у нас и у тебя много дел. Так что давай, стелись и спать."
+    mt "Я пока выйду, подышу свежим воздухом."
+    mt "Чтоб, когда я пришла, ты уже лежал в постели, всё понятно, пионер?"
+    me "Я, да, это, есть, я, всё понял!"
+
+    show mt nightdress grin with dspr
+
+    "Она мило улыбнулась, довольная своим командирским нравом."
+    mt "Вот и отлично!"
+
+    show mt nightdress normal with dspr
+    pause(0.5)
+    show mt nightdress normal at walk_away_right
+    pause(2.0)
+    hide mt with dspr
+
+    "Вожатая вышла из домика, а я приступил к вечернему ритуалу."
+    "Хотя приступать было особо не к чему."
+    "Я просто разделся до трусов, аккуратно сложил вещи на стул, нырнул в кровать, и устроившись поудобнее, положил руки под голову."
+    "..."
+
+    call to_nvl_mode
+
+    "Так, пора подвести итоги сегодняшнего дня."
+    "Меня не пытались избить, ограбить, изнасиловать или убить."
+    "Место кажется дружелюбным… {w}И даже ничего не вызывает подозрения! Вот что я не мог понять всё это время!"
+    "Казалось бы, ситуация наистраннейшая. Попал неизвестно куда, может вообще в другое время."
+    "По всем канонам меня сейчас должны испытывать как лабораторную крыску, подсовывая всякие испытания, но нет… "
+    "Всё вокруг, и люди, и окружение – было дружелюбным, и даже оно, дружелюбие, не было… {w}Наигранным что ли?"
+    "Всё не просто казалось настоящим, оно таким и являлось, и это единственное, что вызывало подозрения, но оно же и успокаивало."
+
+    call to_adv_mode
+
+    "Решительно придя к тому, что я ни к чему не пришел, я решил оставить поиск ответов до завтра, а сейчас решил сосредоточиться на сне."
+    "..."
+    th "А вожатой всё нет. Куда это она, интересно, бегает, на ночь глядя, в одной ночнушке?"
+
+    stop music fadeout 5.0
+    stop ambience fadeout 5.0
+
+    th "Ох, не простая вы, Ольга Дмитриевна, ох не простая."
+    "..."
+    "Повертев ещё пару минут в голове всякое, я начал проваливаться в сон…"
+
+    show blink
+
+    window hide
+
+    pause(1.0)
+
+    jump simple_happiness_mod_day2
+
+
+label simple_happiness_mod_day2:
+    $ backdrop = "days"
+    $ new_chapter(2, u"Простое Счастье. День 2")
+
+    $ day_time()
+    $ set_mode_adv()
+    $ persistent.sprite_time = "day"
+
+    play music music_list["everyday_theme"] fadein 6.0 volume 0.5
+
+    "Несмотря на пережитый стресс, спал я хорошо."
+    "Не понятно, сказывалась накопившаяся усталость, или в этом месте просто так хорошо спится, но проснулся я полный сил."
+    "Однако по природе своей не упустил возможности ещё немного полежать с закрытыми глазами, нежно потягиваясь в кровати."
+    th "Интересно, вожатая меня разбудит? И сколько вообще время?"
+    "Вот как оказывается некомфортно себя ощущаешь, лишившись благ современной цивилизации."
+    "Такая простая вещь, как возможность постоянно знать о текущем времени, но лишившись её, сразу чувствуешь себя некомфортно."
+    mt "Семён, подъём!"
+    "Вожатая не заставила себя долго ждать."
+
+    hide blink
+    show unblink
+
+    show bg int_house_of_mt_day with dissolve1
+
+    show mt pioneer normal panama far at fright
+    with dspr
+
+    "Я открыл глаза, и сел на кровати, потянувшись и зевнув."
+    me "Доброе утро, Ольга Дмитриевна."
+    "Она уже стояла в форме и панамке."
+    mt "Доброе, Семён. Давай, одевайся, и иди в столовую. Завтрак через 20 минут. А я на обход."
+    mt "И домик не забудь закрыть!"
+    me "Хорошо. Будет сделано, т-рищ начальник!"
+
+    show mt pioneer laugh panama far with dspr
+
+    "Она улыбнулась."
+    me "А вот за «т-рища» могу и треснуть."
+
+    show mt pioneer smile panama far with dspr
+    pause(0.5)
+    show mt pioneer smile panama far at walk_away_right
+    pause(0.5)
+
+    "Я лишь только тоже улыбнулся в ответ, и вожатая вышла из домика."
+    "..."
+    "Одевшись, и кое-как заправив постель, я огляделся, и только сейчас заметил зеркало, висящее на дверце шкафа."
+    th "~ Интересно, как я выгляжу в пионерской форме?"
+    th "Наверное, просто верх идиотизма."
+
+    stop music fadeout 2.0
+
+    "Я подошел к зеркалу, и…"
+
+    play music music_list["doomed_to_be_defeated"]
+
+    show cg d2_mirror with dissolve
+
+    th "Твою мать!"
+    "От неожиданности я чуть не отпрянул, но всё-таки схватился за дверцу, и уставился в отражение."
+    "В отражении был не я!"
+    "Где месячная небритость, мешки под глазами, и вечное выражение лица, которое ясно даёт понять всему миру, что у меня нет желания ни с кем общаться?"
+    "В отражении стоял молодой парень лет 16–18 в хорошем телосложении... {w}Погоди-ка."
+    "Я присмотрелся."
+    th "Господи… Да этож я!"
+    "Ну точно, это был я! {w}Только образца конца школы – начала института."
+    "Не зря я чувствовал в себе перемены."
+    "И вот почему никто не обращал внимания на мой возраст. {w}Потому что я с ними одного возраста!"
+
+    stop music fadeout 2.5
+
+    "Поразглядывав себя ещё секунд 30, я отошел от зеркала."
+
+    hide cg with dissolve
+
+    th "Чертовщина какая-то."
+    "В перемещение в пространстве и времени я ещё мог поверить, но пересадить мой разум в другое тело?"
+    "Нет, это было выше моего понимания."
+
+    play music music_list["confession_oboe"] fadein 3.5 volume 0.9
+
+    "С другой стороны, так даже лучше. Будет меньше проблем, чем если бы я выглядел на свои 25."
+    "..."
+    th "Ладно, пора в столовую."
+
+    show bg ext_house_of_mt_day with dissolve
+
+    play ambience ambience_camp_center_day fadein 2.0
+    play sound sfx_dinner_horn_processed
+
+    "Выйдя из домика, я закрыл его, и тут прозвучал горн."
+    th "Черт, надо поторапливаться."
+    "Я быстрым шагом направился в столовую, никого не встретив по дороге."
+
+    show bg ext_dining_hall_near_day with dissolve1
+
+    "У входа, как обычно, толпились пионеры, заходя в помещение, но никого из знакомых я не увидел, так что, просто зашел внутрь."
+
+    stop ambience fadeout 2.0
+
+    show bg int_dining_hall_people_day with dissolve
+
+    show mt pioneer normal at fright
+    with dspr
+
+    "На входе уже стояла Ольга Дмитриевна, и отмечала пионеров."
+
+    play ambience ambience_dining_hall_full fadein 1.5
+
+    "Я кивнул ей."
+    "Она чиркнула в тетради, и села за столик, который стоял чуть поодаль от остальных."
+
+    show mt pioneer normal at walk_away_right
+
+    "Видимо, я пришел последний из отряда."
+
+    hide mt
+
+    "..."
+    "Взяв свою порцию, я начал искать глазами, куда бы сесть, как увидел, что примерно с середины зала мне машет Славя."
+    "Я поспешно направился к ней и сел за единственное свободное место рядом со Славей."
+
+    show sl pioneer normal at cright
+    with dspr
+
+    "Пожелав всем приятного аппетита, я оглядел пионеров."
+    "Никто из них не был мне знаком, так что я заговорил со Славей."
+
+    me "Утро доброе, ну что, как вчера порисовали?"
+    sl "Доброе, Семён."
+
+    show sl pioneer smile with dspr
+
+    sl "Отлично! {w}Я тебе обязательно как-нибудь покажу, и рисунки Лены тоже."
+    me "Было бы здорово посмотреть. {w}Я вот, знаешь, никогда не умел рисовать."
+    "Мы продолжили разговаривать и есть одновременно."
+    "..."
+
+    stop ambience fadeout 2.0
+
+    show sl pioneer normal at right
+    with good_dspr
+
+    show bg ext_dining_hall_near_day with dissolve
+
+    "Закончив приём пищи, мы вышли на крыльцо, и я спросил."
+    me "Ну что, есть у нас сегодня какие-нибудь планы?"
+    "Не знаю от чего, но жутко хотелось себя чем-нибудь занять."
+
+    play ambience ambience_camp_center_day fadein 2.0 volume 0.8
+
+    sl "Ну-у, не знаю ещё, но сейчас нам точно нужно идти на линейку."
+    th "Ох-ё… Я и забыл, что в подобных местах есть линейки."
+    me "На площади, да?"
+
+    show sl pioneer smile with dspr
+
+    "Предположил я."
+    sl "Ага."
+    me "Ну, тогда пойдем."
+
+    stop music fadeout 2.0
+
+    show bg ext_square_day with dissolve1
+
+    "Мы вышли на площадь."
+
+    play music music_list["sweet_darkness"] fadein 2.0
+
+    "По всему периметру рядами стояли отряды пионеров перед своими вожатыми."
+    "Кто-то уже был построен, кто-то ещё подходил."
+    "Вместе со Славей мы подошли к своему отряду."
+
+    show sl pioneer smile at walk_away_right
+    pause(1.5)
+    hide sl with dspr
+
+    "Славя заняла свое место, а я, решив, что здесь действует простой школьный принцип «по росту», встал ближе к началу, рядом с Алисой."
+    "Я огляделся вокруг."
+    "Помимо нас, на площади стояло ещё несколько отрядов. Кто-то был нашего возраста, другие помладше."
+    "Если учесть, что все пионеры живут по двое, неужели на меня не хватило места? Учитывая количество домиков."
+
+    show mt pioneer smile panama far at cleft
+    with dspr
+
+    "Из размышлений меня вывела подошедшая вожатая."
+    mt "Всем здравствуйте, ребята!"
+    pis "Здравствуйте."
+    "Ответили пионеры в разнобой."
+    mt "Итак, начнём линейку!"
+
+    show cg d2_lineup with dissolve
+
+    mt "Начинается наша последняя неделя в лагере!"
+    mt "Я надеюсь, за эти семь дней вы сможете ещё больше подружиться, и сделать много…"
+    "Дальше я не слушал."
+    "Никогда не выносил все эти формальные сообщения от начальства к подчинённым, особенно в высоких речах."
+    th "Интересно, это так уж прям обязательно, или ей самой в кайф?"
+    mt "... Семён..."
+    "Услышал свое имя, я встрепенулся, навострил слух и посмотрел на вожатую."
+    mt "… нашем отряде."
+    mt "С кем-то из вас он уже познакомился, с кем-то ещё познакомится, но я надеюсь, что вы будете добры по отношению к нему!"
+    mt "На этом всё, линейка окончена. {w}На сегодня особых указаний не было, так что, по кружкам. {w}Вольно!"
+
+    hide mt
+    hide cg with dissolve
+
+    "Пионеры начали говорить, и расходиться."
+
+    show mt pioneer normal panama at right
+    with good_dspr
+
+    "Я, не зная, что мне делать, тоже вышел из строя, но тут ко мне подошла вожатая."
+    mt "А для тебя, Семён, у меня на сегодня особое поручение."
+    me "Для меня? И какое же?"
+
+    show sl pioneer normal at left
+    with good_dspr
+
+    "Подошла Славя."
+    "Вожатая достала из кармана юбки сложенный вчетверо листок, и передала мне."
+
+    play sound sfx_paper_bag
+
+    show obhod none at center
+    with dspr
+
+    "Я развернул его, и увидел небольшую распечатанную таблицу, с указаниями места, подписи руководителя и пометкой «вступил» у каждого поля."
+
+    "Я повертел его пару секунд."
+    me "Обходной лист?"
+
+    show mt pioneer smile panama with dspr
+
+    mt "Да. Бегунок."
+    mt "Сегодня, желательно до обеда, тебе нужно посетить все эти места, сделать отметки, и обязательно, Семён. {w}{b}{u}Обязательно{/b}{/u}. Куда-нибудь вступить."
+
+    hide obhod with dspr
+
+    "Я поднял взгляд и посмотрел на вожатую, и на Славю."
+
+    me "Ё-ё… Ольга Дмитриевна, я же тут первый день! Лагерь толком не знаю, я ж до вечера плутать буду!"
+
+    show mt pioneer normal panama
+    show sl pioneer smile
+    with half_good_dspr
+
+    "Славя, до этого стоявшая молча, сказала."
+    sl "Ольга Дмитриевна, давайте я помогу! Побуду сегодня гидом немножко."
