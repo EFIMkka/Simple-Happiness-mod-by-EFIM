@@ -1,4 +1,6 @@
 default card_game_d2_win = False # Сохранение результатов карточной игры во втором дне
+default d6_r1_winner = "" # Сохранение победителя в 6 дне, раунд 1
+default d6_r2_winner = "" # Сохранение победителя в 6 дне, раунд 2
 
 init:
     # == ИНИТЫ ==
@@ -44,6 +46,7 @@ init:
     image bg ext_stage_normal_sunset = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_ext_stage_normal_sunset.png"
     image bg ext_water_day = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_ext_water_day.jpg"
     image bg ext_musclub_concert_day = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_ext_musclub_concert_day.png"
+    image bg ext_house_of_sl_sunset = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_ext_house_of_sl_sunset.jpg"
 
     image bg int_warehouse_day = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_warehouse_day.png"
     image bg int_dining_hall_people_sunset = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_dining_hall_people_sunset.png"
@@ -51,6 +54,10 @@ init:
     image bg int_infirmary_day = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_infirmary_day.png"
     image bg int_bath_ent = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_bath_ent.jpg"
     image bg int_bathhouse = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_bathhouse.jpg"
+    image bg int_cinema_people = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_cinema_people.png"
+    image bg int_cinema_movie = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_cinema_movie.png"
+    image bg int_house_of_sl_sunset = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_house_of_sl_sunset.png"
+    image bg int_house_of_sl_night = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_house_of_sl_night.jpg"
 
     image bg d1_rena_sleep = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_d1_rena.jpg"
 
@@ -84,6 +91,21 @@ init:
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_veryfar_normal.png", im.matrix.tint(0.63, 0.78, 0.82)),
         True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_veryfar_normal.png"
     )
+    image sl civil normal = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_normal.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_normal.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_normal.png"
+    )
+    image sl civil smile = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_smile.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_smile.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_smile.png"
+    )
+    image sl pioneer_wet smile = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_wet_smile.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_wet_smile.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_wet_smile.png"
+    )
     image sl pioneer happy_cry = ConditionSwitch(
         "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_4_pioneer_happy_cry.png", im.matrix.tint(0.94, 0.82, 1.0)),
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_4_pioneer_happy_cry.png", im.matrix.tint(0.63, 0.78, 0.82)),
@@ -93,6 +115,11 @@ init:
         "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_skirt_smile.png", im.matrix.tint(0.94, 0.82, 1.0)),
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_skirt_smile.png", im.matrix.tint(0.63, 0.78, 0.82)),
         True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_skirt_smile.png"
+    )
+    image sl skirt shy = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_skirt_shy.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_skirt_shy.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_skirt_shy.png"
     )
     image sl towel normal = ConditionSwitch(
         "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_towel_normal.png", im.matrix.tint(0.94, 0.82, 1.0)),
@@ -104,10 +131,50 @@ init:
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_towel_smile.png", im.matrix.tint(0.63, 0.78, 0.82)),
         True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_towel_smile.png"
     )
+    image sl mid_naked smile = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_mid_naked_smile.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_mid_naked_smile.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_mid_naked_smile.png"
+    )
+    image sl mid_naked shy = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_mid_naked_shy.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_mid_naked_shy.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_mid_naked_shy.png"
+    )
+    image sl mid_naked smile2 = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_mid_naked_smile2.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_mid_naked_smile2.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_mid_naked_smile2.png"
+    )
     image sl naked smile = ConditionSwitch(
         "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_naked_smile.png", im.matrix.tint(0.94, 0.82, 1.0)),
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_naked_smile.png", im.matrix.tint(0.63, 0.78, 0.82)),
         True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_naked_smile.png"
+    )
+    image sl naked shy = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_naked_shy.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_naked_shy.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_naked_shy.png"
+    )
+    image sl naked smile2 = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_naked_smile2.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_naked_smile2.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_naked_smile2.png"
+    )
+    image sl naked surprise close = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_3_naked_surprise.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_3_naked_surprise.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_3_naked_surprise.png"
+    )
+    image sl naked scared close = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_4_naked_scared.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_4_naked_scared.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_4_naked_scared.png"
+    )
+    image sl naked tender close = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_4_naked_tender.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_4_naked_tender.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_4_naked_tender.png"
     )
 
     image mt nightdress normal = ConditionSwitch(
@@ -137,6 +204,23 @@ init:
         True, "mods/simple_happiness_mod_efim/images/sp/dv/simple_happiness_dv_3_skirt_shy.png"
     )
 
+    image sem normal = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sem/simple_happiness_sem_normal.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sem/simple_happiness_sem_normal.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/sem/simple_happiness_sem_normal.png"
+    )
+
+    image kt normal = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/kt/simple_happiness_kt_1_pioneer_normal.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/kt/simple_happiness_kt_1_pioneer_normal.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/kt/simple_happiness_kt_1_pioneer_normal.png"
+    )
+    image kt smile = ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/kt/simple_happiness_kt_3_pioneer_smile.png", im.matrix.tint(0.94, 0.82, 1.0)),
+        "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/kt/simple_happiness_kt_3_pioneer_smile.png", im.matrix.tint(0.63, 0.78, 0.82)),
+        True, "mods/simple_happiness_mod_efim/images/sp/kt/simple_happiness_kt_3_pioneer_smile.png"
+    )
+
     image obhod none = "mods/simple_happiness_mod_efim/images/sp/obhod/simple_happiness_obhod_0.png"
     image obhod one = "mods/simple_happiness_mod_efim/images/sp/obhod/simple_happiness_obhod_1.png"
     image obhod two = "mods/simple_happiness_mod_efim/images/sp/obhod/simple_happiness_obhod_2.png"
@@ -144,6 +228,7 @@ init:
     image obhod full = "mods/simple_happiness_mod_efim/images/sp/obhod/simple_happiness_obhod_full.png"
 
     # Инициализация звуков
+        # sfx
     $ sfx_smoking_cigaret = "mods/simple_happiness_mod_efim/sounds/sfx/smoking_cigaret.mp3"
     $ sfx_clocks = "mods/simple_happiness_mod_efim/sounds/sfx/clocks.mp3"
     $ sfx_bicycle_falls = "mods/simple_happiness_mod_efim/sounds/sfx/bicycle_fall.mp3"
@@ -153,11 +238,14 @@ init:
     $ sfx_lamp_turn_on_off = "mods/simple_happiness_mod_efim/sounds/sfx/lamp_turn_on_off.mp3"
     $ sfx_water_drops = "mods/simple_happiness_mod_efim/sounds/sfx/water_drops.ogg"
 
+        # music
     $ miku_song_mi_learn1 = "mods/simple_happiness_mod_efim/sounds/music/miku_song_miku_learn1.ogg"
     $ miku_song_bad_learn = "mods/simple_happiness_mod_efim/sounds/music/miku_song_bad_learn.ogg"
     $ memories_guitar_only = "mods/simple_happiness_mod_efim/sounds/music/memories_guitar_only.mp3"
     $ this_one_for_her = "mods/simple_happiness_mod_efim/sounds/music/this_one_for_her.ogg"
     $ un_sinij_sinij_inij = "mods/simple_happiness_mod_efim/sounds/music/sinij_sinij_inij.ogg"
+    $ warmest_summer = "mods/simple_happiness_mod_efim/sounds/music/warmest_summer.ogg"
+    $ kostry_concert = "mods/simple_happiness_mod_efim/sounds/music/kostry_concert.ogg"
 
     # Персонажи
     define pis = Character(name=u"Пионеры", color="#ffffff", what_color="#f1d076", drop_shadow = [(-1, -1), (1, -1), (-1, 1), (1, 1)], drop_shadow_color = "#000000", what_drop_shadow = [(-1, -1), (1, -1), (-1, 1), (1, 1)], what_drop_shadow_color = "#000000") # Для случаев, когда много пионеров говорят разом
@@ -168,6 +256,8 @@ init:
     define mi_n = Character(name=u"Мику", color="#00deff", what_color="#f1d076", kind=nvl, drop_shadow = [(-1, -1), (1, -1), (-1, 1), (1, 1)], drop_shadow_color = "#000000", what_drop_shadow = [(-1, -1), (1, -1), (-1, 1), (1, 1)], what_drop_shadow_color = "#000000") # Мику для режима nlv
     define un_n = Character(name=u"Лена", color="#a5a5ff", what_color="#f1d076", kind=nvl, drop_shadow = [(-1, -1), (1, -1), (-1, 1), (1, 1)], drop_shadow_color = "#000000", what_drop_shadow = [(-1, -1), (1, -1), (-1, 1), (1, 1)], what_drop_shadow_color = "#000000") # Лена для режима nlv
     define dv_n = Character(name=u"Алиса", color="#ff7800", what_color="#f1d076", kind=nvl, drop_shadow = [(-1, -1), (1, -1), (-1, 1), (1, 1)], drop_shadow_color = "#000000", what_drop_shadow = [(-1, -1), (1, -1), (-1, 1), (1, 1)], what_drop_shadow_color = "#000000") # Алиса для режима nlv
+    define kt = Character(name=u"Катя", color="#a67640", what_color="#f1d076", drop_shadow = [(-1, -1), (1, -1), (-1, 1), (1, 1)], drop_shadow_color = "#000000", what_drop_shadow = [(-1, -1), (1, -1), (-1, 1), (1, 1)], what_drop_shadow_color = "#000000") # Катя
+    define ktp = Character(name=u"Пионерка", color="#a67640", what_color="#f1d076", drop_shadow = [(-1, -1), (1, -1), (-1, 1), (1, 1)], drop_shadow_color = "#000000", what_drop_shadow = [(-1, -1), (1, -1), (-1, 1), (1, 1)], what_drop_shadow_color = "#000000") # Катя-пионерка
 
     # Анимация "часов"
     define clocks_in = ImageDissolve(image="mods/simple_happiness_mod_efim/images/anim/simple_happiness_clock_anim_mask.png", time=2.5, ramplen=8)
@@ -232,15 +322,19 @@ label calc_music_how_much_play:
     $ track_len = renpy.music.get_duration()
     $ track_played = renpy.music.get_pos()
 
-    $ track_left = (track_len - track_played) + 1.0
+    if renpy.music.is_playing():
+        $ track_left = (track_len - track_played) + 1.0
 
-    if track_left > 1.0:
-        window hide
-        $ renpy.pause(delay=track_left, hard=True)
-        window show
+        if track_left > 1.0:
+            window hide
+            $ renpy.pause(delay=track_left, hard=True)
+            window show
+        else:
+            pause(1.0)
+
     else:
         pause(1.0)
-
+    
     return
 
 
@@ -2424,6 +2518,7 @@ label simple_happiness_mod_day1:
     jump simple_happiness_mod_day2
 
 
+# День 2
 label simple_happiness_mod_day2:
     $ backdrop = "days"
     $ new_chapter(2, u"Простое Счастье. День 2")
@@ -5460,6 +5555,7 @@ label d2_card_game_r2_draw:
     call simple_happiness_mod_d2_card_game_r2
 
 
+# День 2 после карт
 label simple_happiness_mod_day2_continue:
     $ renpy.block_rollback()
     stop music fadeout 2.5
@@ -5783,6 +5879,7 @@ label simple_happiness_mod_day2_continue:
     jump simple_happiness_mod_day3
 
 
+# День 3
 label simple_happiness_mod_day3:
     $ renpy.block_rollback()
     $ backdrop = "days"
@@ -7741,6 +7838,7 @@ label simple_happiness_mod_day3:
     jump simple_happiness_mod_day4
 
 
+# День 4
 label simple_happiness_mod_day4:
     $ renpy.block_rollback()
     $ backdrop = "days"
@@ -9494,6 +9592,7 @@ label simple_happiness_mod_day4:
     jump simple_happiness_mod_day_none
 
 
+# День ???
 label simple_happiness_mod_day_none:
     $ renpy.block_rollback()
 
@@ -9825,6 +9924,7 @@ label simple_happiness_mod_day_none:
     jump simple_happiness_mod_day5
 
 
+# День 5
 label simple_happiness_mod_day5:
     $ renpy.block_rollback()
     $ backdrop = "days"
@@ -12061,6 +12161,7 @@ label simple_happiness_mod_day5:
     jump simple_happiness_mod_day6
 
 
+# День 6
 label simple_happiness_mod_day6:
     $ renpy.block_rollback()
     $ backdrop = "days"
@@ -12635,3 +12736,1035 @@ label simple_happiness_mod_day6:
     with dissolve
 
     "Наконец, мы добрались до музыкального клуба."
+
+    hide un
+    hide dv
+    hide mi
+    show un pioneer smile at fleft
+    show dv pioneer smile at cleft
+    show mi pioneer normal at center
+    with long_dspr
+
+    "Вместе со Славей мы подошли к Мику, и остальным, и Славя спросила."
+    sl "Когда начнёте?"
+    mi "Хм-м, даже не знаю. Все музыканты уже тут. Осталось желающих дождаться. А... А кто, собственно, желающие?"
+
+    show sl pioneer smile2 with dspr
+
+    sl "Ну, я уже тут, хи-хи."
+
+    show sl pioneer smile with dspr
+
+    sl "Женя ещё подойдёт."
+    mi "Ещё Шурик вроде обещал."
+    "Повисла небольшая пауза."
+    me "Ну, минут 20 наверное выжидаем, и хватит."
+
+    show mi pioneer smile with dspr
+
+    "Мику согласилась."
+    
+    show sl pioneer smile at walk_away_right
+    pause(0.5)
+    hide sl with dspr
+
+    "Мы направились к инструментам, чтобы ещё раз всё проверить, а Славя села на скамейку рядом с крыльцом, и с интересом наблюдала за всеми нами."
+    "..."
+
+    show mz pioneer smile at right
+    with good_dspr
+
+    "Вскоре подошла Женя."
+    mz "Ого, ничего себе у вас тут инструментов."
+    mz "Может и не зря пришла!"
+    sl "Женя, давай ко мне!"
+
+    show mz pioneer smile at walk_away_right
+    pause(0.5)
+    hide mz with dspr
+
+    "Женя села на скамейку рядом со Славей, а мы продолжили подготовку."
+    "..."
+    "На горизонте показалась вожатая."
+
+    show dv pioneer surprise
+    show mt pioneer normal at fright
+    with good_dspr
+
+    "Алиса посмотрела в её сторону."
+    dv "Чего это она тут?"
+
+    show mi pioneer normal with dspr
+
+    mi "Не знаю, может сказать что-то хочет?"
+
+    show dv pioneer normal with dspr
+
+    "Вожатая подошла и заговорила."
+    mt "Ну что, ребята, уже скоро начинаете?"
+    mt "Я тоже послушаю."
+
+    show mt pioneer smile with dspr
+
+    mt "Не могу же я пропустить самодеятельность своих пионеров!"
+    "Она по-доброму улыбнулась, и встала рядом с верандой, наблюдая за нами."
+
+    show mt pioneer smile at walk_away_right
+    pause(0.5)
+    hide mt with dspr
+
+    pause(1.0)
+    
+    show sh pioneer normal at right
+    with dspr
+
+    "Вскоре подошёл Шурик."
+
+    show sh pioneer normal_smile with dspr
+
+    sh "Представитель клуба кибернетиков на месте!"
+    "Бодро заявил он."
+
+    show mi pioneer smile with dspr
+
+    "Мику увидела его, и помахала рукой."
+    mt "А Электроник не пришёл?"
+    "Послышался голос Ольги Дмитриевны неподалёку."
+
+    show sh pioneer normal with dspr
+
+    sh "Он с роботом возится. Да и ему не интересно, он сказал."
+    "..."
+
+    stop music fadeout 1.0
+
+    hide mi
+    hide dv
+    hide un
+    hide sh
+    show un pioneer normal at fleft
+    show dv pioneer smile at fright
+    show mi pioneer normal at cleft
+    with dissolve
+
+    play music music_list["went_fishing_caught_a_girl"] fadein 1.0 volume 0.59
+
+    "Мы все уже стояли на импровизированной сцене на веранде."
+    "Лена стояла возле пюпитра и бегала глазами по нотам."
+    "Алиса уже в который раз пробовала, как бы ей получше встать."
+    "Я же просто стоял с гитарой у окна, и держал её за гриф. Так как сейчас с ней буду выступать не я."
+    "А Мику, положив на барабан палочки, подошла ближе к выходу из веранды, взяла микрофон и начала говорить."
+
+    hide mi
+    show mi pioneer smile at center
+    with good_dspr
+
+    mi "Приветствую всех желающих поприсутствовать на генеральной репетиции музыкального клуба!"
+    mi "Прошу всех встать поближе, но не мешать друг другу, начинаем уже через минуту!"
+
+    show mi pioneer normal with dspr
+
+    "Мику положила микрофон, и подойдя ко мне, взяла у меня гитару, и устроила её рядом со стулом перед выходом."
+    "Когда она хотела было уже вновь взять микрофон, я увидел как к нам подходит какая-то пионерка, но не из нашего отряда."
+    me "Мику, подожди."
+
+    show mi pioneer smile with dspr
+
+    "Она оглянулась на меня, а я кивнул головой в сторону дорожки."
+    "Остальные участники, как и Мику, посмотрели в ту сторону."
+
+    show dv pioneer normal
+    show un pioneer normal
+    with dspr
+
+    dv "Кто это?"
+    un "Не знаю, из другого отряда наверное."
+
+    show un pioneer smile
+    show mi pioneer happy
+    with dspr
+
+    "Наконец, девушка встала вместе с остальными, Мику взяла микрофон и произнесла."
+    mi "Спасибо всем кто пришел на нашу генеральную репетицию."
+    mi "Композиций не много, и они короткие, но надеемся, они вам понравятся."
+
+    stop music fadeout 3.0
+
+    pause(1.0)
+
+    "Она выдержала небольшую паузу."
+    mi "Первая композиция моего сочинения и исполнения для акустической гитары. «Воспоминания»."
+    mi "Я написала её в память о своей родине, о Японии."
+
+    show mi pioneer smile with dspr
+
+    play sound sfx_simon_applause fadein 0.5 volume 0.6 loop
+    play sound2 "<from 0.2>" + sfx_simon_applause fadein 0.5 volume 0.8 loop
+    play sound3 "<from 0.5>" + sfx_simon_applause fadein 0.5 volume 0.55 loop
+
+    "Мику отложила микрофон, а все слушатели, и мы, начали аплодировать."
+
+    stop sound fadeout 1.0
+    stop sound2 fadeout 1.0
+    stop sound3 fadeout 1.0
+
+    "Мику села на стул, устроилась, и начала играть…"
+
+    stop ambience fadeout 1.0
+
+    pause(1.0)
+
+    play ambience ambience_camp_center_day fadein 1.0 volume 0.33
+
+    show cg mi_guitar_yam with dissolve
+
+    play music memories_guitar_only fadein 0.5 noloop
+
+    "Когда Мику начала играть, всё пространство вокруг заполнилось магическим звуком."
+    th "Всё-таки она великолепно играет."
+    "Все слушатели, и это было даже внешне заметно, тут же обратились в слух."
+    "Они стояли, словно зачарованные, и слушали красивейшие ноты, которые Мику извлекала из инструмента мастерскими движениями."
+    "Больше всего, кажется, композиция понравилась Шурику."
+    "Он подошёл чуть ближе, и встал, уперевшись плечом об веранду."
+
+    call calc_music_how_much_play
+
+    hide cg
+    show mi pioneer happy
+    show dv pioneer smile
+    with dissolve
+
+    "Мику закончила играть, и посмотрела на немногочисленных зрителей."
+
+    pause(1.0)
+
+    play sound "<from 0.0 to 7.0>" + sfx_concert_applause volume 0.7 fadeout 1.5
+
+    "Спустя секундную паузу, все присутствующие начали с энтузиазмом аплодировать. {w}Аплодировали и мы, другие участники."
+
+    show mi pioneer cry_smile with dspr
+
+    "Я не видел лица Мику, но я был уверен, что она улыбается."
+
+    show mi pioneer smile with dspr
+
+    "Когда аплодисменты стихли, Мику встала со стула, и убрав его в сторону, передала мне гитару."
+    "Затем она взяла микрофон, и сказала."
+    mi "Спасибо вам всем большое за тёплую реакцию!"
+
+    show mi pioneer happy
+
+    mi "Следующая композиция посвящена Совёнку."
+    mi "Её я написала под впечатлением от этой смены в лагере, и всех великолепных людях, которых встретила здесь!"
+
+    hide dv
+    hide mi
+    hide un
+    show un pioneer normal at cleft
+    show sem normal at cright
+    show mi pioneer normal at center
+    with dissolve
+
+    play sound sfx_simon_applause fadein 0.5 volume 0.6 loop
+    play sound2 "<from 0.2>" + sfx_simon_applause fadein 0.5 volume 0.8 loop
+    play sound3 "<from 0.5>" + sfx_simon_applause fadein 0.5 volume 0.55 loop
+
+    "Пока нас встречали аплодисментами, мы с Леной подошли поближе, я перекинул гитару за ремень на плечо."
+
+    stop sound fadeout 1.0
+    stop sound2 fadeout 1.0
+    stop sound3 fadeout 1.0
+    
+    "Лена встала возле пюпитра, а Мику, сделав громкость микрофона потише, сместилась немного в сторону."
+    "Удивительно, но я даже не нервничал."
+    "Конечно, был небольшой мандраж, но вызван он был скорее тем, что мне сейчас нужно сыграть идеально с первого раза, а не публикой."
+    "Вдохнув, я посмотрел на Лену."
+
+    show un pioneer smile with dspr
+
+    "Она кивнула, и поднесла флейту к губам."
+    "Я сложил пальцы в аккорде, занёс медиатор, и-и-и…"
+
+    play music warmest_summer fadein 0.5 fadeout 0.5 noloop
+
+    "Мы начали играть."
+    "Также, как на репетициях. За тем исключением, что на нас сейчас смотрели пять пар глаз, четыре из которых я знал, а одну так и вовсе любил."
+
+    call calc_music_how_much_play
+
+    play sound "<from 0.0 to 8.0>" + sfx_concert_applause volume 0.75 fadeout 1.5
+
+    "Мику закончила петь, Лена выдула последний воздух во флейту, а я последний раз коснулся струны."
+    "В этот раз слушатели проснулись быстрее, и начали хлопать почти сразу."
+    "И, кажется, даже более активно."
+
+    show mi pioneer smile with dspr
+
+    mi "Спасибо вам!"
+    mi "Нам очень приятно слышать ваши аплодисменты!"
+
+    pause(1.0)
+
+    hide un
+    hide sem
+    with long_dspr
+
+    "Вскоре, хлопки утихли. Мы с Леной отошли назад, я поставил гитару, и облокотился на стену здания."
+
+    show mi pioneer grin with dspr
+
+    mi "А теперь, чтобы зарядить всех зарядом бодрости на оставшийся день – немного рока!"
+    mi "Композиция «Костры»!"
+
+    play sound "<from 0.0 to 7.0>" + sfx_concert_applause volume 0.35 fadeout 0.5
+
+    "Зрители захлопали, а Шурик даже присвистнул."
+
+    hide mi
+    show mi pioneer normal at cleft
+    with dspr
+
+    "Мику запрыгнула на барабанную стойку."
+
+    show dv pioneer laugh at cright
+    with dspr
+
+    "Алиса вышла к центру, показала козу, и выкрикнула."
+    dv "Всем рок-н-ролл!"
+    "Алиса отклонилась назад, и занесла руку с медиатором…"
+
+    play music kostry_concert fadein 0.5 fadeout 0.5 noloop
+
+    "И начала играть мелодию."
+
+    pause(3.0)
+
+    "Мику отбила барабанами, и девочки выдали на полную."
+    "Клубный усилитель был явно лучше, чем тот, что стоит на сцене, так что звук выходил потрясающий."
+    "Я активно качался в такт музыке."
+    "В зале, как я видел, Славя притопывает ногой, а вожатая, скрестив руки на груди, и улыбаясь, качает головой в такт."
+
+    call calc_music_how_much_play
+
+    play sound sfx_concert_applause volume 0.95 fadeout 1.0
+
+    "Когда девочки закончили играть, помимо, в этот раз явно громких аплодисментов, послышалось несколько растянутых «у-у-ху!»."
+
+    hide mi
+    hide dv
+    show un pioneer smile at fleft
+    show sem normal at cleft
+    show mi pioneer normal at cright
+    show dv pioneer smile at fright
+    with dissolve
+
+    "Я, Лена и Мику подошли к Алисе, и Мику, взяв микрофон, заговорила."
+
+    show mi pioneer shy with dspr
+
+    mi "Спасибо вам большое за то, что пришли!"
+
+    show mi pioneer smile with dspr
+
+    mi "Мы были очень рады услышать ваши аплодисменты, это лучшая награда для любого музыканта!"
+
+    pause(1.0)
+
+    "Все вместе мы поклонились, и на этом наш «мини-концерт» закончился."
+
+    stop ambience fadeout 1.0
+
+    hide mi
+    hide dv
+    hide un
+    hide sem
+    with dissolve1
+
+    play ambience ambience_camp_center_day fadein 1.0
+
+    "Продлился он всего несколько минут, но подарил эмоции всем присутствующим."
+    "..."
+
+    play music music_list["your_bright_side"] fadein 2.0 volume 0.7
+
+    "После того, как мы закончили, немногочисленные зрители начали подходить к нам, и разговаривать."
+
+    show mt pioneer smile far at fleft
+    show sh pioneer normal far at cleft
+    show mi pioneer smile far at left
+    with good_dspr
+
+    "К Мику подошли Ольга Дмитриевна и Шурик."
+
+    show mt pioneer smile far at walk_away_left
+    show sh pioneer normal far at walk_away_left
+    show mi pioneer smile far at walk_away_left
+    pause(0.5)
+    hide mt
+    hide sh
+    hide mi
+    with dspr
+
+    pause(1.0)
+
+    show un pioneer smile far at fright
+    show dv pioneer smile far at cright
+    show mz pioneer smile far at right
+    with good_dspr
+
+    "Женя подошла к Лене и Алисе, и они начали о чём-то беседовать."
+
+    show un pioneer smile far at walk_away_right
+    show dv pioneer smile far at walk_away_right
+    show mz pioneer smile far at walk_away_right
+    pause(0.5)
+    hide un
+    hide dv
+    hide mz
+    with dspr
+
+    pause(1.0)
+
+    show sl pioneer smile2 at cright
+    with good_dspr
+
+    "Ко мне подошла Славя, обняла меня, и сказала, что я отлично сыграл."
+    me "Спасибо."
+    me "Ну я поучаствовал то всего в одной композиции из трёх."
+    "В отличии, кстати, от Мику, которая отыграла во всех трёх, так ещё и в разных ролях."
+
+    show sl pioneer shy with dspr
+
+    sl "Но мне всё равно больше всего твоя игра понравилась."
+
+    show sl pioneer smile2 with dspr
+
+    sl "Ну и Мику с Алисой. Здорово они конечно!"
+
+    show sl pioneer laugh with dspr
+
+    sl "Видимо, теперь я люблю рок."
+    "Мы посмеялись, и к нам подошла та самая неизвестная пионерка."
+
+    show kt normal at left
+    show sl pioneer smile
+    with good_dspr
+
+    ktp "Хорошо играете."
+    me "Спасибо. А ты, кстати, откуда? Я тебя не видел."
+    ktp "Я из другого отряда. Сидела рядом с вашим столиком, услышала как вы обсуждаете «мини-концерт». Меня, кстати, Катя зовут."
+    me "Приятно познакомиться, Катя. Ну что, не пожалела, что пришла?"
+    kt "Ни в коем случае."
+
+    show kt smile with dspr
+
+    "Она улыбнулась."
+    kt "Приятно было разбавить повседневные пионерские будни вашей музыкой."
+    "Мы перебросились ещё парой фраз, после чего она подошла к Мику и остальным девочкам, и заговорила с ними."
+
+    show kt smile at walk_away_left
+    pause(0.5)
+    hide kt with dspr
+
+    "..."
+
+    hide sl
+    show sl pioneer smile at right
+    with good_dspr
+
+    "Мы отошли со Славей в сторону, и сели на лавочку. Она положила свою руку на мою."
+    sl "Какие у вас сейчас планы?"
+    me "А какие у нас планы? План максимум выполнен успешно!"
+    me "Сейчас уберём всю аппаратуру, ну и-и… {w}Кино же сегодня, да?"
+
+    show sl pioneer smile2 with dspr
+
+    sl "Да. Тогда я тебя подожду, вместе пойдём. Может помогу чем."
+    me "Спасибо. Думаю, девочки тоже оценят."
+
+    stop music fadeout 2.0
+
+    "..."
+
+    hide sl with dspr
+
+    call to_nvl_mode
+
+    play music music_list["everyday_theme"] fadein 2.0 volume 0.8
+
+    "Вскоре, вожатая, Женя и Шурик ушли."
+    "Времени до кино было ещё порядком, так что мы все решили выпить чаю."
+    "..."
+    "Отпивая травяной напиток, я подумал."
+    ths "А когда эта Катя ушла?"
+    "Я спросил у остальных, и, как оказалось, никто не видел как она ушла."
+    ths "Странно."
+    "Впрочем, скоро наш разговор перешёл в совсем другое русло, а допив чай, мы начали убирать всю аппаратуру и инструменты."
+    nvl clear
+    "По инициативе Мику решено было начать с самого тяжелого и сложного: колонка, усилитель, барабанная установка и пюпитр."
+    "Поднять усилитель в этот раз оказалось легче, ибо теперь мы с Алисой взялись спереди и сзади, а Мику и Лена поддерживали по краям. Славя держала дверь."
+    "Затем, в ход пошла колонка, и барабанная установка."
+    "Дело шло быстро."
+    mi_n "Так, ну что, мелочь осталась."
+    mi_n "До кино ещё где-то полчаса. Успеваем!"
+    "Мы занесли оставшееся: гитары, флейту, пюпитр и стул, и аккуратно расставили всё внутри."
+
+    stop ambience fadeout 1.0
+
+    call to_adv_mode
+
+    show bg int_musclub_mattresses_day
+    show un pioneer normal at fleft
+    show dv pioneer normal at cleft
+    show mi pioneer smile at cright
+    show sl pioneer smile at fright
+    with dissolve1
+
+    play ambience ambience_music_club_day fadein 1.0
+
+    me "Дело сделано."
+    mi "Отлично, тогда в кино!"
+
+    show un pioneer smile with dspr
+
+    un "Интересно, что сегодня будут показывать?"
+
+    show dv pioneer grin with dspr
+
+    dv "Да какая разница, главное поторопиться, а то Сёма наш со Славей не успеют места для парочек занять."
+
+    show sl pioneer shy with dspr
+
+    "Алиса ехидно улыбнулась, а мы со Славей смутились, но спорить не стали."
+
+    stop ambience fadeout 1.0
+
+    show bg ext_musclub_day
+    show dv pioneer smile
+    with dissolve
+
+    play ambience ambience_camp_center_day fadein 1.0
+
+    "Выйдя из клуба, Мику закрыла его на ключ, и мы направились в импровизированный кинотеатр, который располагался в здании спортзала."
+
+    play sound sfx_clocks fadein 0.5 volume 0.5
+
+    show black with clocks_in
+
+    show bg ext_playground_day
+    show dv pioneer smile
+    show sl pioneer smile
+    hide black
+    with clocks_out
+
+    stop sound fadeout 0.5
+
+    "Мы подошли к зданию спортзала, которое располагалось рядом с площадками для волейбола и футбола."
+    th "Хах, а я тут и не был ни разу."
+    "Мысленно отметив у себя в голове, что даже {b}тут{/b} меня не тянуло к спорту, я обратил внимание на Мику, которая показывала на вход."
+
+    show mi pioneer smile with dspr
+
+    mi "Ой, смотрите, все уже заходят!"
+    "Мы прибавили шаг, и зашли в здание спортзала."
+
+    stop ambience fadeout 1.0
+
+    show bg int_cinema_people with dissolve
+
+    play ambience ambience_medium_crowd_indoors_1 fadein 1.0
+
+    "Внутри уже было довольно много пионеров, так что мы начали искать, куда бы сесть."
+
+    hide un
+    hide dv
+    hide mi
+    hide sl
+    show sl pioneer smile at right
+    with good_dspr
+
+    "Девочки пошли ближе к середине, а мы со Славей заприметили таки слева два свободных места в углу на последнем ряду, и сели туда."
+
+    hide sl
+    show sl pioneer normal at left
+    with good_dspr
+
+    me "А что тут обычно показывают?"
+    "Поинтересовался я."
+
+    show sl pioneer smile with dspr
+
+    sl "Да по разному. Когда про войну, когда про пионерию. Может и просто какой-нибудь фильм."
+    th "Понятно, «Терминатора» в пиратской озвучке мне не дождаться."
+    "Потихоньку переговариваясь, через несколько минут мы услышали как закрывается входная дверь, а проектор начинает включаться."
+
+    stop ambience fadeout 1.0
+    stop music fadeout 3.0
+
+    show bg int_cinema_movie with dissolve
+
+    play ambience ambience_medium_crowd_indoors_1 fadein 1.0 volume 0.35
+
+    hide sl
+    show sl pioneer smile2 close at cleft
+    with good_dspr
+
+    "Зал стал затихать, я взял Славю за руку, а она положила голову мне на плечо."
+    "Фильм начался."
+
+    hide sl with dspr
+
+    play music music_list["confession_oboe"] fadein 3.0 volume 0.6
+
+    pause(1.0)
+
+    call to_nvl_mode
+
+    "Показывали «А зори здесь тихие»."
+    "Конечно я смотрел этот фильм пару раз, но выбор его для пионерского лагеря мне показался весьма нетипичным. Хотя бы из-за пары откровенных сцен."
+    ths "Хотя, раз цензура пропустила…"
+    "Славя, как я понял, тоже уже видела этот фильм."
+    "Неудивительно, учитывая скудность выбора у советских граждан."
+    "..."
+    "Примерно к середине фильма я настолько осмелел, что положил руку Славе на ногу."
+    "Она была не против, а лишь взглянула на меня, и немного смутившись, положила свою руку поверх моей."
+    "Так мы просидели до конца фильма."
+    "..."
+
+    stop music fadeout 2.0
+    stop ambience fadeout 1.0
+
+    call to_adv_mode
+
+    show bg int_cinema_people
+    show sl pioneer smile at left
+    with dissolve
+
+    play ambience ambience_medium_crowd_indoors_1 fadein 1.0 volume 0.85
+
+    pause(1.0)
+
+    "Наконец, фильм закончился, и пионеры начали потихоньку выходить."
+
+    play music music_list["dance_of_fireflies"] fadein 2.0 volume 0.8
+
+    "Славя потянулась, устав сидеть три часа подряд, и сказала."
+    sl "Кажется они не учли, что хронометраж у фильма немаленький. Уже время ужина по идее."
+
+    show mt pioneer normal far at fright
+    with good_dspr
+
+    "Не успела она это сказать, как в зал зашла ОД, заводя обратно пионеров, которые уже успели выйти, и сказала."
+    mt "Так, ребята, внимание!"
+    mt "Фильм затянулся, так что сейчас все сразу на ужин."
+    mt "Все взяли себе по стулу, и шагом-арш в столовую!"
+    "Нам повезло, что сидели мы близко к выходу, так что, взяв стулья, одни из первых вышли из здания."
+    "На улице я взял у Слави её стул. Она, конечно, посопротивлялась, но я настоял."
+
+    window hide
+
+    stop ambience fadeout 1.0
+    play sound sfx_clocks fadein 0.5 volume 0.8
+
+    show black with clocks_in
+
+    $ sunset_time()
+    $ persistent.sprite_time = "sunset"
+
+    play ambience ambience_dining_hall_full fadein 1.0
+
+    hide sl
+    hide mt
+    show bg int_dining_hall_people_sunset
+    show sl pioneer smile at center
+    hide black
+    with clocks_out
+
+    stop sound fadeout 0.5
+
+    window show
+
+    "Вскоре, мы уже были в столовой, сидели за столом на принесённых нами стульях, и ужинали."
+    me "Какие планы на вечер?"
+
+    show sl pioneer smile2 with dspr
+
+    "Славя немного посмеялась."
+    sl "Очень хорошо, что ты спросил! {w}Потому что у меня {b}есть{/b} на тебя планы!"
+    me "О-о, интересно, и какие же?"
+    sl "Узнаешь, когда выйдем из столовой."
+    "Я многозначно посмотрел на Славю."
+
+    show sl pioneer shy with dspr
+
+    "Та в ответ лишь игриво улыбнулась."
+    me "Заинтриговала!"
+
+    show sl pioneer smile with dspr
+
+    "Мы продолжили есть и мило беседовать."
+    "..."
+
+    stop ambience fadeout 1.0
+
+    hide sl
+    show bg ext_dining_hall_near_sunset
+    show sl pioneer normal at right
+    with dissolve1
+
+    play ambience ambience_camp_center_evening fadein 1.0
+
+    "Выйдя из столовой, мы взялись за руки, и пошли в сторону домиков."
+    me "Так что ты хотела предложить?"
+
+    stop music fadeout 1.0
+
+    show bg ext_dining_hall_away_sunset
+    show sl pioneer smile
+    with dissolve
+
+    play music "<from 5.0>" + music_list["eternal_longing"] fadein 1.0 volume 0.8
+
+    sl "Я хотела тебе предложить зайти ко мне сегодня вечером…"
+    th "Что?"
+    me "Что?"
+    "Спросил я ещё раз, только уже вслух."
+    "В голове тут же начался настоящий ворох. Я перебирал десятки вариантов того, как она продолжит."
+
+    show bg ext_square_sunset
+    show sl pioneer laugh
+    with dissolve
+
+    sl "… поиграть в карты!"
+    th "Ах, вот оно что."
+    th "А я тут себе уже начал фантазировать."
+    th "Ну ладно, в эту игру могут играть двое."
+    "У меня сразу же появилась идея, как можно «подогреть» этот вечер."
+    th "Хотя… Чёрт, а с Женей что делать?"
+
+    if card_game_d2_win == True:
+        me "Что, хочешь взять реванш?"
+        "Усмехнулся я, вспоминая свою победу, когда мы играли все вместе на пляже."
+        show sl pioneer smile2 with dspr
+        "Славя улыбнулась."
+        sl "Можно и так сказать."
+        sl "Но в этот раз ты так легко не отделаешься, зай!"
+        show bg ext_houses_sunset with dissolve
+        "Она хотела сказать «знай», или назвала меня «зай»?"
+        me "Хорошо. Но ты тоже теперь поцелуем в щечку не отделаешься!"
+    else:
+        me "Отлично, я как раз хочу взять реванш!"
+        "Сказал я, вспоминая как мы играли вместе с девочками на пляже."
+        show bg ext_houses_sunset
+        show sl pioneer smile2
+        with dissolve
+        sl "Хах, думаешь, в этот раз сможешь победить?"
+        "Я улыбнулся."
+        me "Не сомневайся! И я обязательно потребую приз."
+    
+    sl "Ха-ха, хорошо!"
+    "Мы поямеялись, и продолжили идти."
+
+    stop music fadeout 2.0
+
+    "..."
+    me "Кстати, ты же вместе с Женей живешь."
+
+    play music music_list["everyday_theme"] fadein 2.0 volume 0.8
+
+    me "Она с нами будет играть?"
+
+    show sl pioneer smile with dspr
+
+    sl "Хм-м, помнишь она говорила, что у неё перед нами должок."
+    sl "Вот, пришло время возвращать."
+    sl "Оставит нас вдвоём, посидит в библиотеке. Ей всё равно не привыкать."
+    th "Отлично, она не станет помехой."
+
+    show bg ext_house_of_sl_sunset with dissolve
+
+    "Мы подошли к домику Слави."
+    me "Ну что, когда мне быть?"
+    sl "Через полчаса примерно подходи. Подожду, пока Женя вернётся с ужина, и поговорю с ней."
+    me "Отлично, тогда не прощаемся!"
+    "Мы поцеловались, и разошлись."
+
+    hide sl with long_dspr
+
+    "Я был в предвкушении сегодняшнего вечера."
+    "..."
+
+    show bg ext_house_of_mt_sunset with dissolve1
+
+    pause(0.5)
+
+    play sound sfx_knock_door7_polite volume 0.9
+
+    "Покурив в пролеске, я подошёл к своему с вожатой домику и постучал."
+
+    pause(1.0)
+
+    th "Хм, не отвечает."
+    me "Есть кто дома? Ольга Дмитриевна, это я!"
+
+    pause(1.0)
+
+    "Ответа не последовало."
+    th "Ушла что ли?"
+    "Я открыл дверь, и зашёл в домик."
+
+    stop ambience fadeout 1.0
+
+    show bg int_house_of_mt_sunset with dissolve
+
+    play ambience ambience_int_cabin_evening fadein 1.0
+
+    "И дверь не заперта. Странно."
+    "Раскидывая мозгами о том, куда же вожатая так торопилась, что даже дверь не закрыла, я решил поменять нижнее бельё, благо, второй комплект носков и трусов у меня был."
+    "..."
+    "Переодевшись, я налил себе стакан воды, и сел на стул."
+    th "Интересно, что там на мобиле?"
+    "Я достал телефон из-под подушки."
+    "Заряда оставалось всего 20%%, но меня привлекло другое."
+    "Почему-то было открыто приложение заметок."
+
+    stop music fadeout 1.0
+
+    pause(1.0)
+
+    play music music_list["just_think"] fadein 1.0 volume 0.8
+
+    "Я разблокировал телефон, и открыл последнюю сохранённую заметку."
+    "Когда я прочёл содержимое, то обомлел."
+    "В заметке была всего одно предложение:"
+    "{i}Ты здесь не просто так.{/i}"
+    th "Что за?.."
+    "Не мог же это я написать?"
+    "Вожатая, или кто-то из пионеров?"
+    th "Ну да, нашли неведомое устройство, и вместо того, чтобы разбираться, написали непонятное послание, и убрали обратно?"
+    "Я задумался."
+    "Кажется тот тип, похожий на меня, утверждал что может «перемещаться по лагерям»."
+    "Так всё, что он говорил правда, и это его рук дело?"
+
+    stop music fadeout 2.0
+
+    "Посидев ещё пару минут, я понял, что все равно не смогу получить никакие ответы, поэтому, просто удалил заметку и убрал телефон обратно."
+
+    play music music_list["take_me_beautifully"] fadein 2.0 volume 0.8
+
+    th "Пора идти к Славе."
+    
+    show bg ext_house_of_mt_sunset with dissolve
+
+    "С этими мыслями я вышел из домика, и закрыл его на ключ."
+    "Я решил пару минут подождать, не появиться ли Ольга Дмитриевна."
+    "..."
+    "Но её всё не было."
+    th "Ну и ладно. {w}Думаю она не обидится, если в этот раз я уйду без спроса."
+    "..."
+    "Я пошёл к домику Слави."
+
+    show bg ext_house_of_sl_sunset with dissolve
+
+    "Уже через две минуты я был на месте."
+
+    play sound sfx_knock_door7_polite volume 0.7
+
+    pause(1.0)
+
+    show sl pioneer smile2 at center
+    with good_dspr
+
+    "Я постучал в дверь, и мне открыла Славя."
+    sl "Сёма, заходи!"
+
+    stop ambience fadeout 1.0
+
+    hide sl
+    show bg int_house_of_sl_sunset
+    show sl pioneer shy close at cright
+    with dissolve
+
+    play ambience ambience_int_cabin_evening fadein 1.0
+
+    "Я зашёл, и мы заключили друг друга в долгое объятие и поцелуи."
+    "Я опустил одну руку чуть ниже талии, к бедрам девушки."
+    "Славя не сопротивлялась, а лишь, кажется, томно улыбнулась, как я успел увидеть, немного отведя взгляд от её лица."
+
+    hide sl
+    show sl pioneer smile at cright
+    with half_good_dspr
+
+    "Наконец, мы закончили миловаться, Славя вернулась к двери, и повернула ключ, затем сказала."
+    sl "Ну что, начнём игру? Карты у меня."
+    me "Давай, а где играть будем? За столом, или?.."
+    sl "Давай лучше на мою кровать сядем."
+    me "Давай."
+
+    hide sl
+    show sl pioneer smile at center
+    with good_dspr
+
+    "Мы сели по обе стороны от кровати, Славя достала колоду, и начала тасовать карты."
+    me "На что играем?"
+
+    show sl pioneer smile2 with dspr
+
+    "Девушка улыбнулась."
+    sl "А ты хочешь играть на что-то конкретное?"
+    "Я улыбнулся, прищурив взгляд и посмотрел на неё."
+    me "У меня есть идея… {w}Но не знаю, как она тебе понравится."
+    "Славя с интересом посмотрела на меня."
+
+    stop music fadeout 2.0
+
+    sl "Ну рассказывай! Кусаться не буду, честно!"
+
+    pause(1.0)
+
+    play music "<from 2.0>" + music_list["heather"] fadein 1.5 volume 0.8
+
+    me "Сыграем… {w}На раздевание?"
+
+    show sl pioneer surprise with dspr
+
+    "Во мгновение у меня пересохло в горле."
+    "Славя, кажется, удивилась, но я сразу понял по выражению лица, что она скорее заинтригована, а не злится."
+
+    show sl pioneer laugh with dspr
+
+    sl "Х-м-м, какой ты проказник!"
+    sl "Ладно, я за!"
+
+    show sl pioneer smile with dspr
+
+    "В её глазах загорелся огонёк."
+    "Я улыбнулся, и обсудив правила, мы приступили к игре."
+
+    window hide
+
+    jump label_name
+
+
+# КАРТОЧНАЯ ИГРА ДЕНЬ 6
+label simple_happiness_mod_d6_card_game_r1:
+    python:
+        difficulty = "normal"
+        CARD_GAME_WITH_EXCHANGE = True
+
+        dialogs = {
+            (0, "win", "jump"): "d6_card_game_r1_me_win",
+            (0, "fail", "jump"): "d6_card_game_r1_sl_win",
+            (0, "draw", "jump"): "d6_card_game_r1_draw"
+        }
+
+        generate_cards("bg int_house_of_sl_sunset", dialogs)
+        rival = CardGameRivalUn(sl_avatar_set, "Славя")
+    
+    $ game_starts_r1 = True
+
+    call cards_gameloop
+
+    return
+
+
+label d6_card_game_r1_sl_win:
+    $ game_starts_r1 = False
+    $ d6_r1_winner = "sl"
+
+    window show
+
+    "Славя меня уделала."
+
+    show sl pioneer laugh with dspr
+
+    sl "Д-а-а!"
+    "Восторженно крикнула она, сбросив оставшиеся карты на кровать, и улыбнулась."
+
+    show sl pioneer smile2 with dspr
+
+    sl "Хи-хи, давай, выполняй уговор. С тебя рубашка!"
+    me "Ну а как же!"
+
+    show sl pioneer shy with dspr
+
+    "Я снял рубашку, и повесил её на спинку кровати."
+    "Славя, кажется, немного смутилась, но в её глазах уже очень рьяно горел азарт. У меня тоже."
+    me "Продолжим?"
+
+    show sl pioneer smile with dspr
+
+    sl "Определённо! Раздавай!"
+    "Заведённые и вошедшие в азарт после первого раунда, мы продолжили игру."
+
+    hide sl with dspr
+
+    window hide
+
+    jump simple_happiness_mod_d6_card_game_r2
+
+
+label d6_card_game_r1_me_win:
+    $ game_starts_r1 = False
+    $ d6_r1_winner = "me"
+
+    window show
+
+    th "Да, победа!"
+    "Я скинул оставшиеся карты, и посмотрел на Славю."
+
+    show sl pioneer smile2 with dspr
+
+    sl "Вот же! Так и знала, что надо было по-другому сыграть!"
+    "Улыбнувшись, я ответил."
+    me "Ну, может ещё отыграешься? А пока выполняй уговор."
+
+    show sl pioneer shy with dspr
+
+    "Славя немного смутилась, но всё же улыбнулась в ответ, и начала снимать рубашку."
+    "А я с большим удовольствием наблюдал за этим."
+
+    pause(1.0)
+
+    show sl skirt shy with good_dspr
+
+    "Теперь из верха на ней остался только лифчик."
+
+    show sl skirt smile with dspr
+
+    sl "Ну, в следующий раз ты со своей рубашкой попрощаешься! {w}Давай, раздавай!"
+    "Кажется в Славе окончательно разгорелся азарт."
+    me "Это мы ещё посмотрим!"
+    "Мы посмеялись, и я начал раздавать карты."
+
+    hide sl with dspr
+
+    window hide
+
+    jump simple_happiness_mod_d6_card_game_r2
+
+
+label d6_card_game_r1_draw:
+    $ game_starts_r1 = False
+    $ d6_r1_winner = "both"
+
+    window show
+
+    me "Вот те раз, с первого раунда и ничья!"
+    sl "А может так даже и лучше! {w}Ну что, как договаривались?"
+    me "Обижаешь!"
+
+    pause(1.0)
+
+    show sl skirt shy with good_dspr
+
+    "Мы одновременно начали снимать свои рубашки."
+    "Пока я расстегивал пуговицы, и снимал рукава, то постоянно смотрел на Славю."
+    "Всё же у неё было интереснее."
+    "Она, кажется, тоже поглядывала на меня."
+
+    show sl skirt smile with dspr
+
+    "Оба немного смущённые, но уже разгоряченные обстановкой и первым раундом игры, мы тут же решили продолжить играть дальше."
+    "У нас обоих горел азарт в глазах в перемешку с возбуждением."
+    "Я раздал карты, и начался второй раунд."
