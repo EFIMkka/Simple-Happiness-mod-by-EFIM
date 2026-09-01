@@ -58,6 +58,7 @@ init:
     image bg int_cinema_movie = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_cinema_movie.png"
     image bg int_house_of_sl_sunset = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_house_of_sl_sunset.png"
     image bg int_house_of_sl_night = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_house_of_sl_night.jpg"
+    image bg int_house_of_mt_clean_day = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_house_of_mt_clean_day.png"
 
     image bg d1_rena_sleep = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_d1_rena.jpg"
 
@@ -68,7 +69,6 @@ init:
     image cg d1_food_normal_sunset = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d1_food_normal_sunset.png"
     image cg mi_guitar_yam = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_mi_guitar_yam.png"
     image cg d2_scared_by_squirel = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d2_scared_by_squirel.png"
-
     image cg d2_cards_scheme_basic = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d2_basic_scheme.png"
     image cg d2_cards_scheme_r1_me_win = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d2_scheme_r1_me_win.png"
     image cg d2_cards_scheme_r1_un_win = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d2_scheme_r1_un_win.png"
@@ -84,6 +84,8 @@ init:
     image cg d5_sl_dance = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d5_boath_sl_dance.png"
     image cg d5_sl_kiss = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d5_kiss.png"
     image cg d5_sl_love = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d5_love.png"
+    image cg d6_concert_me_un_mi = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d6_me_un_mi_playing.png"
+    image cg d6_concert_mi_dv = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d6_dv_mi_playing.png"
 
     #   Спрайты
     image sl veryfar = ConditionSwitch(
@@ -5216,11 +5218,12 @@ label d2_card_game_r1_midgame:
 
 
 label d2_card_game_r1_me_win:
+    show bg ext_beach_sunset
+
     $ game_starts_r1 = False
 
     window show
 
-    show bg ext_beach_sunset with None
     show un pioneer normal at right
     with dspr
 
@@ -5299,11 +5302,12 @@ label d2_card_game_r1_me_win:
 
 
 label d2_card_game_r1_me_fail:
+    show bg ext_beach_sunset
+
     $ game_starts_r1 = False
 
     window show
 
-    show bg ext_beach_sunset with None
     show un pioneer normal at right
     with dspr
 
@@ -5370,9 +5374,10 @@ label d2_card_game_r1_me_fail:
 
 
 label d2_card_game_r1_draw:
+    show bg ext_beach_sunset
+
     window show
 
-    show bg ext_beach_sunset with None
     show un pioneer normal at center
     with dspr
 
@@ -5433,6 +5438,8 @@ label d2_card_game_r2_endgame:
 
 
 label d2_card_game_r2_me_win:
+    show bg ext_beach_sunset
+
     $ game_starts_r2 = False
     $ card_game_d2_win = True
 
@@ -5506,6 +5513,8 @@ label d2_card_game_r2_me_win:
     jump simple_happiness_mod_day2_continue
 
 label d2_card_game_r2_me_fail:
+    show bg ext_beach_sunset
+
     $ game_starts_r2 = False
 
     window show
@@ -5541,9 +5550,10 @@ label d2_card_game_r2_me_fail:
 
 
 label d2_card_game_r2_draw:
+    show bg ext_beach_sunset
+
     window show
 
-    show bg ext_beach_sunset with None
     show sl pioneer smile at center
     with dspr
 
@@ -5557,6 +5567,8 @@ label d2_card_game_r2_draw:
 
 # День 2 после карт
 label simple_happiness_mod_day2_continue:
+    show bg ext_beach_sunset
+
     $ renpy.block_rollback()
     stop music fadeout 2.5
 
@@ -5564,7 +5576,6 @@ label simple_happiness_mod_day2_continue:
     hide sl
     hide mi
     hide un
-    show bg ext_beach_sunset
     show un pioneer normal at fleft
     show mi pioneer normal at cleft
     show sl pioneer smile at right
@@ -8385,7 +8396,7 @@ label simple_happiness_mod_day4:
     show mi pioneer cry_smile with dspr
 
     "Мику, кажется, умилилась, и ответила."
-    mi "О-ха-ё! Любовь — это так прекрасно. Ну как я могу отказать?"
+    mi "Охаёшечки-даттебаёшечки! Любовь — это так прекрасно. Ну как я могу отказать?"
 
     show mi pioneer smile with dspr
 
@@ -12985,6 +12996,8 @@ label simple_happiness_mod_day6:
     "Она кивнула, и поднесла флейту к губам."
     "Я сложил пальцы в аккорде, занёс медиатор, и-и-и…"
 
+    show cg d6_concert_me_un_mi with dissolve
+
     play music warmest_summer fadein 0.5 fadeout 0.5 noloop
 
     "Мы начали играть."
@@ -12993,6 +13006,8 @@ label simple_happiness_mod_day6:
     call calc_music_how_much_play
 
     play sound "<from 0.0 to 8.0>" + sfx_concert_applause volume 0.75 fadeout 1.5
+
+    hide cg with dissolve
 
     "Мику закончила петь, Лена выдула последний воздух во флейту, а я последний раз коснулся струны."
     "В этот раз слушатели проснулись быстрее, и начали хлопать почти сразу."
@@ -13033,6 +13048,8 @@ label simple_happiness_mod_day6:
     dv "Всем рок-н-ролл!"
     "Алиса отклонилась назад, и занесла руку с медиатором…"
 
+    show cg d6_concert_mi_dv with dissolve
+
     play music kostry_concert fadein 0.5 fadeout 0.5 noloop
 
     "И начала играть мелодию."
@@ -13047,6 +13064,8 @@ label simple_happiness_mod_day6:
     call calc_music_how_much_play
 
     play sound sfx_concert_applause volume 0.95 fadeout 1.0
+
+    hide cg with dissolve
 
     "Когда девочки закончили играть, помимо, в этот раз явно громких аплодисментов, послышалось несколько растянутых «у-у-ху!»."
 
@@ -13463,7 +13482,7 @@ label simple_happiness_mod_day6:
         me "Не сомневайся! И я обязательно потребую приз."
     
     sl "Ха-ха, хорошо!"
-    "Мы поямеялись, и продолжили идти."
+    "Мы посмеялись, и продолжили идти."
 
     stop music fadeout 2.0
 
@@ -13643,7 +13662,7 @@ label simple_happiness_mod_day6:
 
     window hide
 
-    jump label_name
+    jump simple_happiness_mod_d6_card_game_r1
 
 
 # КАРТОЧНАЯ ИГРА ДЕНЬ 6
@@ -13669,6 +13688,9 @@ label simple_happiness_mod_d6_card_game_r1:
 
 
 label d6_card_game_r1_sl_win:
+    show bg int_house_of_sl_sunset
+
+    $ renpy.block_rollback()
     $ game_starts_r1 = False
     $ d6_r1_winner = "sl"
 
@@ -13705,6 +13727,9 @@ label d6_card_game_r1_sl_win:
 
 
 label d6_card_game_r1_me_win:
+    show bg int_house_of_sl_sunset
+
+    $ renpy.block_rollback()
     $ game_starts_r1 = False
     $ d6_r1_winner = "me"
 
@@ -13745,6 +13770,9 @@ label d6_card_game_r1_me_win:
 
 
 label d6_card_game_r1_draw:
+    show bg int_house_of_sl_sunset
+
+    $ renpy.block_rollback()
     $ game_starts_r1 = False
     $ d6_r1_winner = "both"
 
@@ -13768,3 +13796,1279 @@ label d6_card_game_r1_draw:
     "Оба немного смущённые, но уже разгоряченные обстановкой и первым раундом игры, мы тут же решили продолжить играть дальше."
     "У нас обоих горел азарт в глазах в перемешку с возбуждением."
     "Я раздал карты, и начался второй раунд."
+
+    hide sl with dspr
+
+    window hide
+
+    jump simple_happiness_mod_d6_card_game_r2
+
+
+label simple_happiness_mod_d6_card_game_r2:
+    python:
+        difficulty = "normal"
+        CARD_GAME_WITH_EXCHANGE = True
+
+        dialogs = {
+            (0, "win", "jump"): "d6_card_game_r2_me_win",
+            (0, "fail", "jump"): "d6_card_game_r2_sl_win",
+            (0, "draw", "jump"): "d6_card_game_r2_draw"
+        }
+
+        generate_cards("bg int_house_of_sl_sunset", dialogs)
+        rival = CardGameRivalUn(sl_avatar_set, "Славя")
+    
+    $ game_starts_r2 = True
+
+    call cards_gameloop
+
+    return
+
+
+label d6_card_game_r2_sl_win:
+    show bg int_house_of_sl_sunset
+
+    $ renpy.block_rollback()
+    $ game_starts_r2 = False
+
+    window show
+
+    if d6_r1_winner == "sl":
+        show sl pioneer laugh at center
+        with good_dspr
+
+        sl "Ура, снова победа!"
+        th "Да как же так-то!?"
+        "Не сказать, что я был зол, или раздосадован, просто не мог поверить в происходящее."
+        "Славя выигрывает уже второй раз подряд!"
+
+        show sl pioneer smile2 with dspr
+
+        me "Вот ты блин! Ну, в следующем раунде тебе точно не поздоровится!"
+        "Я начал снимать шорты."
+        "Славя сначала смотрела на меня, а потом сказала."
+
+        show sl pioneer smile with dspr
+
+        sl "Знаешь, чтобы тебе было проще… {w}Так и быть."
+        "Я сел обратно на кровать, раздетый уже до трусов, и увидел как Славя снимает рубашку."
+
+        show sl skirt smile with dspr
+
+        th "Так, а вот это плохо. На такой исход я не рассчитывал, а мой боец на посту может проснуться."
+        "Славя сняла рубашку, и сказала."
+        sl "Я думаю, тебе так спокойнее будет, верно?"
+        "Она осмотрела меня."
+        sl "И приятнее."
+        "Мы оба посмеялись, и Славя собрала карты и начала их тасовать, сейчас был её черёд раздавать."
+        "Я был очень приятно удивлён тому, что несмотря на небольшое стеснение и лёгкий мандраж, между нами не было неловкости даже в такой ситуации."
+        "Наконец, мы начали играть третий раунд."
+    
+    elif d6_r1_winner == "me":
+        show sl skirt smile at center
+        with good_dspr
+
+        "В этот раз выиграла Славя."
+        sl "Ну что, теперь твой черёд, давай!"
+        sl "Я уже не могу дождаться, когда эта рубашка слетит с тебя!"
+        "Я посмеялся, и ответил."
+        me "Конечно-конечно, сейчас!"
+        "Я начал снимать рубашку, и подумал, что на мой взгляд последняя фраза Слави прозвучала очень эротично, если не сказать возбуждающе."
+        "Что могло стать… Проблемой? Мой боец был готов вот-вот проснуться."
+        "Я сняла рубашку полностью, и повесила её на спинку кровати."
+        "А Славя, с большим интересом рассматривая меня, сказала."
+        sl "Ну что, готов играть третий раунд?"
+        me "Готов! И в этот раз я выиграю, будь уверена!"
+        "Славя улыбнулась, и сказала."
+        sl "Ну это мы ещё посмотрим!"
+        "Славя раздала карты, и мы начали играть."
+    
+    elif d6_r1_winner == "both":
+        show sl skirt smile at center
+        with good_dspr
+
+        "В этот раз победу одержала Славя."
+        sl "Ура-а!"
+        "Славя посмотрела на меня, и сказала."
+        sl "А ну ка! Штаны на базу!"
+        "Я встал, и начал расстёгивать ремень."
+        me "Ничего себе, как смело!"
+
+        show sl skirt shy with dspr
+
+        "Славя в ответ лишь хихикнула."
+        "Пока я стягивал штаны, я явно чувствовал напряжение ниже пояса."
+        "Славя точно этого не могла не замечать, но не комментировала, а лишь осматривала меня."
+        "Я заметил это, и спросил."
+
+        show sl skirt smile with dspr
+
+        me "Ну, как я выгляжу?"
+        sl "Прекрасно! Как здорово, что ты достался мне."
+        "Я умилился этим словам, сел обратно на кровать, и Славя начала тасовать карты."
+        "Оставался третий раунд."
+
+    window hide
+
+    jump simple_happiness_mod_d6_after_card_game
+
+
+label d6_card_game_r2_me_win:
+    show bg int_house_of_sl_sunset
+
+    $ renpy.block_rollback()
+    $ game_starts_r2 = False
+
+    window show
+
+    if d6_r1_winner == "sl":
+        show sl pioneer smile at center
+        with good_dspr
+
+        "В этот раз я выиграл."
+        me "Ну что, теперь твой черёд, давай!"
+        sl "Хи-хи, что не можешь дождаться, когда уже эта рубашка слетит с меня?"
+        "Славя начала снимать рубашку, и я подумал что на мой взгляд последняя фраза прозвучала очень эротично, если не сказать возбуждающе."
+        "Что могло стать… Проблемой? Мой боец был готов вот-вот проснуться."
+
+        show sl skirt smile with dspr
+
+        "Славя сняла рубашку полностью, и повесила её на спинку кровати."
+        "А я, с большим интересом рассматривая её, сказал."
+        me "Ну что, готова играть третий раунд?"
+        "Славя улыбнулась, и сказала."
+        sl "Готова! И в этот раз я выиграю, будь уверен!"
+        me "Ну это мы ещё посмотрим!"
+        "Славя раздала карты, и мы начали играть."
+    
+    elif d6_r1_winner == "me":
+        show sl skirt smile at center
+        with good_dspr
+
+        th "Я опять выиграл! Да мне сегодня прёт!"
+        "Славя, которая не могла не заметить мою радость в глазах, посмеялась, и спросила."
+        sl "Хи-хи, Сёма, скажи честно, ты тренировался играть, да?"
+        "После этих слов она встала с кровати, и начала снимать юбку."
+        "Решив, что так дело не пойдет, я начал снимать рубашку, и ответил."
+        me "Ни в коем случае! Выигрываю абсолютно честно!"
+
+        show sl swim shy with dspr
+
+        sl "Ой, Сём, ты зачем это?"
+        "Славя увидела, как я вешаю рубашку на спинку кровати."
+        "И непонятно, чем она была смущена больше, тем что осталась в одном нижнем белье, или тем, что я проявил инициативу."
+        me "Мне кажется, так будет правильнее."
+        "Я улыбнулся."
+
+        show sl swim smile2 with dspr
+
+        sl "Вполне… Мне все нравится!"
+        "Она запрыгнула обратно на кровать, и начала тасовать карты для третьего раунда."
+        "В это время я смотрел на неё."
+        "Передо мной сидела, в одном нижнем белье, девушка, в которую я был влюблён."
+        "Сердце было готово выскочить из груди, а мой боец уже начал просыпаться."
+        "Наконец, Славя перемешала и раздала карты, и мы начали играть третий раунд."
+    
+    elif d6_r1_winner == "both":
+        show sl skirt smile at center
+        with good_dspr
+
+        "В этот раз я победил."
+        "Мы уже оба сидели без верха, но теперь черёд снимать следующий элемент одежды достался Славе."
+        me "Во-от! Так мне больше нравится!"
+        "Гордо заявил я, и откинулся на стену рядом с кроватью."
+        sl "Хи-хи, нравится ему!"
+        "Посмотрим, как тебе понравится следующий раунд!"
+        "После этих слов она встала с кровати, и начала снимать юбку."
+        "Я смотрел на неё, как завороженный."
+
+        show sl swim smile2 with dspr
+
+        "Славя обратила на это внимание, и полностью сняв юбку, спросила."
+        sl "Сём… Ты так смотришь… Я правда такая красивая?"
+        me "Конечно! И не смей сомневаться в обратном!"
+
+        show sl swim shy with dspr
+
+        "Славя явно смутилась от комплимента, и запрыгнув обратно на кровать, сказала."
+        sl "Ну что, финальный раунд?"
+        me "Раздавай!"
+        "Славя перетасовала карты, раздала их, и мы начали играть."
+
+    window hide
+
+    jump simple_happiness_mod_d6_after_card_game
+
+
+label d6_card_game_r2_draw:
+    show bg int_house_of_sl_sunset
+
+    $ renpy.block_rollback()
+    $ game_starts_r2 = False
+
+    window show
+
+    if d6_r1_winner == "sl":
+        show sl pioneer smile at center
+        with dspr
+
+        "В этот раз мы сыграли в ничью."
+        me "Ну что, давай как договаривались?"
+        sl "Ну конечно!"
+        "Славя начала снимать рубашку, а я встал, и проделывал тоже самое с шортами."
+
+        show sl skirt smile with dspr
+
+        "Так как ей разобраться со своей одеждой было быстрее, она уже сидела в одном лифчике, и с интересом смотрела на меня."
+
+        show sl skirt shy with dspr
+
+        "Закончив, я остался в одних трусах, и поймал на себе интересующийся, но при этом слегка застенчивый взгляд Слави."
+        "Я улыбнулся, посмотрев на неё, и сел обратно на кровать."
+        me "Интересно, что будет в третьем раунде?"
+        sl "Конечно, давай я раздам!"
+        "Сейчас была очередь Слави, поэтому она собрала карты, перетасовала их, и мы начали играть третий раунд."
+
+        jump simple_happiness_mod_d6_after_card_game
+    
+    elif d6_r1_winner == "me":
+        show sl skirt smile at center
+        with dspr
+
+        "Второй раунд мы сыграли вничью."
+        me "Вот те раз. Ну что, тогда как договаривались!"
+        sl "Да, хорошо."
+
+        show sl swim smile2 with dspr
+
+        "Мне то было проще, я снял всего рубашку. А Славя осталась уже в одном нижнем белье."
+        "Я смотрел на неё жадными глазами, а мой боец начал просыпаться."
+        "Славя прыгнула обратно на кровать, и начала тасовать карты."
+        sl "Ну что, играем третий раунд?"
+        me "Конечно! Интересно же, как он закончится."
+
+        show sl swim smile with dspr
+
+        "Славя стрельнула глазками, и улыбнувшись, ответила."
+        sl "А то!"
+        "Она раздала карты, и мы начали играть третий раунд."
+    
+    elif d6_r1_winner == "both":
+        show sl skirt smile at center
+        with dspr
+
+        "Вот так-так, а это уже интересно!"
+        sl "Ого, второй раз подряд вничью вышли!"
+        me "Ага…"
+        "Я улыбнулся."
+        me "Как специально, слушай!"
+        sl "Как бы там ни было…"
+        "Она встала с кровати."
+        sl "Уговор есть уговор."
+        "После этих слов она начала расстёгивать ремень, и снимать юбку."
+        "Я последовал её примеру."
+
+        show sl swim shy with dspr
+
+        "Уже скоро мы оба стояли в одном лишь нижнем белье."
+        "Мы оба были немного смущены, и я спросил."
+        me "Ты когда-нибудь могла подумать, что в лагере с тобой произойдёт нечто подобное."
+
+        show sl swim smile2 with dspr
+
+        sl "Нет. Но я рада что произошло. И именно с тобой."
+
+        hide sl
+        show sl swim smile2 close at cright
+        with good_dspr
+
+        "Она сделала пару шагов ко мне."
+        sl "Потому что я люблю тебя. И полностью тебе доверяю."
+        "Я приобнял её за талию, и мы поцеловались."
+        "Одна её рука была у меня на плече, а вторая водила по животу, следуя рельефу небольшого пресса, но ниже не опускалась."
+        "..."
+
+        hide sl
+        show sl swim smile at center
+        with good_dspr
+
+        "Вскоре, мы вернулись обратно на кровать."
+        "Славя взяла карты, и начала тасовать их. Нас ждал третий раунд."
+    
+    window hide
+
+    jump simple_happiness_mod_d6_after_card_game
+
+
+label simple_happiness_mod_d6_after_card_game:
+    show bg int_house_of_sl_sunset
+
+    $ renpy.block_rollback()
+    $ renpy.pause(2.0, hard=True)
+
+    stop music fadeout 3.0
+
+    show black with clocks_in
+
+    play music music_list["forest_maiden"] fadein 3.0 volume 0.93
+
+    hide black with clocks_out
+
+    "Примерно на половине игры, я понял что уже вообще не могу следить за картами."
+    "Я весь пылал, и у меня тряслись руки."
+    sl "Семён…"
+    "Я обошел кровать сбоку, и сел рядом со Славей, положив руку ей на бедро."
+
+    show blink
+
+    "Уже через секунду мы слились в страстном поцелуе."
+
+    hide sl
+
+    "Я начал расстёгивать лифчик Слави, и через несколько секунд, он упал мне на колени."
+    "Я отбросил его, и повалил девушку на кровать."
+
+    show cg d6_sl_hentai_2
+    hide blink
+    show unblink
+
+    "Мы лежали на кровати, и обменивались ласками."
+    "Я нежно касался руками груди девушки, целуя её в шею, и покусывая за мочку уха."
+    "..."
+    "Она томно и горячо дышала, становясь всё смелее, опуская руку всё ниже и ниже."
+    "..."
+    "Я легонько провел пальцем по всему телу Слави, и коснулся пальцами её трусиков."
+    "Она издала громкий вздох напополам со стоном, и немного поджала ноги."
+    "..."
+    "Мы оба пылали страстью."
+    "Я уже забыл какого это, быть настолько близко с девушкой."
+    "Голова кружилась, разум был готов вот-вот затуманиться, но я держал себя в руках, не позволяя лишнего."
+    "..."
+    "Вскоре, Славя шепнула мне на ушко."
+    sl "{i}Сём… Сёма!{/i}"
+    "Я с трудом отстранился от её объятий и прикосновений, облокотился на руку, и посмотрел на неё."
+
+    window hide
+
+    $ night_time()
+    $ persistent.sprite_time = "night"
+
+    hide cg
+    show bg int_house_of_sl_night
+    show sl naked tender close at cright
+    with dissolve1
+
+    window show
+
+    sl "Сёма, если ты не против, то… давай не сегодня?"
+    sl "Женя уже скоро должна прийти."
+    "Я кивнул, и поцеловав её руку, ответил."
+    me "Ну конечно. Я же говорил, когда ты будешь готова."
+    "Славя улыбнулась мне, и мы ещё на несколько мгновений слились в поцелуе, после чего, настала пора нам собираться."
+    "..."
+
+    hide sl
+    show sl pioneer smile at right
+    with good_dspr
+
+    stop music fadeout 5.0
+
+    "Как не было бы грустно прерывать этот вечер, но мы оделись, собрали карты, которые разбросали по всему полу, пока валялись на кровати, после чего Славя сказала."
+
+    play music music_list["what_do_you_think_of_me"] volume 0.8 fadein 2.0
+
+    sl "Давай на улицу выйдем, там попрощаемся? Я хочу немного свежим воздухом подышать."
+    me "Конечно!"
+
+    show bg ext_house_of_sl_night with dissolve
+
+    "Славя отперла дверь, и мы вышли на улицу."
+    "Вечернее тепло уже спало, и вне стен домика было по-настоящему свежо."
+    "А лунный свет вкупе с горящими лампой и светильником создавал поистине чудесную картинку."
+
+    hide sl
+    show sl pioneer tender close at center
+    with good_dspr
+
+    "Славя взяла меня за руки, посмотрела мне в глаза, и сказала."
+    sl "Сёма, спасибо тебе большое за этот прекрасный вечер."
+    sl "Я ещё никогда не чувствовала себя… {w}Так. Любимой, желанной. Страстной."
+
+    show sl pioneer shy with dspr
+
+    "Я улыбнулся, и ответил."
+    me "Это тебе спасибо. Ты позвала, и сама организовала нам вечер вдвоём. Без твоей инициативы такой близости бы не было."
+    "Я секунду подумал, и добавил."
+    me "Я надеюсь, ты не обижаешься, что я был немного настойчив?"
+
+    show sl pioneer smile2 with dspr
+
+    sl "Нет, что ты, ни в коем случае."
+    sl "Я бы и сама хотела большего. Смена скоро закончится, мы разъедемся…"
+
+    show sl pioneer sad with good_dspr
+
+    sl "Кто знает, увидимся ли мы ещё когда-нибудь?"
+
+    hide sl
+    show sl pioneer tender close at cright
+    with long_dspr
+
+    "Славя обняла меня и положила голову мне на плечо."
+    "Я обнял её в ответ."
+    th "Ох, как бы я сам хотел знать, что случится после смены…"
+    me "Я надеюсь, у нас всё получится."
+    "Славя ничего не ответила, а лишь крепче прижалась ко мне."
+
+    pause(1.0)
+
+    "..."
+
+    show sl pioneer smile2 with dspr
+
+    "Так, мы простояли ещё некоторое время, после чего подарили дуг другу последний на сегодня поцелуй."
+
+    hide sl
+    show sl pioneer smile2 far at center
+    with long_dspr
+
+    "Славя поднялась по ступенькам, и помахав друг другу на прощание, она зашла в домик..."
+
+    hide sl with half_good_dspr
+
+    "..."
+    "А я простояв в улыбке с полминуты, пошел к нашему с вожатой домику."
+
+    show bg ext_house_of_mt_night_without_light with dissolve1
+
+    pause(1.0)
+
+    call smoking_process(with_pause=1.5)
+
+    "Я сидел за нашим с вожатой домиком, курил."
+    "И не знал, что мне делать. Какая эмоция сейчас передо мной главенствующая?"
+    "Воздушная, лёгкая, как пуховая подушка, любовь, в которую хотелось окунуться?"
+    "Сладкая, терпкая, молодая, дерзкая и возбуждающая романтика?"
+    "..."
+    "Или страх? Холодный, пустой, странный… {w}Как и вся моя жизнь до того, как я встретил эту девушку, и вообще попал в этот лагерь?"
+    "Страх пропасть отсюда, как будто бы меня тут и не было никогда? {w}Потерять весь этот лагерь навсегда?"
+    "Потерять Славю?"
+    "..."
+    
+    play sound sfx_smoking_cigaret
+
+    "Я не знал, что случиться дальше. Но о последнем варианте даже думать не хотелось."
+    "Я старался откинуть его как можно дальше. В любом случае от меня ничего не зависит."
+    "Сейчас я мог только наслаждаться приятными чувствами, оставленными вечером, проведённым в компании девушки, которую я полюбил здесь."
+
+    pause(1.0)
+
+    show bg int_house_of_mt_night2 with dissolve
+
+    "Докурив, я зашёл в домик, открыв дверь своим ключом, и не обнаружил вожатую."
+    "Почему-то, я даже не удивился этому факту."
+    "Поэтому, решив лишний раз не терзать себя вопросами, я разделся, и лёг в постель, и довольно быстро начал засыпать…"
+
+    stop music fadeout 2.0
+
+    "… засыпать, смакуя в голове, и прокручивая всё произошедшее за эти дни, и за сегодняшний вечер…"
+
+    window hide
+
+    stop ambience fadeout 1.0
+
+    show blink
+
+    $ renpy.pause(3.5, hard=True)
+
+    jump simple_happiness_mod_day7
+
+
+# День 7
+label simple_happiness_mod_day7:
+    $ renpy.block_rollback()
+    $ backdrop = "days"
+    $ new_chapter(7, u"Простое Счастье. День 7")
+
+    $ day_time()
+    $ set_mode_adv()
+    $ persistent.sprite_time = "day"
+
+    play ambience ambience_int_cabin_day fadein 3.0 volume 0.9
+
+    "Сон мой был, мягко говоря, откровенный."
+    "Сказывалось всё произошедшее вчера."
+
+    show bg int_house_of_mt_day
+    hide blink
+    show unblink
+
+    play music music_list["dance_of_fireflies"] fadein 2.0 volume 0.7
+
+    "Я открыл глаза, сладко потянулся, и подумал."
+
+    hide unblink
+
+    th "Надо же, ведь перед нами не было ни капли стеснения."
+    mt "О чём мечтаешь?"
+
+    show mt pioneer smile at right
+    with dspr
+
+    "От неожиданности я немного вздрогнул, и посмотрел на вожатую. Она уже была одета в пионерскую форму."
+    me "Утро доброе, Ольга Дмитриевна! А я вас вчера вечером так и не дождался, вы где пропадали?"
+
+    show mt pioneer grin with dspr
+
+    mt "Ой, да прям ждал он, так и поверила."
+    mt "Сам то небось уже в двенадцатом часу вернулся?"
+    me "Ну-у…"
+
+    show mt pioneer smile with dspr
+
+    mt "Вот именно."
+    mt "А я занята была немножко, у Ви… {w}Э, ну, пионеру плохо стало, вот."
+    "Она немного замялась."
+    mt "Виола его осматривала."
+    th "С каждым разом всё интереснее и интереснее."
+    me "Понятно. Ну, главное что всё хорошо."
+    "После этих слов я поднялся с кровати, и начал готовиться к завтраку."
+    "..."
+
+    hide mt
+    show mt pioneer normal at fright
+    with good_dspr
+
+    "Одевшись и умывшись, я спросил у вожатой."
+    me "Ольга Дмитриевна, вы идёте?"
+
+    show mt pioneer sad with dspr
+
+    mt "Ты иди, я позже подойду. Всё равно линейки нет, а у меня живот крутит."
+    me "Хорошо."
+
+    stop ambience fadeout 1.0
+
+    hide mt
+    show bg ext_house_of_mt_day
+    with dissolve
+
+    play ambience ambience_camp_center_day fadein 1.0
+
+    "Стоило мне выйти из домика, и закрыть дверь, как я увидел подходящую Славю."
+
+    show sl pioneer smile2 at cright
+    with half_good_dspr
+
+    "Я быстро спустился по ступенькам, мы обнялись и поцеловались."
+    sl "Сёма, сегодня после ужина… Нет, после обеда! Ты весь мой!"
+    me "Ха-ха, Славя, в чём дело? Ты опять что-то придумала?"
+    sl "Да. Тебе точно понравится! Пойдём завтракать, я тебе по дороге расскажу."
+    me "Пойдём."
+
+    hide sl
+    show sl pioneer smile at right
+    show bg ext_houses_day
+    with dissolve
+
+    "Пока мы шли, Славя рассказала мне, что вчера вечером, пока мы сидели у неё, Женя, от нечего делать, лазила в библиотеке по закоулкам."
+    "И нашла в одном из таких походный спальник. Двухместный."
+
+    stop music fadeout 2.0
+
+    show bg ext_square_day with dissolve
+
+    play music music_list["forest_maiden"] fadein 2.0 volume 0.95
+
+    "Я уже понял, к чему она клонит."
+    me "Ты хочешь, чтобы мы ушли с тобой подальше от всех?"
+    sl "Да… {w}А переночевать я предлагаю прямо в лесу, в спальнике. Отъезд только днём, так что вернуться точно успеем."
+
+    hide sl
+    show sl pioneer smile2 close at cright
+    with good_dspr
+
+    "Идя по площади, мы свернули с протоптанной дорожки немного в сторону, к деревьям, и Славя продолжила."
+
+    show sl pioneer shy close
+    with dspr
+
+    sl "Сём… {w}Я очень хочу провести там ночь. {w}С тобой…"
+    "У меня перехватило дыхание. Ведь Славя говорила не просто о чувствах, не просто о вчерашних, хоть и эротических, но по большей части, играх."
+    "Она была готова доверить мне… Себя."
+    
+    hide sl
+    show sl pioneer shy close at center
+    with dspr
+
+    "Я взял девушку за руки."
+    me "Славя."
+    me "Я только за. Но я не хочу, чтобы ты чувствовала себя обязанной."
+    sl "Всё хорошо."
+
+    show sl pioneer smile2 close with dspr
+
+    sl "Ведь ты сам говорил, что не будешь торопиться, пока я не буду готова."
+    sl "Я готова. Вчера я это поняла."
+    "Ну вот и всё, она окончательно овладела моим сердцем."
+    "У меня пропали всякие сомнения. Теперь я точно её не отпущу."
+
+    show sl pioneer tender close with dspr
+
+    me "Я люблю тебя."
+    sl "И я тебя."
+
+    show sl pioneer smile2 close with dspr
+
+    "Мы украдкой поцеловались, и пошли дальше в сторону столовой."
+
+    stop music fadeout 3.0
+
+    hide sl
+    show bg ext_dining_hall_away_day
+    show sl pioneer surprise at right
+    with dissolve1
+
+    pause(1.0)
+
+    play music music_list["she_is_kind"] fadein 2.0 volume 0.83
+
+    "Подойдя к столовой, мы поняли, что немного задержались, так как подходящих пионеров уже не было."
+    "Ускорив шаг, мы почти забежали в столовую."
+
+    stop ambience fadeout 1.0
+
+    hide sl
+    show bg int_dining_hall_people_day
+    show sl pioneer smile at right
+    with dissolve
+
+    play ambience ambience_dining_hall_full fadein 1.0
+
+    "Так и оказалось."
+    "Внутри уже всё было забито, так что, получив завтрак, нам ничего не оставалось, кроме как приткнуться к единственному свободному столику, за которым сидела Ульяна, и ещё какая-то пионерка."
+
+    stop music fadeout 2.0
+
+    hide sl
+    show us sport normal at center
+    show sl pioneer smile at left
+    with dissolve
+
+    play music music_list["i_want_to_play"] fadein 1.5 volume 0.8
+
+    "Сев, мы пожелали друг другу приятного аппетита, и я поздоровался с Ульяной."
+    me "Здрав буди, мелочь!"
+
+    show us sport calml with dspr
+
+    us "Ещё один! Да не маленькая я!"
+    me "Та я ж любя!"
+
+    show kt normal at fright
+    with good_dspr
+
+    kt "Ой, кстати, ребята, привет!"
+    "Я повернулся."
+    "Пионеркой, которую я сначала не признал, оказалась Катя, которая слушала наше выступлении."
+
+    show us sport normal
+    show sl pioneer smile2
+    with half_good_dspr
+
+    sl "Привет."
+    sl "Э-э-э, Катя, правильно?"
+    kt "Правильно."
+    
+    show sl pioneer smile with dspr
+
+    me "А я тебя и не признал сначала."
+
+    show kt smile with dspr
+
+    kt "Да ничего."
+    "Мы немного поговорили, после чего Ульяна обратилась к Славе."
+
+    show us sport smile
+    show kt normal
+    with dspr
+
+    us "Кстати, Славя, а где ты всё пропадаешь?"
+    us "Как хахаля своего нашла, так и не вижу тебя."
+
+    show sl pioneer shy with dspr
+
+    "Славя немного смутилась."
+    sl "Да там же, где и всегда. Везде то есть."
+
+    show sl pioneer smile2 with dspr
+
+    sl "А вечерами мы с Семёном просто гуляем."
+    "Мы со Славей переглянулись."
+
+    show us sport surp1 with dspr
+
+    us "Ой, а где гуляете? Скажите а, может я тоже туда кого приглашу!"
+
+    show sl pioneer laugh with dspr
+
+    "Мы со Славей немного рассмеялись."
+    sl "Хах, Ульяна, ну нам же не нужно какое-то конкретное место. Где придётся, там и проводим время вместе."
+    me "И вообще, будешь много знать, быстро состаришься."
+
+    show us sport dontlike
+    show sl pioneer smile2
+    with dspr
+
+    "Ульяна показала язык, и кажется, что-то пробормотала."
+    kt "А вы... Встречаетесь?"
+    sl "Да. Но мы тут познакомились, в лагере."
+    "Я подтвердил."
+
+    show kt smile with dspr
+
+    kt "Ой, здорово!"
+    kt "Знаете, я почему-то так и подумала, когда только вас вместе увидела."
+    "Мы поговорили за остатками завтрака ещё немного."
+    "Ульяна ещё пару раз пыталась что-то расспрашивать у Слави, но вскоре потеряла к нам интерес."
+
+    stop ambience fadeout 1.0
+    stop music fadeout 2.0
+
+    hide us
+    hide sl
+    hide kt
+    show bg ext_dining_hall_near_day
+    show sl pioneer smile at right
+    with dissolve1
+
+    play ambience ambience_camp_center_day fadein 1.0
+
+    "Выйдя из столовой, я спросил у Слави."
+
+    play music music_list["so_good_to_be_careless"] fadein 2.0 volume 0.8
+
+    me "Сегодня же, я так понимаю, хозяйственный день?"
+    
+    show sl pioneer smile2 with dspr
+
+    sl "Да. Убираемся в домиках, в клубах… Ну обычно до обеда всё успеваем."
+    
+    show sl pioneer laugh with dspr
+
+    sl "А мы с тобой должны успеть Сёма, обязаны!"
+    "Я улыбнулся."
+    me "Тогда не будем терять времени?"
+
+    show sl pioneer smile2 with dspr
+
+    sl "До встречи на обеде?"
+    me "Жду с нетерпением!"
+    "Мы попрощались, приобнявшись, но целоваться не стали. Слишком много было посторонних глаз вокруг."
+    "..."
+
+    hide sl
+    show bg ext_dining_hall_away_day
+    with dissolve
+
+    "Воодушевлённый сегодняшним романтическим вечером, я направился к зданию музыкального клуба."
+    "..."
+
+    show bg ext_musclub_day
+    show dv pioneer2 normal far at cleft
+    with dissolve
+
+    "Подходя к клубу, я пересёкся с Алисой."
+    me "Привет!"
+
+    hide dv
+    show dv pioneer2 normal at cleft
+    with long_dspr
+
+    "Я подошёл ближе."
+    me "А ты чего тут?"
+    dv "Привет, да вот, убраться пришла помочь. Я всё-таки вместе с вами играла."
+    dv "А мелкую одну в домике оставила убираться. Пусть будет ей в наказание за тот случай."
+    me "Вот оно как, ну здорово, что пришла помочь. Вчетвером то мы тут за полчаса управимся."
+
+    show dv pioneer2 smile with dspr
+
+    dv "Да, только покурим для начала."
+    me "Всенепременно!"
+    "Мы раскурили с Алисой по сигарете, и зашли в клуб."
+
+    stop ambience fadeout 1.0
+
+    show cg d5_mi with dissolve
+
+    play ambience ambience_music_club_day fadein 1.0
+
+    mi "Ой, Семён, а вот и… {w}Алиса?"
+    dv "Я тоже пришла! Я ж всё-таки у вас тут торчала, играла с вами. Нехорошо будет уборку на вас оставить."
+    dv "Кстати, а где Лена?"
+
+    hide cg
+    show bg int_musclub_mattresses_day
+    show mi pioneer smile at cright
+    with dissolve
+
+    un "Я тут!"
+
+    show un pioneer smile at fleft
+    with good_dspr
+
+    "Лена вышла из подсобки с ведром с водой, и Мику весело огласила."
+
+    show mi pioneer grin with dspr
+
+    mi "Ну, берегись, клуб! Теперь ты будешь сиять!"
+
+    hide mi
+    hide un
+    hide dv
+    with good_dspr
+
+    call to_nvl_mode
+
+    "Мы принялись за уборку."
+    "Сейчас дело шло конечно быстрее, чем в понедельник, когда мы убирались с Мику вдвоём."
+    "Не представляю, как она это всё вообще в одного делала."
+    me_n "А кстати, почему мы в понедельник то убирались, если хозяйственный день в субботу?"
+    mi_n "Так я не успевала совсем, пока одна была, вот и приходилось часть в субботу делать, часть на понедельник оставлять."
+    ths "И правда что."
+    "..."
+    "Уже через час всё здание музыкального клуба от потолка до пола сияло и пахло чистотой."
+
+    call to_adv_mode
+
+    pause(1.0)
+
+    show un pioneer normal at left
+    show dv pioneer2 smile at right
+    show mi pioneer normal at center
+    with long_dspr
+
+    show dv pioneer2 smile with dspr
+
+    dv "Ну что, может по чаю?"
+
+    show mi pioneer smile with dspr
+
+    mi "Конечно, можно! Мы заслужили."
+    "Мы все единогласно на этом сошлись, и я с Мику отправились делать на всех чай."
+    "..."
+
+    hide un
+    hide mi
+    hide dv
+    show un pioneer normal at left
+    show dv pioneer2 smile at fright
+    show mi pioneer normal at cright
+    with long_dspr
+
+    "Когда мы уже сидели на диване и наслаждались чаем, Мику вдруг спросила."
+
+    show mi pioneer grin with dspr
+
+    mi "Сём, а Сём! {w}Расскажи, как у тебя со Славей!"
+    "Я немного округлил глаза."
+
+    show dv pioneer2 laugh with dspr
+
+    dv "Да чё ты, все свои."
+
+    show un pioneer smile with dspr
+
+    un "Да, всем было бы интересно послушать… {w}Но мы не настаиваем, конечно."
+    me "Да что рассказывать…"
+
+    show dv pioneer2 smile
+    show mi pioneer happy
+    with good_dspr
+
+    "В конечном итоге я кратко рассказал девочкам всю историю наших со Славей отношений."
+    "От первого моего дня, когда она мне помогала освоиться, до первого танца и поцелуя."
+    "От вечерних прогулок, до вчерашней игры в карты."
+    "Интимные подробности, я конечно, опускал."
+
+    show un pioneer cry_smile with dspr
+
+    un "Здорово…"
+    "Мечтательно сказала Лена, когда я закончил рассказ."
+
+    show dv pioneer2 laugh with dspr
+
+    dv "Хм, знаешь, а ты мне сначала не понравился."
+    "Поставила свой вердикт Алиса."
+
+    show mi pioneer cry_smile with dspr
+
+    mi "Сёма, да ты просто идеальный парень. Ещё и на гитаре ей хочешь сыграть. Кстати!"
+
+    show un pioneer smile
+    show dv pioneer2 smile
+    with dspr
+
+    me "Кстати да, блин, чуть не забыл!"
+    
+    show un pioneer shy with dspr
+
+    un "Ой, заговорили мы тебя, кажется."
+
+    show mi pioneer smile with dspr
+
+    mi "Да вообще-то ничего, у Сёмы уже почти идеально получается. Только надо пару раз ещё прогнать."
+
+    show un pioneer smile with dspr
+
+    dv "Ну, наша помощь тут ни к чему."
+    dv "Пойдём, Лена. Не будем им мешать."
+    un "Да… {w}Мику, я в домике пока сама начну убираться тогда."
+    
+    show mi pioneer happy with dspr
+
+    mi "Да, Леночка, хорошо-хорошо, ты сильно не торопись, успеем!"
+    "Я встал с дивана, собрал все чашки, и перед тем как идти в подсобку, сказал."
+    me "Пока, девочки!"
+
+    show un pioneer smile at walk_away_left
+    show dv pioneer2 smile at walk_away_left
+    pause(1.0)
+    hide un
+    hide dv
+    with dspr
+
+    "Лена и Алиса попрощались, и вышли из здания."
+    "А я отнес чашки, и вернувшись, взял гитару в руки, и сел рядом с Мику."
+
+    hide mi
+    show mi pioneer smile at right
+    with good_dspr
+
+    "Мы с Мику несколько раз повторили композицию, которую уже сегодня я буду играть Славе."
+    mi "Отлично, Семён. Давай теперь последний раз полностью."
+    "Я выдохнул, и начал играть."
+
+    window hide
+
+    pause(2.0)
+
+    window show
+
+    "Получилось идеально, и без ошибок."
+
+    show mi pioneer cry_smile with dspr
+
+    mi "Я горжусь тобой! Ты мой лучший ученик!"
+    "Я улыбнулся."
+    me "Легко быть лучшим, когда ты единственный."
+
+    show mi pioneer happy with dspr
+
+    mi "Неважно!"
+    mi "Важно, что Славе понравится, я уверена."
+
+    show mi pioneer smile with dspr
+
+    mi "Так… {w}Ты гитару когда забираешь?"
+    me "Ну-у, сегодня после обеда."
+    mi "Хорошо, тогда я дверь закрывать не буду. Зайдешь, возьмёшь."
+    mi "Только поаккуратнее с ней!"
+
+    show mi pioneer grin with dspr
+
+    mi "Ну, и со Славей тоже."
+    "Мику интересно улыбнулась."
+    me "Что, ха-ха, что ты имеешь в виду?"
+
+    show mi pioneer smile with dspr
+
+    mi "То самое."
+
+    hide mi
+    show mi pioneer smile at cright
+    with dspr
+
+    mi "А теперь пойдем, нам надо ещё в домиках до обеда убраться."
+    me "Да. Меня вожатая, наверное, убьёт. Пойдём скорее."
+
+    stop ambience fadeout 1.0
+    stop music fadeout 2.0
+
+    hide mi
+    show bg ext_musclub_day
+    show mi pioneer normal at left
+    with dissolve
+
+    play ambience ambience_camp_center_day fadein 1.0
+
+    "Мы с Мику вышли из здания музыкального клуба, и поспешили в сторону домиков."
+
+    play music music_list["everyday_theme"] fadein 2.0 volume 0.82
+
+    show black with clocks_in
+
+    hide mi
+    show bg ext_houses_day
+    hide black
+    with clocks_out
+
+    "Мы разошлись с ней на развилке, она пошла к Лене в их домик, а я к себе."
+
+    show bg ext_house_of_mt_day
+    show mt pioneer normal at center
+    with dissolve
+
+    "Когда я подошёл к домику, то увидел вожатую, которая выносила ведро с водой."
+    mt "Семён, наконец-то. Убрались в клубе?"
+    "Я ответил, утвердительно, и вожатая продолжила."
+    mt "Отлично, тогда принимаемся за наше жилище. Я уже начала, так что до обеда управимся."
+    mt "Сейчас самое сложное будет, надо всё двигать…"
+    me "Всё сделаем, Ольг- Дмитр-на!"
+
+    stop ambience fadeout 1.0
+
+    hide mt
+    show bg int_house_of_mt_day
+    with dissolve
+
+    play ambience ambience_int_cabin_day fadein 1.0
+
+    "Мы с вожатой продолжили уборку вместе."
+    "Отодвинули кровати, тумбочки, и даже шкаф."
+    "Отовсюду всё вымели, вытерли, убрали грязные вещи, и навели на полках порядок."
+
+    show bg int_house_of_mt_clean_day with dissolve1
+
+    pause(2.0)
+
+    "Вскоре, наш домик прямо-таки засиял чистотой."
+    "Вожатая подошла ко мне, и сказала, также как и я осматривая плоды наших стараний."
+
+    show mt pioneer smile at right
+    with good_dspr
+
+    mt "Ну вот, другое дело!"
+
+    play sound sfx_dinner_horn_processed volume 0.5
+
+    "Не успела закончить она, как прозвучал горн."
+    mt "Ну вот, хорошо потрудились, теперь можно хорошо покушать!"
+    "Я согласился, и мы направились в столовую."
+
+    stop ambience fadeout 1.0
+
+    show black with clocks_in
+
+    play ambience ambience_camp_center_day fadein 1.0
+
+    hide mt
+    show bg ext_dining_hall_away_day
+    show mt pioneer normal at left
+    show sl pioneer normal far at cright
+    hide black
+    with clocks_out
+
+    "Подходя к столовой, мы увидели Славю, которая ждала у крыльца."
+    "Заприметив нас, она начала приближаться."
+
+    hide sl
+    show sl pioneer normal at right
+    with good_dspr
+
+    mt "Славя, привет ещё раз. Как в столовой?"
+
+    show sl pioneer smile with dspr
+
+    sl "Отлично, Ольга Дмитриевна, кухня сияет!"
+    mt "Домик?"
+    sl "Обижаете!"
+
+    show mt pioneer smile with dspr
+
+    mt "Ну хорошо. Идёмте есть?"
+
+    hide mt
+    show mt pioneer smile at cleft
+    with dspr
+
+    pause(0.33)
+
+    hide sl
+    show sl pioneer smile at cright
+    with dspr
+
+    "Вожатая уже было хотела сделать шаг, как Славя её прервала, сказав."
+    sl "Стойте, Ольга Дмитриевна!"
+
+    show mt pioneer surprise with dspr
+
+    "Она посмотрела на Славю, и спросила."
+    mt "Что такое?"
+    sl "Давайте немножко отойдём."
+    "Я понял, что она хочет сделать, а точнее спросить, поэтому посмотрел на Славю, и кивнул."
+
+    hide mt
+    hide sl
+    show mt pioneer normal at cright
+    show sl pioneer normal at fright
+    with good_dspr
+
+    "Вместе мы отошли в сторонку от тропинки."
+    mt "Славя, что случилось?"
+
+    show sl pioneer smile with dspr
+
+    sl "Ольга Дмитриевна, …"
+    "Славя рассказала вожатой про то, что мы хотим сегодня после обеда уйти, но предупредила, что фактически мы будем на территории лагеря."
+    "Сказала она и про то, что под открытым небом мы не окажемся, у нас есть спальный мешок."
+
+    show mt pioneer sad with half_good_dspr
+
+    "Вожатая выслушала это всё, и покачав головой, ответила, потирая лоб."
+    mt "Ох, дети…"
+    mt "Конечно, это не по правилам. Поход должен быть под руководством хотя бы одного вожатого."
+    mt "И странно вообще, что нам его не назначили на эту смену."
+    mt "Но я знаю, что даже если не отпущу вас, вы всё равно сбежите, хоть я вас под ста замками закрою."
+
+    show mt pioneer normal with dspr
+
+    mt "Поэтому, я вас отпускаю. {w}А ещё потому, что вы честно всё сказали, а не пытались сбежать."
+
+    show sl pioneer smile2 with dspr
+
+    "Славя в миг повеселела, я тоже улыбнулся."
+    mt "Но имейте в виду, что я это делаю под свою ответственность. Если с вами что-то случится, спрос будет с меня."
+    mt "И хоть вы себя и показали, как пионеры ответственные, и взрослые, я обязана предупредить."
+    mt "Глупостей не делать, за территорию лагеря не выходить."
+    mt "При первых признаках недуга незамедлительно обратно в лагерь."
+
+    hide sl
+    show mt pioneer grin
+    show sl pioneer laugh at right
+    with dspr
+
+    "Славя расплылась в «спасибо-спасибо-спасибо», и обняла вожатую."
+    me "Спасибо за доверие, Ольга Дмитриевна."
+
+    show mt pioneer smile with dspr
+
+    mt "Да что уж там… Кстати, а что вы вечером то есть будете?"
+
+    hide sl
+    show sl pioneer smile2 at fright
+    with dspr
+
+    sl "Об этом не переживайте. Я пока помогала убираться в столовой, поговорила с поварихами."
+    sl "Выделят нам остатки булочек и кефира с завтрака. Голодные не останемся."
+    mt "Ну, хоть что-то."
+    mt "Ладно, пойдёмте кушать."
+    
+    show sl pioneer laugh with dspr
+
+    "Вожатая пошла впереди нас, а мы со Славей взялись за руку, и беззвучно засмеялись."
+    "Теперь нам точно ничего не помешает, и ни от кого не прилетит."
+
+    stop ambience fadeout 1.0
+
+    hide mt
+    hide sl
+    show bg int_dining_hall_people_day
+    show sl pioneer smile at right
+    with dissolve
+
+    play ambience ambience_dining_hall_full fadein 1.0
+
+    "Столовая уже была полна пионеров, так что, взяв подносы, нам ничего не оставалось, кроме как сесть за единственные два оставшихся свободных места, с незнакомыми пионерами, и приступить к еде."
+    "Так как мы сидели в битком набитой столовой, то не могли даже примерно перекинуться парой слов о нашем предстоящем «путешествии», так что разговор зашёл за отвлечённые темы…"
+
+    stop music fadeout 2.0
+
+    "..."
+
+    play music music_list["dance_of_fireflies"] fadein 2.0 volume 0.8
+
+    "Когда, наконец, пионеры начали рассасываться, а мы со Славей доели, то вышли на улицу, и заговорили о предстоящих планах."
+
+    stop ambience fadeout 1.0
+
+    show bg ext_dining_hall_near_day with dissolve
+
+    play ambience ambience_camp_center_day fadein 1.0
+
+    me "Когда выдвигаемся?"
+    sl "Мне сейчас надо будет в столовой забрать нам еду, а для этого мне нужно в домик, у поварих пакетов нет."
+    sl "Ну а потом к Жене в библиотеку, и можем отправляться."
+    me "Хорошо, я тогда тоже кой-чего заберу. Встретимся тут же минут через десять?"
+
+    show sl pioneer smile2 with dspr
+
+    sl "Да, отлично."
+    "Мы поцеловались и разошлись."
+
+    hide sl
+    show bg ext_dining_hall_away_day
+    with dissolve
+
+    "Славя направилась к домикам, а я пошёл в музыкальный клуб за гитарой."
+    "..."
+
+    show black with clocks_in
+
+    show bg ext_musclub_verandah_day
+    hide black
+    with clocks_out
+
+    "Уже через несколько минут я подошел к зданию клуба, и открыл дверь."
+    "..."
+    "Зайдя внутрь, и забрав гитару, я увидел что в замочной скважине изнутри торчит ключ."
+    th "Вот Мику блин, во даёт."
+    "Я вытащил ключ, закрыл дверь снаружи, и бросив ключ под коврик, зашёл за клуб."
+
+    call smoking_process(with_pause=1.0)
+
+    "Поставил гитару рядом, закурил сигарету, сел и задумался."
+    th "А мне что-нибудь надо из домика взять?"
+    th "..."
+    th "Да вроде нет."
+    "Повертев в голове варианты того, что я мог забыть, я так ничего и не вспомнил, и направился обратно к столовой."
+
+    show black with clocks_in
+
+    show bg ext_dining_hall_away_day
+    show sl pioneer smile far at cright
+    hide black
+    with clocks_out
+
+    "Ещё издалека я увидел Славю, которая стояла с немаленьким пакетом, в котором, судя по всему, было несколько булочек и несколько пакетов кефира."
+
+    hide sl
+    show sl pioneer surprise at right
+    with long_dspr
+
+    "Подойдя ближе, я так же заметил сильное изумление на её лице."
+    sl "Сём, ты что… {w}играть будешь?"
+    "Я улыбнулся."
+    me "Да, ну-у… Сюрприз получился не полностью, я-то не думал, что мне с ней и с тобой одновременно идти придётся."
+    me "Но да, Мику помогла мне выучить композицию."
+
+    show sl pioneer tender with good_dspr
+
+    "Славя расплылась в улыбке."
+    sl "Сёма… {w}Ого!"
+    sl "Так ты не только свою партию на выступление учил, но ещё и песню для меня?"
+    sl "Бли-ин, это так мило!"
+
+    hide sl
+    show sl pioneer smile2 close at cright
+    with good_dspr
+
+    pause(1.0)
+
+    hide sl
+    show sl pioneer smile2 at right
+    with good_dspr
+
+    "Девушка подошла ближе, и положив мне руку на плечо, поцеловала меня."
+    sl "Я притворюсь, что не вижу её, пока ты не решишь сыграть, хорошо?"
+    "Мы посмеялись, и отправились к зданию библиотеки за спальником."
