@@ -47,6 +47,8 @@ init:
     image bg ext_water_day = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_ext_water_day.jpg"
     image bg ext_musclub_concert_day = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_ext_musclub_concert_day.png"
     image bg ext_house_of_sl_sunset = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_ext_house_of_sl_sunset.jpg"
+    image bg ext_polyana_nebo_day = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_ext_polyana_nebo.png"
+    image bg ext_polyana_nebo_night = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_ext_polyana_nebo_night.png"
 
     image bg int_warehouse_day = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_warehouse_day.png"
     image bg int_dining_hall_people_sunset = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_dining_hall_people_sunset.png"
@@ -86,6 +88,9 @@ init:
     image cg d5_sl_love = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d5_love.png"
     image cg d6_concert_me_un_mi = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d6_me_un_mi_playing.png"
     image cg d6_concert_mi_dv = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d6_dv_mi_playing.png"
+    image cg d7_polyana = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d7_polyana.png"
+    image cg d7_polyana_night = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d7_polyana_night.png"
+    image cg d7_polyana_guitar_playing = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d7_polyana_guitar_playing.png"
 
     #   Спрайты
     image sl veryfar = ConditionSwitch(
@@ -15072,3 +15077,362 @@ label simple_happiness_mod_day7:
     "Девушка подошла ближе, и положив мне руку на плечо, поцеловала меня."
     sl "Я притворюсь, что не вижу её, пока ты не решишь сыграть, хорошо?"
     "Мы посмеялись, и отправились к зданию библиотеки за спальником."
+
+    show bg ext_library_day
+    show sl pioneer smile
+    with dissolve1
+
+    "Подойдя, я оставил гитару у входа, и мы зашли внутрь."
+
+    stop ambience fadeout 1.0
+
+    show bg int_library_day with dissolve
+
+    play ambience ambience_library_day fadein 1.0
+
+    "Спальный мешок сложно было не заметить."
+    "Он был свёрнут по всем походным канонам, и лежал прямо у входа."
+    "Я поднял его."
+    th "Не легкий, блин. Тёплый, наверное."
+    "Благо сразу я обнаружил, что у него есть лямки, чтобы его можно было одеть как рюкзак."
+    "Закинув мешок за спину, я подтянул регулировки, чтобы он не болтался, и утвердительно хмыкнул."
+
+    show sl pioneer smile2 with dspr
+
+    sl "Женя-я! Спасибо, что оставила спальник! Мы ушли!"
+    "Из дальнего конца помещения послышалось."
+    mz "Хорошо!"
+
+    stop ambience fadeout 1.0
+
+    show bg ext_library_day
+    show sl pioneer smile
+    with dissolve
+
+    play ambience ambience_camp_center_day fadein 1.0
+
+    "Мы вышли из библиотеки, я взял гитару в левую руку, а правую протянул Славе."
+
+    stop music fadeout 2.0
+
+    hide sl
+    show sl pioneer smile close at right
+    with good_dspr
+
+    pause(1.0)
+
+    play music music_list["everlasting_summer"] fadein 2.0 volume 0.7
+
+    "Она взяла её, и мы медленно зашагали."
+    th "Вот бы это {b}лето{/b} было {b}бесконечным{/b}."
+    "Пронеслось в голове."
+    "..."
+
+    show bg ext_path_day with dissolve
+
+    "Выйдя на лесную тропинку, мы обсуждали всякое, когда я спросил."
+    me "Кстати, а куда конкретно мы идём?"
+    sl "Да я сама толком не знаю. Но эта тропинка ведёт к месту, где у отрядов обычно конечная точка похода."
+    "Так что идти должно быть недалеко, не больше сорока минут, может часа."
+
+    show sl pioneer smile2 with half_good_dspr
+
+    sl "А ещё, говорят, рядом есть чистое озеро."
+    "Я улыбнулся."
+    me "Я был бы не против искупаться."
+    sl "Я тоже!"
+
+    show sl pioneer smile with good_dspr
+
+    "..."
+    "Продолжая идти, мы мило беседовали, и наслаждались красотой вокруг."
+    "Нас вела прекрасная лесная тропа, достаточно широкая чтобы по ней можно было спокойно идти вдвоём."
+
+    stop ambience fadeout 1.0
+
+    pause(1.5)
+
+    play ambience ambience_forest_day fadein 1.0
+
+    show bg ext_path2_day with dissolve
+
+    "Постепенно, тропинка начала сужаться, а сама она становилась всё более заросшей."
+    "Мы почувствовали, что уже не просто идём пионерской походной тропой, а заходим в самый настоящий лес."
+    "И на удивление, не было комаров, да и в принципе я тут не встретил ни одного насекомого."
+    "Чему, впрочем, я был скорее рад."
+    "..."
+
+    pause(1.0)
+
+    "Совсем скоро идти рядом стало невозможно, кто-нибудь из нас постоянно сходил в траву, и путь тому преграждали кусты."
+
+    show sl pioneer smile at walk_away_right
+    pause(1.0)
+    hide sl with good_dspr
+
+    "Я решил идти первый, а Славя за мной."
+    "Так мы прошли ещё метров двести, пока впереди не показалось большое пространство."
+    me "Смотри, видимо пришли!"
+    sl "Где?"
+
+    pause(1.0)
+
+    show sl pioneer smile2 at center
+    with good_dspr
+
+    "Она выглянула пару раз из-за моей спины, но толком ничего не разглядев, обогнала меня, и бодро зашагала впереди…"
+
+    hide sl
+    show bg ext_polyana_day
+    show sl pioneer smile at fleft
+    with dissolve1
+
+    "И вот, мы вышли на залитую солнцем поляну, находившуюся в низине, в окружении деревьев, и сотен полевых цветов."
+
+    show sl pioneer tender with dspr
+
+    sl "О-ой, как красиво!"
+    "Я тоже оценил красоту этого места."
+    "По всей видимости, это была не та поляна, куда ходили пионеры. Она выглядела совершенно девственно чисто."
+
+    hide sl
+    show sl pioneer smile2 far at cleft
+    with good_dspr
+
+    pause(1.0)
+
+    hide sl
+    show sl pioneer smile far at cright
+    with good_dspr
+
+    pause(1.0)
+
+    hide sl
+    show sl pioneer tender far at fright
+    with good_dspr
+
+    pause(1.0)
+
+    hide sl
+    show sl pioneer smile at cright
+    with good_dspr
+
+    pause(1.0)
+
+    hide sl
+    show sl pioneer smile2 at center
+    with long_dspr
+
+    "Славя легонько оббежала поляну по кругу, сорвала один цветочек, и вдохнув его аромат, легла на траву."
+    "Я впервые увидел её в самой естественной её среде, так как она выросла рядом с природой."
+
+    play sound sfx_drop_alisa_bag volume 0.8
+
+    "Я скинул спальник, и аккуратно поставил гитару рядом с одним из деревьев, и присоединился к Славе."
+
+    hide sl
+    show bg ext_polyana_nebo_day
+    with dissolve1
+
+    "Я лёг на траву рядом с ней, и посмотрел наверх."
+    "Дневное небо было уже не таким ярким, но солнечные лучи красиво пробивались сквозь кроны деревьев."
+    "..."
+
+    stop music fadeout 2.0
+
+    "Мы лежали, взявшись за руки, и смотрели на эту великолепную красоту."
+
+    play music music_list["forest_maiden"] fadein 2.0 volume 1.0
+
+    "Славя прикрыла глаза рукой, но по трясущимся губам я понял, что она собирается заплакать."
+    me "Славечка, ты чего?"
+    sl "Я… {w}Сёма, я так рада оказаться тут с тобой, вдвоём."
+
+    show cg d7_polyana with dissolve
+
+    "Я перевернулся на бок, и отложив руку девушки, нежно протёр ей выступившие слёзы."
+    me "Но мы же оказались."
+    me "Я считаю, что нам обоим повезло. И оказаться в этом лагере, и полюбить друг друга, и сейчас, лежать вдвоём здесь…"
+    "Я понизил голос."
+    me "На красивейшей поляне, а вокруг никого."
+    "Славя лишь улыбнулась в ответ, и притянула меня за воротник рубашки к себе."
+    "Я закрыл глаза, а наши губы соединились в поцелуе."
+
+    show blink
+
+    "Но это была не страсть. Не в этот момент."
+    "Сейчас это была бесконечная благодарность друг другу за все моменты вместе, за взаимную любовь, уважение, доверие…"
+    "За то, что мы нашли друг друга, а наши души слились воедино, и мы уже начинали понимать друг друга с полуслова."
+    "..."
+
+    hide blink
+    hide cg
+    show bg ext_polyana_day
+    show unblink
+    with dissolve1
+
+    show sl pioneer smile at right
+    with long_dspr
+
+    "Полежав ещё некоторое время в тишине, державшись за руки, Славя сказала."
+
+    hide unblink
+
+    sl "Пойдём, поищем озеро, про которое я говорила?"
+    me "Да, пойдём. Было бы правда здорово искупаться."
+    "Мы встали, и выбрав произвольное направление, направились на поиски лесного озера."
+
+    show bg ext_path2_day
+    show sl pioneer smile2
+    with dissolve
+
+    "Пройдя немного по лесу, Славя вдруг вскинула руку, и указала куда-то."
+    sl "Смотри, я вижу!"
+
+    hide sl
+    show sl pioneer smile at center
+    with good_dspr
+
+    "Она побежала вперёд."
+    me "Стой, подожди!"
+
+    hide sl with dspr
+
+    "..."
+
+    show cg d2_slavya_forest with dissolve
+
+    "Нагнав её через несколько секунд, я уже наблюдал как она сбрасывает одежду у берега."
+    "Я последовал её примеру."
+
+    stop ambience fadeout 1.0
+
+    show cg d6_sl_swim with dissolve
+
+    play ambience ambience_lake_shore_day fadein 1.0
+
+    "Славя разделась догола, и зашла в воду."
+    "Уже совсем скоро мы с ней вдвоём плескались в слегка тёплой, но чистой и освежающей воде лесного озера."
+    "Удивительно, но под ногами я даже не чувствовал ила, ноги касались мягкого песка."
+    "..."
+    "Вдоволь накупавшись, мы вышли из воды, и решили что пока не будем одевать нижнее белье, а просто накинем верхнюю одежду."
+
+    stop music fadeout 2.0
+
+    hide cg
+    show sl pioneer_wet smile at right
+    with dissolve
+
+    pause(1.0)
+
+    play music "<from 19.5>" + music_list["take_me_beautifully"] fadein 3.5 volume 0.75
+
+    "Надо ли говорить, что от мокрого тела наши рубашки намокли, и стали полупрозрачные?"
+    "И теперь, Славя хоть и была прикрыта рубашкой, но она вовсе ничего не закрывала, а лишь наоборот, подстёгивала воображение."
+    "Так же и я уже не мог сдерживать свою природу, и всё было прекрасно видно, хоть я был и в шортах."
+    "Мы это, конечно, оба заметили друг в друге."
+    "Но лишь отметили этот приятный факт, многозначно друг на друга посмотрев, и отправились обратно к полянке."
+    "..."
+
+    stop ambience fadeout 1.0
+
+    window hide
+
+    hide sl
+    show bg ext_polyana_sunset
+    with dissolve
+
+    $ sunset_time()
+    $ persistent.sprite_time = "sunset"
+
+    pause(1.0)
+
+    show sl pioneer_wet smile at right
+    with good_dspr
+
+    play ambience ambience_forest_evening fadein 1.0
+
+    window show
+
+    "Пока мы шли обратно, день сменился вечером, и атмосфера на нашей полянке поменялась."
+
+    play sound sfx_alisa_lighter volume 0.8
+    queue sound sfx_forest_fireplace fadein 2.0 volume 0.7 loop
+
+    "Разложив вещи, чтобы они успели просушиться, мы разожгли костёр, и сидели перед ним, уминая кефир с булочками."
+
+    hide sl
+    show sl pioneer_wet smile at left
+    with dissolve
+
+    "Посреди трапезы, Славя встала и подошла к нашим вещам."
+    sl "Сём, да они уже высохли!"
+    sl "Оденемся?"
+    me "Да, конечно."
+    "..."
+
+    hide sl with good_dspr
+
+    pause(1.0)
+
+    show sl pioneer smile at left
+    with good_dspr
+
+    "Мы оделись, и вернулись к костру, продолжив наш небольшой ужин."
+
+    hide sl
+    show sl pioneer smile at right
+    with good_dspr
+
+    "..."
+
+    show sl pioneer smile2 with dspr
+
+    "Славя закончила есть первая, и достав из кармана платочек, вытерла рот."
+    "Я заметил, что платок был не обычный, явно ручной работы."
+    "Он был чуть большего размера, и украшен сложным вышитым рисунком из цветов в русском классическом стиле."
+    me "Ого, красивый у тебя платок. Откуда у тебя такой?"
+    sl "Я сама делала."
+    "Я немного округлил взгляд."
+    me "Ты и вышивать умеешь?"
+    sl "А я разве не рассказывала? {w}Да, бабушка учила."
+
+    stop music fadeout 2.0
+
+    show sl pioneer shy with dspr
+
+    pause(1.0)
+
+    play music music_list["forest_maiden"] fadein 2.0 volume 1.0
+
+    "Славя немного помяла платочек в руках, и сказала."
+    sl "А знаешь, бери его себе."
+    sl "Кто знает, когда мы в следующий раз встретимся, и встретимся ли вообще?"
+    "На этих словах моё сердце сжалось."
+    th "Уже завтра смена закончится. Что же будет дальше?"
+
+    show sl pioneer happy_cry with good_dspr
+
+    "Я запил остатки булочки, и подошёл к Славе. Она опять начала плакать."
+
+    hide sl
+    show cg d5_sl_love
+    with dissolve
+
+    "Я сел рядом с ней, и обнял её."
+    me "Славя, давай не будем об этом думать сегодня."
+    me "Обменяемся адресами, будем писать… Может, когда-нибудь, кто-нибудь из нас приедет к другому."
+    "Я сам не верил в то, что говорил… Но мне хотелось утешить её, убедить, что всё будет хорошо…"
+    "Хотя я сам не был уверен даже в своей судьбе."
+    th "Что меня ждёт дальше?"
+    "..."
+    "Славя, кажется, немного успокоилась, и расслабилась, сидя у меня в объятиях."
+
+    hide cg
+    show sl pioneer smile2 at right
+    with dissolve
+
+    "Спустя некоторое время я поднялся, подбросил веток в костёр, и сказал Славе."
+    me "Подожди меня немножко, я скоро вернусь."
+    "Славя посмотрела на меня, и ответила."
+    sl "Хорошо."
