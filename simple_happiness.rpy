@@ -27,6 +27,7 @@ init:
     image fullscreen_flickering noise1 = "mods/simple_happiness_mod_efim/images/anim/simple_happiness_fullscreen_flickering_1.png"
     image fullscreen_flickering noise2 = "mods/simple_happiness_mod_efim/images/anim/simple_happiness_fullscreen_flickering_2.png"
     image fullscreen_flickering noise3 = "mods/simple_happiness_mod_efim/images/anim/simple_happiness_fullscreen_flickering_3.png"
+    image red = "#FF0000"
 
     #   Фоны
     image bg prologue_backdrop = "mods/simple_happiness_mod_efim/images/backdrop/simple_happiness_prologue_backdrop.png"
@@ -61,6 +62,7 @@ init:
     image bg int_house_of_sl_sunset = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_house_of_sl_sunset.png"
     image bg int_house_of_sl_night = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_house_of_sl_night.jpg"
     image bg int_house_of_mt_clean_day = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_house_of_mt_clean_day.png"
+    image bg int_bus_people_sunset = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_int_bus_people_sunset.png"
 
     image bg d1_rena_sleep = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_d1_rena.jpg"
     image bg d8_nvl_back = "mods/simple_happiness_mod_efim/images/bg/simple_happiness_d8_nvl_back.png"
@@ -92,6 +94,7 @@ init:
     image cg d7_polyana = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d7_polyana.png"
     image cg d7_polyana_night = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d7_polyana_night.png"
     image cg d7_polyana_guitar_playing = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d7_polyana_guitar_playing.png"
+    image cg d8_sl_love = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_d8_love.png"
 
     #   Спрайты
     image sl veryfar = ConditionSwitch(
@@ -351,6 +354,7 @@ label calc_music_how_much_play:
     return
 
 
+# Вызов звуков курения
 label smoking_process(with_pack_crumple=False, with_pause=0):
     stop sound
 
@@ -365,6 +369,24 @@ label smoking_process(with_pack_crumple=False, with_pause=0):
     if with_pause != 0:
         pause(with_pause)
 
+    return
+
+
+# Смена времени дня
+label set_time(new_time="day"):
+    if new_time == "prolog":
+        $ prolog_time()
+        $ persistent.sprite_time = "night"
+    elif new_time == "sunset":
+        $ sunset_time()
+        $ persistent.sprite_time = new_time
+    elif new_time == "night":
+        $ night_time()
+        $ persistent.sprite_time = new_time
+    else:
+        $ day_time()
+        $ persistent.sprite_time = new_time
+    
     return
 
 
@@ -412,6 +434,19 @@ transform deblurring:
     blur 15.0
     linear 1.5 blur 0.0
 
+# Пульсирующая пелена перед глазами
+transform pulsing_eyes:
+    alpha 0.0
+    linear 1.5 alpha 0.35
+    linear 1.5 alpha 0.20
+    linear 1.5 alpha 0.40
+    linear 1.5 alpha 0.15
+    repeat
+
+# Скрыть пульсацию
+transform depulsing_eyes:
+    linear 2.0 alpha 0.0
+
 # == ПОВЕСТВОВАНИЕ ==
 
 # Стартовый лейбл. Пролог
@@ -420,9 +455,10 @@ label simple_happiness_mod_prologue:
 
     $ new_chapter(0, u"Пролог")
 
-    call custom_day_screen(0, "Пролог", "prologue")
+    call custom_day_screen(0, "Простое Счастье. Пролог", "prologue")
 
-    $ prolog_time()
+    call set_time("prolog")
+
     $ set_mode_adv()
 
     play music music_list["farewell_to_the_past_full"] volume 0.7 fadein 5.0
@@ -577,9 +613,9 @@ label simple_happiness_mod_day1:
     $ backdrop = "days"
     $ new_chapter(1, u"Простое Счастье. День 1")
 
-    $ day_time()
+    call set_time
+
     $ set_mode_adv()
-    $ persistent.sprite_time = "day"
 
     play music music_list["no_tresspassing"] volume 0.9 fadein 1.0
 
@@ -1894,8 +1930,7 @@ label simple_happiness_mod_day1:
     sl "Семён! {w}Семён! {w}Сёма, блин, проснись!"
     th "Что?"
 
-    $ sunset_time()
-    $ persistent.sprite_time = "sunset"
+    call set_time("sunset")
 
     play ambience ambience_camp_center_evening fadein 5.0 volume 0.75
 
@@ -2420,11 +2455,9 @@ label simple_happiness_mod_day1:
 
     th "Да, девочка ураган прямо. Только словесный."
 
-    $ night_time()
+    call set_time("night")
 
     show bg ext_square_night with dissolve
-
-    $ persistent.sprite_time = "night"
 
     pause(2.0)
 
@@ -2536,9 +2569,9 @@ label simple_happiness_mod_day2:
     $ backdrop = "days"
     $ new_chapter(2, u"Простое Счастье. День 2")
 
-    $ day_time()
+    call set_time
+
     $ set_mode_adv()
-    $ persistent.sprite_time = "day"
 
     play music music_list["everyday_theme"] fadein 6.0 volume 0.5
 
@@ -4389,8 +4422,7 @@ label simple_happiness_mod_day2:
 
     show black with clocks_in
 
-    $ sunset_time()
-    $ persistent.sprite_time = "sunset"
+    call set_time("sunset")
 
     stop sound fadeout 3.0
 
@@ -5705,8 +5737,7 @@ label simple_happiness_mod_day2_continue:
     sl "Ой, давай! Спасибо большое!"
     me "Не стоит."
 
-    $ night_time()
-    $ persistent.sprite_time = "night"
+    call set_time("night")
 
     hide sl
     show bg ext_beach_night
@@ -5907,9 +5938,9 @@ label simple_happiness_mod_day3:
     $ backdrop = "days"
     $ new_chapter(3, u"Простое Счастье. День 3")
 
-    $ day_time()
+    call set_time
+
     $ set_mode_adv()
-    $ persistent.sprite_time = "day"
 
     play ambience ambience_int_cabin_day fadein 3.0 volume 0.9
 
@@ -7105,8 +7136,7 @@ label simple_happiness_mod_day3:
     stop ambience fadeout 1.0
     stop music fadeout 2.0
 
-    $ sunset_time()
-    $ persistent.sprite_time = "sunset"
+    call set_time("sunset")
 
     hide dv
     hide un
@@ -7591,8 +7621,7 @@ label simple_happiness_mod_day3:
 
     "Затем, достаточно отдалившись от площади, вышли на дорожку."
 
-    $ night_time()
-    $ persistent.sprite_time = "night"
+    call set_time("night")
 
     hide sl
     show sl dress smile close at right
@@ -7866,9 +7895,9 @@ label simple_happiness_mod_day4:
     $ backdrop = "days"
     $ new_chapter(4, u"Простое Счастье. День 4")
 
-    $ day_time()
+    call set_time
+
     $ set_mode_adv()
-    $ persistent.sprite_time = "day"
 
     play ambience ambience_int_cabin_day fadein 3.0 volume 0.9
     play music music_list["everyday_theme"] fadein 5.0 volume 0.8
@@ -9245,8 +9274,7 @@ label simple_happiness_mod_day4:
     "А я в нотной грамоте всё равно понимал чуть больше, чем ничего."
     "К тому же, учить свою партию я начал ещё несколько дней назад, и у меня уже почти полностью получалось."
 
-    $ sunset_time()
-    $ persistent.sprite_time = "sunset"
+    call set_time("sunset")
 
     show bg ext_dining_hall_near_sunset with dissolve1
 
@@ -9469,8 +9497,7 @@ label simple_happiness_mod_day4:
 
     hide sl
 
-    $ night_time()
-    $ persistent.sprite_time = "night"
+    call set_time("night")
 
     show bg ext_house_of_sl_night
     show sl pioneer smile2 close at center
@@ -9629,8 +9656,7 @@ label simple_happiness_mod_day_none:
 
     $ set_mode_adv()
 
-    $ night_time()
-    $ persistent.sprite_time = "night"
+    call set_time("night")
 
     play music music_list["drown"] fadein 3.0 volume 0.8
 
@@ -9952,9 +9978,9 @@ label simple_happiness_mod_day5:
     $ backdrop = "days"
     $ new_chapter(6, u"Простое Счастье. День 5")
 
-    $ day_time()
+    call set_time
+
     $ set_mode_adv()
-    $ persistent.sprite_time = "day"
 
     play ambience ambience_int_cabin_day fadein 3.0 volume 0.9
     play sound sfx_hell_alarm_clock fadein 1.0 volume 0.8
@@ -11391,8 +11417,7 @@ label simple_happiness_mod_day5:
 
     window hide
 
-    $ sunset_time()
-    $ persistent.sprite_time = "sunset"
+    call set_time("sunset")
 
     stop ambience fadeout 1.0
     stop music fadeout 2.0
@@ -11562,8 +11587,7 @@ label simple_happiness_mod_day5:
 
     window hide
 
-    $ night_time()
-    $ persistent.sprite_time = "night"
+    call set_time("night")
 
     show bg ext_bathhouse_night
     show mt pioneer smile at right
@@ -12189,9 +12213,9 @@ label simple_happiness_mod_day6:
     $ backdrop = "days"
     $ new_chapter(6, u"Простое Счастье. День 6")
 
-    $ day_time()
+    call set_time
+
     $ set_mode_adv()
-    $ persistent.sprite_time = "day"
 
     play ambience ambience_int_cabin_day fadein 3.0 volume 0.9
     play sound sfx_hell_alarm_clock fadein 1.5 volume 0.35 fadeout 1.5
@@ -13398,8 +13422,7 @@ label simple_happiness_mod_day6:
 
     show black with clocks_in
 
-    $ sunset_time()
-    $ persistent.sprite_time = "sunset"
+    call set_time("sunset")
 
     play ambience ambience_dining_hall_full fadein 1.0
 
@@ -14161,8 +14184,7 @@ label simple_happiness_mod_d6_after_card_game:
 
     window hide
 
-    $ night_time()
-    $ persistent.sprite_time = "night"
+    call set_time("night")
 
     hide cg
     show bg int_house_of_sl_night
@@ -14301,9 +14323,9 @@ label simple_happiness_mod_day7:
     $ backdrop = "days"
     $ new_chapter(7, u"Простое Счастье. День 7")
 
-    $ day_time()
+    call set_time
+
     $ set_mode_adv()
-    $ persistent.sprite_time = "day"
 
     play ambience ambience_int_cabin_day fadein 3.0 volume 0.9
 
@@ -15350,8 +15372,7 @@ label simple_happiness_mod_day7:
     show bg ext_polyana_sunset
     with dissolve
 
-    $ sunset_time()
-    $ persistent.sprite_time = "sunset"
+    call set_time("sunset")
 
     pause(1.0)
 
@@ -15498,8 +15519,7 @@ label simple_happiness_mod_day7:
 
     play music this_one_for_her volume 1.05
 
-    $ night_time()
-    $ persistent.sprite_time = "night"
+    call set_time("night")
 
     window show
 
@@ -15670,9 +15690,9 @@ label simple_happiness_mod_day8:
     $ backdrop = "days"
     $ new_chapter(8, u"Простое Счастье. День 8")
 
-    $ day_time()
+    call set_time
+
     $ set_mode_adv()
-    $ persistent.sprite_time = "day"
 
     play ambience ambience_forest_day fadein 3.0 volume 0.8
     play music music_list["everyday_theme"] fadein 3.0 volume 0.7
@@ -15953,7 +15973,11 @@ label simple_happiness_mod_day8:
     me "Проводим лагерь перед отъездом."
     "Мы взялись за руки, и пошли в произвольном направлении."
 
+    stop ambience fadeout 1.0
+
     show black with clocks_in
+
+    play ambience ambience_boat_station_day fadein 1.0
 
     show bg ext_boathouse_day
     show sl pioneer smile
@@ -15970,3 +15994,586 @@ label simple_happiness_mod_day8:
     "Отчего-то мне подумалось, что там наверняка растёт вкусная лесная ягода."
     sl "Пойдем вон туда сядем!"
     "Славя показала на место в небольшой тени деревьев."
+
+    stop music fadeout 2.0
+
+    hide sl
+    show cg d8_sl_love
+    with dissolve1
+
+    pause(1.0)
+
+    play music music_list["forest_maiden"] fadein 2.0 volume 0.85
+
+    "Мы сели прямо как несколько дней назад, когда признались друг другу в любви."
+    "Я обнимал свою любимую девушку, и думал, что это, возможно, последний раз, когда мы можем вот так вот спокойно сидеть, наслаждаться компанией друг друга и природой вокруг нас."
+    "В груди всё больше давило от ощущения надвигающейся неизвестности."
+    sl "Сём..."
+    me "Да?"
+    sl "Ты же меня не забудешь? Ты будешь мне писать?"
+    "Я улыбнулся, но тут же мои губы задрожали."
+    "Я начал глубоко и тяжело дышать."
+    "Славя скорее всего это почувствовала, и крепче обняла мои руки."
+    "С большим усилием подавив слёзы, и проглотив ком в горле, я ответил."
+    me "Конечно, я… {w}Я постараюсь. {w}Я свяжусь с тобой при первой же возможности."
+    "Славя откинула голову мне на грудь, и закрыла глаза."
+    sl "Хорошо…"
+    sl "Знаешь, а я почему-то уверена, что у нас всё получится."
+    "Она немного засмеялась."
+    sl "Даже не знаю, почему. Ведь мы живём в тысячах километров друг от друга."
+    me "Наверное, это хорошее предчувствие."
+    me "А такому надо верить, и надеяться на лучшее."
+
+    show blink
+
+    "Славя лишь вздохнула, а я покрепче обнял её, закрыв глаза."
+    "У меня было странное, почти явственное желание. {w}Только одно."
+
+    play sound sfx_head_heartbeat fadein 1.0 volume 0.65 loop
+
+    "В голове гудело."
+    "Она не болела, но было стойкое ощущение, как будто внутри работает ни то генератор, ни то большой вентилятор."
+    "Я сосредоточился на главном. {w}На своём желании."
+    "Мне было не важно где, в каком времени, и в какой стране."
+    "Я просто хотел быть рядом с этой девушкой."
+    "Ради этого я был готов отдать всё, и пойти на что угодно."
+    "..."
+
+    stop sound fadeout 1.0
+
+    hide blink
+    show unblink
+
+    "Так мы просидели некоторое время, пока Славя не подняла на меня взгляд, и не поцеловала меня."
+    sl "Нужно идти. А то опоздаем."
+    me "Да…"
+    "Я физически ощущал желание не покидать это место, остаться здесь…"
+
+    hide unblink
+    hide cg
+    show sl pioneer smile2 at right
+    with dissolve2
+
+    "Но мы всё же поднялись, и пошли обратно к своим домикам."
+    "..."
+    "А по пути у нас завязался разговор про наши родные города, про то что есть интересного."
+    "Делились мы и подробностями того, как мы живём."
+
+    stop music fadeout 2.0
+    stop ambience fadeout 1.0
+
+    show black with clocks_in
+
+    play ambience ambience_camp_center_day fadein 1.0
+    play music music_list["farewell_to_the_past_full"] fadein 2.0 volume 0.65
+
+    hide sl
+    show bg ext_house_of_mt_day
+    hide black
+    with clocks_out
+
+    "Проводив Славю до домика, и условившись встретиться на площади, чтобы уже оттуда пойти на остановку, мы разошлись."
+    "А я, подошёл, уже по всей видимости в последний раз к домику вожатой, постучался."
+
+    play sound sfx_knock_door7_polite volume 0.93
+
+    pause(1.0)
+
+    "Ответа не последовало."
+
+    stop ambience fadeout 1.0
+
+    show bg int_house_of_mt_clean_day with dissolve
+
+    play ambience ambience_int_cabin_day fadein 1.0
+
+    "Уже не гадая, где она может быть, я зашел в домик и задумался."
+    th "А что мне, собственно, собирать?"
+    "Из важных вещей у меня был с собой только телефон, но он уже лежал в кармане."
+    "Тащить с собой свою зимнюю обувь не хотелось."
+    "..."
+    "Прикинув все за и против, я остановился на том, что заберу свою кофту и штаны, в которых приехал."
+    "Достав их из шкафа, и аккуратно сложив на кровати, я сел на стул, и потёр лицо."
+
+    stop music fadeout 2.0
+
+    show blink
+
+    pause(1.5)
+
+    "Хотелось стереть с себя всю эту тяжесть."
+    "Хотелось, чтобы всё само как-нибудь разрешилось, ведь впереди ждала только неизвестность."
+
+    hide blink
+    show pi normal at right
+    show unblink
+
+    play music music_list["door_to_nightmare"] fadein 1.5
+
+    "Я открыл глаза и вздрогнул от неожиданности, подпрыгнув на стуле."
+    "Передо мной стоял тот пионер из сна…"
+    me "Ты… {w}это ты?"
+    pi "Я? Не-ет, я это ты!"
+    pi "Ну, в прочем, я тебе уже это объяснял."
+    "В груди начала кипеть злость от его очередных игр в секреты, но я проигнорировал его слова."
+    me "Так значит, это был не сон? Значит ты с той девушкой и правда забрали меня… Куда-то?"
+    pi "А ты только сейчас это понял? Я думал ты посообразительнее."
+    me "Я не намерен выслушивать твою пустую болтовню. Если тебе нет чего дельного сказать, уходи."
+    pi "Да ладно, чего ты такой нерадостный?"
+    pi "Больно будет, ну может первые раз пятьдесят…"
+
+    show pi smile with dspr
+
+    pi "Бесконечные эмоциональные качели, чтоб их, ха-ха-ха!"
+    "Пионер мерзко рассмеялся."
+    
+    show pi normal with dspr
+
+    pi "Я и сам через это проходил. Славя, Лена, Алиса, Мику, Славя, Лена, Мику, Алиса, Славя, Лена, чтоб её, Лена!"
+    "Он сорвался на крик."
+    pi "Я пытался полюбить каждую из них, но скоро понял, что это бессмысленно."
+    pi "Потому-что всякий раз я оказывался в начальной точке."
+
+    hide pi
+    show pi normal at fright
+    with long_dspr
+
+    "Он присел на кровать вожатой."
+    pi "Поэтому, просто начал получать удовольствие. {w}Сначала просто от изнасилования, потом от пыток."
+
+    show pi smile with dspr
+
+    pi "До сих пор вспоминаю. {w}М-м-м, ты даже не представляешь, как возбуждающе наша любимая вожатая кричит, молит о пощаде, когда раскалённая ложка проникает ей в живот."
+    pi "А потом я совал в это отверстие, пх-пха-ха-ха!"
+    "Он залился смехом, а я сидел на стуле, подперев голову кулаком, и смотрел в пол."
+    me "Ты – долбанный психопат. Зачем ты {b}мне{/b} это всё рассказываешь?"
+    pi "Делюсь опытом, друг! Разве тебе не интересно?"
+    
+    show pi normal with dspr
+
+    pi "К чему романтические розовые сопли, когда можно от души оттянуться?"
+    pi "Помню, я как то распял Славю в лесу, когда она в очередной раз купалась голая, как шлюха..."
+
+    play sound sfx_head_heartbeat loop
+
+    show white at pulsing_eyes
+
+    "У меня закончился кислород."
+    "Внутри всё сдавило, перед глазами пошла белая пелена. Я его уже не слышал."
+    pi "… ну шлюха она и есть."
+
+    show pi smile with dspr
+
+    pi "А когда я закончил. М-м-м, я написал её кровью на её же теле красный крест. Как маэстро прям. Картина мас…"
+
+    stop music fadeout 0.5
+
+    show white at depulsing_eyes
+    hide white
+    with dissolve
+
+    pause(0.5)
+
+    show red at pulsing_eyes
+
+    play music music_list["pile"] fadein 0.5 volume 0.9
+
+    me "Заткнись, блять!!"
+
+    play sound2 sfx_chair_fall volume 0.7
+    queue sound2 sfx_blanket_off_stand
+    queue sound2 sfx_body_bump volume 0.85
+
+    hide pi
+    show pi smile close at cright
+    with long_dspr
+
+    play sound2 sfx_bodyfall_1
+    play sound3 sfx_bed_squeak1
+
+    "Я вскочил со стула, и в одно мгновение повалил пионера, схватив его за воротник рубашки."
+    pi "Ха-ха-ха!"
+    "Он лишь заливался хохотом."
+    "Я смотрел на него остервенелыми глазами, и тяжело дышал. Хотелось придушить его на месте."
+    me "Я не знаю, кто ты, но лучше бы тебе убраться отсюда прямо сейчас, пока я тебя прямо тут не прикончил!!"
+    "Мой голос срывался, а руки дрожали. Весь мир приобрёл красные оттенки."
+    "Пионер продолжал заливаться гомерическим хохотом."
+    pi "ХА-ХА-ХА!"
+    pi "Ты всё равно мне ничего не сделаешь, ровно как и я тебе. Ведь {b}Я{/b}, ЭТО {b}ТЫ{/b}, СЕМЁН! А {b}ТЫ{/b}, ЭТО {b}Я{/b}!"
+    me "Да как ты зае…!"
+
+    play sound2 sfx_blanket_off_stand fadein 0.25 volume 0.75
+
+    "Я занёс кулак для удара, и…"
+
+    play sound2 sfx_bed_squeak1 fadein 0.25 volume 0.75
+
+    hide pi with good_dspr
+
+    "Он ударил по кровати, а я немного провалился."
+
+    stop music fadeout 2.5
+
+    "Пионера подо мной уже не было."
+    "Я начал озираться по комнате, заглянул под кровати, и в шкафы."
+    "Его не было."
+
+    show red at depulsing_eyes
+    hide red
+    with dissolve
+
+    "…"
+
+    stop sound fadeout 2.0
+
+    show blink
+
+    "Всё ещё пытаясь отдышаться, я налил воды в кружку, поправил одежду, и сел на стул, закрыв глаза."
+    "..."
+    "Постепенно, я начал успокаиваться."
+
+    play sound sfx_knock_door7_polite volume 0.6
+
+    "Как вдруг услышал стук в дверь."
+
+    hide blink
+    show unblink
+
+    me "Открыто!"
+
+    hide unblink
+
+    "Сказал я громче, чем хотел, и посмотрел в сторону входа."
+    "Из-за двери сначала выглянула, а потом и зашла, Славя."
+
+    play music music_list["i_dont_blame_you"] fadein 2.0 volume 0.9
+
+    show sl pioneer surprise far at right
+    with long_dspr
+
+    sl "Семён?"
+
+    hide sl
+    show sl pioneer surprise close at cright
+    with long_dspr
+
+    "Я подбежал к ней, и обнял. Из глаз полились слёзы."
+    me "Славя…"
+    "Славя ответила на моё объятие, но всё ещё не понимала, что происходит."
+    sl "Сёма, я тебя не дождалась на площади, зашла вот... Автобус уже скоро подьедет. {w}А ты чего красный весь?"
+    "Я крепче вжался в неё, и смог выдавить лишь."
+    me "Славя…"
+
+    show sl pioneer sad with good_dspr
+
+    "Мы сели на мою кровать, и Славя гладила меня по голове."
+    sl "Сёма, что случилось?"
+    "Я начал успокаиваться."
+    "Утерев глаза, я потряс головой, чтобы выкинуть слова этого чокнутого, и ответил."
+    me "Да так, что-то… Голова закружилась. Мне показалось…"
+    
+    show sl pioneer surprise with good_dspr
+
+    "Славя приобняла меня за плечи, и спросила."
+    sl "Что? Сёма, что показалось?"
+    "Я лишь улыбнулся, взял её руку и выдохнул."
+    me "Да так, ерунда всякая. От переживаний, наверное."
+
+    show sl pioneer normal with long_dspr
+
+    "Славя, кажется, тоже наконец расслабилась, и ответила."
+    sl "А я уж и не знала, что и думать. Ну ты меня и напугал!"
+
+    show sl pioneer smile with dspr
+
+    "Славя улыбнулась."
+
+    me "Да... Прости. Я сам испугался."
+    sl "Ничего."
+
+    "Славя опять обняла меня, и просидев ещё несколько минут, окончательно успокоившись, я сказал."
+    me "Пойдём к остальным? А то без нас уедут."
+    "Я хмыкнул, подумав, что это, в общем-то, не такая уж и плохая идея."
+
+    show sl pioneer smile2 with dspr
+
+    sl "Да… Пойдём."
+    "…"
+    "Я взял свои вещи, зажав их подмышкой, и поднял сумку Слави, которую она бросила на входе."
+
+    stop ambience fadeout 1.0
+    stop music fadeout 2.0
+
+    hide sl
+    show sl pioneer smile at right
+    show bg ext_house_of_mt_day
+    with dissolve1
+
+    play ambience ambience_camp_center_day fadein 1.0
+    play music music_list["confession_oboe"] fadein 2.0 volume 0.8
+
+    "Мы вышли из домика вожатой, и взялись за руки…"
+
+    show bg ext_houses_day with dissolve2
+
+    "В последний раз прошлись вдоль домиков..."
+
+    show bg ext_square_day with dissolve2
+
+    "Прошли по площади…"
+
+    show bg ext_clubs_day with dissolve2
+
+    "Прошли мимо здания клубов..."
+
+    stop ambience fadeout 1.0
+
+    show bg ext_camp_entrance_day with dissolve1
+
+    play ambience ambience_camp_entrance_day fadein 1.0
+
+    "И вышли из ворот лагеря, где нас уже ждал автобус, а вокруг стояло много пионеров."
+    "Мы подошли к нашему отряду."
+
+    show mt pioneer normal at left
+    with long_dspr
+
+    "Там уже стояла Ольга Дмитриевна, и пересчитывала пионеров."
+    "Увидев нас, она указала сначала на меня, потом на Славю, считая, и сказала."
+
+    hide mt
+    hide sl
+    show cg d7_pioneers_leaving_without_us
+    with dissolve
+
+    mt "... девять."
+    mt "Кого-то не хватает…"
+    mt "Ульяна! Где Ульяна!?"
+    "Мы все начали озираться, как тут из-за кольца пионеров пробилась девочка-ракета, и встала перед вожатой."
+
+    show cg d7_pioneers_leaving with dissolve
+
+    us "Ольга Дмитриевна, вот она я!"
+    mt "Фух, ты где пропадаешь?"
+    us "Извините…"
+    mt "Ну ладно. Так, значит все в сборе."
+    "..."
+    "Вожатая начала инструктировать нас по поводу поведения в автобусе, а также касательно наших действий по прибытию в райцентр."
+    "Чем дольше она говорила, тем больше дрожал её голос."
+
+    stop music fadeout 2.0
+
+    hide cg
+    show us pioneer normal at fleft
+    show mz pioneer normal at fright
+    show un pioneer smile at left
+    show dv pioneer normal at right
+    show mi pioneer smile at cleft
+    show sl pioneer smile at cright
+    show mt pioneer scared at center
+    with dissolve1
+
+    pause(1.0)
+
+    play music music_list["everlasting_summer"] fadein 2.0 volume 0.67
+
+    "Наконец она не выдержала, и всхлипнула."
+    mt "Дети… {w}Для многих из вас это была последняя смена в пионерском лагере."
+    mt "Я надеюсь, она запомнится вам надолго…"
+    "Вожатая окончательно заплакала, и к ней подошло несколько девочек, успокаивая."
+
+    hide us
+    hide mz
+    hide un
+    hide dv
+    hide mi
+    hide sl
+    hide mt
+    show bg ext_bus
+    with dissolve1
+
+    "Все остальные стояли рядом, разговаривая, а я отошел немного в сторону, и смотрел на автобус."
+    "Не знаю, что в этот момент, говорил мой взгляд, но воспринимал я его не иначе как лотерейный билет."
+    th "Ему велено решить мою судьбу. Куда он меня повезёт?"
+
+    show sl pioneer smile2 at right
+    with good_dspr
+
+    "Славя, отойдя от вожатой, подошла ко мне, и обняв меня за руку, положила голову на плечо."
+
+    play sound "<from 2.5 to 5.0>" + sfx_bus_stop fadein 1.0 volume 0.6 fadeout 1.0
+
+    pause(1.0)
+
+    "Но вот, мы услышали как открываются двери автобуса."
+    "Вожатая отошла в сторонку, а пионеры начали загружаться в автобус."
+
+    play sound sfx_ikarus_open_doors
+
+    "Так же сделали и мы со Славей."
+
+    stop ambience fadeout 1.0
+
+    hide sl
+    show bg int_bus
+    show sl pioneer smile at cright
+    with dissolve
+
+    play ambience ambience_int_cabin_day fadein 0.5 volume 0.8
+
+    "Мы прошли почти в самый конец, и заняли два места, чтобы к нам больше никто не мог сесть."
+
+    show bg int_bus_people_day with dissolve
+
+    "Вскоре, автобус был полностью заполнен пионерами."
+    "Они разговаривали, смеялись, кто-то крутился."
+
+    hide sl
+    show sl pioneer smile close at cright
+    with good_dspr
+
+    "А Славя взяла мою руку, мы сцепили их на подлокотнике, и она положила голову мне на плечо и улыбнулась."
+    "Только я сидел сжатый, тревожный. Впереди меня ждала неизвестность."
+    "Я не знал, что со мной произойдёт уже через пару часов."
+
+    show sl pioneer smile2 with good_dspr
+
+    sl "Всё будет хорошо."
+    "Произнесла Славя, и закрыла глаза."
+
+    stop ambience fadeout 1.0
+    play sound sfx_bus_interior_moving fadein 2.5 volume 0.7 loop
+
+    "Автобус тронулся."
+    "..."
+
+    window hide
+
+    show blink
+
+    pause(1.5)
+
+    hide sl
+    hide blink
+    show unblink
+    
+    pause(1.0)
+
+    show sl pioneer smile2 close at cright
+    with dspr
+
+    pause(1.5)
+
+    show blink
+
+    pause(1.5)
+
+    hide sl
+    show bg int_bus_people_sunset
+
+    call set_time("sunset")
+
+    hide blink
+    show unblink
+    
+    pause(1.0)
+
+    show sl pioneer smile close at cright
+    with good_dspr
+
+    window show
+
+    "Мы ехали уже довольно долго, пару часов."
+
+    stop music fadeout 2.5
+
+    "Всё это время Славя отвлекала меня разговорами, и надо сказать, довольно успешно."
+
+    pause(1.0)
+
+    play music "<from 40.0>" + music_list["into_the_unknown"] fadein 1.5 volume 0.8
+
+    "Я почти перестал мандражировать."
+    
+    hide sl with long_dspr
+
+    "Но вскоре она уснула, и я остался один на один со своими мыслями."
+    "Я смотрел в окно, но дорога всё не заканчивалась, бесконечно петляя среди степей, которые перемежались лесами."
+    "Не было ни намёка на хоть какой-то населённый пункт."
+    "Я вспомнил записку, которую нашел на телефоне."
+    th "Ты здесь не просто так."
+
+    play sound2 sfx_head_heartbeat fadein 1.0 volume 0.77 loop
+
+    "Эта фраза отчётливо долбила у меня в голове вновь и вновь, я повторял её про себя как мантру, пытаясь понять, может я что-то упустил?"
+    "Недопонял, или не обратил на что-то внимания?"
+    "..."
+
+    stop sound2 fadeout 1.0
+
+    "Но в слова чокнутого пионера я по-прежнему отказывался верить."
+    "Лагерь, и все его обитатели точно были настоящими. {w}Живыми."
+    "..."
+
+    window hide
+
+    call set_time("night")
+
+    show bg int_bus_people_night with dissolve1
+
+    window show
+
+    "Вскоре начало темнеть, а мы всё ехали."
+    "Начало клонить в сон."
+    "Славя пару раз просыпалась, но перебросившись парой фраз, быстро засыпала снова."
+    th "Наверное, тоже вымоталась со всеми этими переживаниями."
+    "Я опёрся лбом о холодное стекло, и вглядывался вдаль, борясь со сном."
+    "Я хотел своими глазами увидеть, что меня ждёт…"
+
+    show blink
+
+    pause(1.0)
+
+    hide blink
+    show unblink
+
+    "Но организм был не согласен."
+    "Всё чаще я кивал головой, но тут же вздрагивал, этого хватало ещё на пару минут."
+
+    stop sound fadeout 3.0
+    stop music fadeout 3.0
+
+    "Пока в конце концов усталость не взяла своё, и я не заснул…"
+
+    window hide
+
+    show blink
+
+    $ renpy.pause(2.5, hard=True)
+
+    jump simple_happiness_mod_epilogue
+
+
+# Эпилог
+label simple_happiness_mod_epilogue:
+    $ renpy.block_rollback()
+
+    $ backdrop = "epilogue"
+    $ new_chapter(9, u"Простое Счастье. Эпилог")
+
+    call set_time("prolog")
+
+    $ set_mode_adv()
+    
+    show bg ext_camp_entrance_night
+    show prologue_dream
+    hide blink
+    show unblink
+    with dissolve3
+
+    play music music_list["sparkles"] volume 0.7 fadein 5.0
+
+    hide unblink
+
+    "Мне снился сон."
+    "Я стоял перед воротами Совёнка, но вокруг была ночь."
