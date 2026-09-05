@@ -489,7 +489,9 @@ label simple_happiness_mod_prologue:
     me "Прямо как я... {w}Хех, м-да..."
     "А вот второй, напротив, был побольше, мякоть его было ярко-зелёная, а иголки весело переливались каким-то золотистым оттенком в свете лампы."
     me "Ну, не хочите, как хочите..."
+
     call flashing
+
     "Я вернул взгляд на монитор компьютера. Яркий, белый свет бил в глаза, да так, что приходилось щурится."
 
     play sound_loop sfx_computer_noise
@@ -791,13 +793,16 @@ label simple_happiness_mod_day1:
 
     "Наконец, пионерка достаточно сократила дистанцию, и заговорила."
     slp "Привет, ты, наверное, новенький, только что же приехал?"
-    "Её красоту я не мог не отметить, даже трясясь от напряжения."
+    "Её красоту я не мог не отметить, даже трясясь от страха."
     "Длинные, до самых бёдер золотого цвета толстые косы, голубые, большие глаза, словно самое чистое море, в которых хотелось утонуть."
     "И фигурой её природа не то, что не обделила, даже перестаралась."
     "Не самая длинная даже по современным меркам юбка дразнящим образом открывала ноги на добрые пятнадцать сантиметров выше колена, а заправленная в неё рубашка эффектно подчеркивала прекрасного размера грудь."
     me "При-привет… Да я вот… Да."
     "Всё ещё находясь в шоке от происходящего, я не мог из себя выдавить более осмысленный ответ."
     "Девочка (девушка?) улыбнулась, и ответила."
+
+    show sl pioneer smile with dspr
+
     slp "Замечательно, мы как раз ждали, что сегодня должен приехать новенький. Тебе сейчас к вожатой надо, хочешь, я тебя провожу?"
     me "Ну… Наверное, да, я думаю… Пойдём."
     "Ответил я, всё ещё продолжая машинально сжимать кулаки. Кажется, она это заметила."
@@ -895,10 +900,10 @@ label simple_happiness_mod_day1:
     stop music fadeout 1.0
     play ambience ambience_camp_center_day fadein 1.0 volume 0.8
 
-    show dv pioneer2 grin
+    show dv pioneer2 grin with half_good_dspr
     pause(1.0)
     show dv pioneer2 grin at walk_away_left
-    pause(2.0)
+    pause(1.0)
     hide dv
 
     "Ещё одна пионерка, по всей видимости, её звали Алисой (интересно, не Селезнёвой ли?), стрельнула глазами, и удалилась восвояси."
@@ -962,20 +967,19 @@ label simple_happiness_mod_day1:
     show sl pioneer smile2 close with dspr
     "Я решительно последовал за ней и оказался внутри."
 
-    show bg int_house_of_mt_day with dissolve1
+    hide sl
+    show bg int_house_of_mt_day
+    show sl pioneer smile at left
+    show mt pioneer normal at cright
+    with dissolve1
 
     "Минуя внутреннее убранство домика, мой взор сразу же зацепился за девушку, сидящую за столом возле окна."
-
-    show sl pioneer smile far at left
-    show mt pioneer normal far at cright
-    with good_dspr
-
     "Она неторопливо что-то записывала то ли в тетрадь, то ли в какой-то документ."
     slp "Ещё раз здравствуйте, Ольга Дмитриевна, я вот новенького привела, как раз ведь сегодня должен был приехать."
     mt "Да, я знаю. Ну что, {i}Семён{/i}…"
     th "Она знает, как меня зовут!??"
 
-    show mt pioneer smile close with good_dspr
+    show mt pioneer smile with good_dspr
 
     "Девушка встала из-за стола, и выпрямившись, сделала пару шагов мне навстречу, улыбнулась, и продолжила."
     mt "Добро пожаловать! Жалко конечно, что ты задержался, но я уверена, что оставшееся время, которое ты проведешь здесь, принесёт исключительно положительные эмоции!"
@@ -985,7 +989,7 @@ label simple_happiness_mod_day1:
     me "А то, я, понимаете, родителям хотел написать, и-и…"
 
     show mt pioneer surprise
-    show sl pioneer normal far at fleft
+    show sl pioneer normal at fleft
     with good_dspr
 
     "Вожатая непонимающе уставилась на меня."
@@ -993,7 +997,7 @@ label simple_happiness_mod_day1:
 
     show mt pioneer laugh with half_good_dspr
     pause(1.25)
-    show mt pioneer normal far
+    show mt pioneer normal
     with half_good_dspr
 
     "Она немного усмехнулась, но без тона издёвки, и продолжила."
@@ -1133,16 +1137,19 @@ label simple_happiness_mod_day1:
     slp "Семён! Сюда!"
     "Я повернул голову в сторону источника звука."
 
-    show sl pioneer smile far with good_dspr
+    show sl pioneer smile far at center
+    with good_dspr
 
     "В паре рядов столов от меня стояла пионерка рядом с пустым столом и махала рукой."
     th "Чёрт, как же я проглядел?"
     "С немного виноватым видом я подошёл к златовласой пионерке, и, запомнив место, мы вместе отправились получать свою пайку..."
 
     stop music fadeout 2.0
-    play music music_list["so_good_to_be_careless"]
+    play music music_list["so_good_to_be_careless"] fadein 2.0 volume 0.8
 
-    show sl pioneer smile with long_dspr
+    hide sl
+    show sl pioneer smile at center
+    with long_dspr
 
     "..."
     "Через время мы уже сидели за столом с двумя подносами друг на против друга."
@@ -1191,7 +1198,7 @@ label simple_happiness_mod_day1:
     slp "Привет, Уля, чем занимаешься?"
 
     stop music fadeout 1.0
-    play music music_list["i_want_to_play"] fadein 0.75
+    play music music_list["i_want_to_play"] fadein 1.0 volume 0.9
 
     "Я обернулся."
 
@@ -1258,7 +1265,7 @@ label simple_happiness_mod_day1:
     show bg ext_dining_hall_near_day with dissolve2
 
     play ambience ambience_camp_center_day fadein 2.0
-    play music music_list["goodbye_home_shores"] fadein 2.0
+    play music music_list["goodbye_home_shores"] fadein 2.0 volume 0.85
 
     "Мы сдали свои подносы, и вышли на улицу."
     "За те двадцать минут, что мы провели внутри, погода успела поменяться."
@@ -1374,7 +1381,7 @@ label simple_happiness_mod_day1:
     with dissolve1
 
     play ambience ambience_int_cabin_day volume 0.8 fadein 3.0
-    play music music_list["silhouette_in_sunset"] volume 0.7 fadein 2.0
+    play music music_list["silhouette_in_sunset"] fadein 2.0 volume 0.7
 
     "Я переступил через порог, и оказался в довольно опрятном складском помещении."
     "Свет мягко пробивался через окно, освещая небольшой столик с книжкой, развешанные комплекты формы, ..."
@@ -1629,12 +1636,12 @@ label simple_happiness_mod_day1:
     "Как будто оказался в каком-то квесте, честное слово… {w}И эта девушка."
     "Славяна. {w}Так ко мне добра. {w}Что же происходит?"
 
-    call smoking_process(with_pause=0.5)
+    call smoking_process(with_pause=1.0)
 
     "Погружаясь в водоворот мыслей, я достал из кармана сигареты, и закурил."
 
     stop music fadeout 2.0
-    play music music_list["reflection_on_water"] volume 0.5
+    play music music_list["reflection_on_water"] fadein 2.0 volume 0.5
 
     "Мысли опять потекли в сторону решения загадки касательно моего положения здесь."
     "Но Солнце так приятно пригревало, а на фоне был слышен шум леса, пение птиц… "
@@ -1657,12 +1664,12 @@ label simple_happiness_mod_day1:
     "Закрыл склад, взял свои вещи и направился обратно в сторону столовой."
     "..."
 
-    stop ambience fadeout 3.0
-    play music music_list["my_daily_life"] fadein 3.0
+    stop ambience fadeout 1.0
+    play music music_list["my_daily_life"] fadein 3.0 volume 0.8
 
     show bg ext_dining_hall_away_day with dissolve2
 
-    play ambience ambience_camp_center_day fadein 3.0
+    play ambience ambience_camp_center_day fadein 1.0
 
     "Я миновал столовую."
 
@@ -1765,7 +1772,7 @@ label simple_happiness_mod_day1:
     "Я вытянулся по стойке с вещами в руках, и отрапортовал."
     me "Пионер Персунов по вашему приказанию прибыл!"
 
-    play music music_list["tried_to_bring_it_back"] fadein 1.5
+    play music music_list["tried_to_bring_it_back"] fadein 2 volume 0.87
 
     show mt pioneer smile with dspr
 
@@ -1849,7 +1856,7 @@ label simple_happiness_mod_day1:
 
     stop music fadeout 2.0
     pause(1.5)
-    play music music_list["so_good_to_be_careless"] fadein 3.0
+    play music music_list["so_good_to_be_careless"] fadein 2.0 volume 0.8
 
     "Я застелил свою постель, а свои вещи убрал под кровать, ибо не стал лезть в шкафчик к вожатой… {w}Мало ли."
     me "Ну. Вот так, как-то."
@@ -1886,7 +1893,7 @@ label simple_happiness_mod_day1:
 
     stop music fadeout 2.0
     pause(1.0)
-    play music music_list["reminiscences"] fadein 3.0 volume 0.4
+    play music music_list["reminiscences"] fadein 2.0 volume 0.4
 
     call to_nvl_mode
 
@@ -1943,14 +1950,20 @@ label simple_happiness_mod_day1:
     "Всеобъемлющую, всепоглощающую."
     "И такую тягучую, плотную, неприятную, от которой никак не получается освободиться…"
 
+    window hide
+
+    call set_time("sunset")
+
     stop music fadeout 5.0
+
+    pause(2.0)
+
+    window show
 
     sl "Семён! {w}Семён! {w}Сёма, блин, проснись!"
     th "Что?"
 
-    call set_time("sunset")
-
-    play ambience ambience_camp_center_evening fadein 5.0 volume 0.75
+    play ambience ambience_camp_center_evening fadein 5.0
 
     hide cg
     show bg ext_house_of_mt_sunset
@@ -2012,7 +2025,7 @@ label simple_happiness_mod_day1:
 
     show bg ext_dining_hall_away_sunset with dissolve2
 
-    play music music_list["dance_of_fireflies"] fadein 3.0 volume 0.75
+    play music music_list["dance_of_fireflies"] fadein 2.0 volume 0.75
 
     "Пока мы шли, прозвучал горн, а на подходе к столовой, помимо меньшей толпы пионеров, я заметил, что начало вечереть."
 
@@ -2025,7 +2038,7 @@ label simple_happiness_mod_day1:
     pause(0.75)
     hide mt with dspr
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
 
     show bg int_dining_hall_people_sunset with dissolve2
 
@@ -2103,7 +2116,7 @@ label simple_happiness_mod_day1:
     "..."
 
     stop music fadeout 3.0
-    stop ambience fadeout 3.0
+    stop ambience fadeout 1.0
 
     show bg ext_dining_hall_near_sunset
     show un pioneer normal
@@ -2112,8 +2125,8 @@ label simple_happiness_mod_day1:
 
     "Мы вышли из столовой."
 
-    play ambience ambience_camp_center_evening fadein 2.0 volume 0.75
-    play music music_list["raindrops"] fadein 3.0 volume 0.7
+    play ambience ambience_camp_center_evening fadein 1.0
+    play music music_list["raindrops"] fadein 2.0 volume 0.7
 
     "На улице уже порядком посвежело, и я вдохнул приятный вечерний летний воздух."
 
@@ -2178,7 +2191,7 @@ label simple_happiness_mod_day1:
     me "Ну и шутки у тебя…"
     "Я окончательно успокоился, и спросил."
 
-    play music music_list["get_to_know_me_better"] fadein 3.0 volume 0.8
+    play music music_list["get_to_know_me_better"] fadein 2.0 volume 0.8
 
     me "Ты что-то хотела?"
 
@@ -2228,9 +2241,7 @@ label simple_happiness_mod_day1:
     me "Ну пойдём… {w}Конспираторша."
     "..."
 
-    stop ambience fadeout 2.0
-
-    pause(0.5)
+    stop ambience fadeout 1.0
 
     show bg ext_storage_sunset
     show dv pioneer normal
@@ -2238,7 +2249,7 @@ label simple_happiness_mod_day1:
 
     "Мы пришли к складу, в котором я днем получал одежду, и зашли немного за угол."
 
-    play ambience ambience_forest_evening fadein 3.0
+    play ambience ambience_forest_evening fadein 1.0
 
     dv "Ну, не тяни кота за одно место! {w}Доставай!"
     me "Эка ты, какая нетерпеливая! Сейчас, подожди."
@@ -2254,7 +2265,7 @@ label simple_happiness_mod_day1:
 
     me "Давай я тебе подкурю."
 
-    call smoking_process
+    call smoking_process(with_pause=0.5)
 
     "Мы раскурили сигареты, и молча стояли, пускали дым."
     "На удивление, Алиса не кашляла и даже не морщилась, как это обычно происходит у неопытных курильщиков."
@@ -2307,7 +2318,7 @@ label simple_happiness_mod_day1:
     dv "Получается так. {w}Ну что, пойдем обратно? Пока нас не потеряли."
     me "Почапали."
 
-    stop ambience fadeout 3.0
+    stop ambience fadeout 1.0
 
     hide dv
     show dv pioneer normal at right
@@ -2317,7 +2328,7 @@ label simple_happiness_mod_day1:
 
     "На обратном пути я переваривал информацию, которую только что узнал."
 
-    play ambience ambience_camp_center_evening fadein 3.0
+    play ambience ambience_camp_center_evening fadein 1.0
 
     "Во-первых, в лагере появляются люди кроме тех, что уже здесь. Это хорошо."
     "Во-вторых, судя по словам Алисы, в относительной близости есть населённый пункт. Это тоже хорошо."
@@ -2379,7 +2390,7 @@ label simple_happiness_mod_day1:
     "Те редкие минуты, когда всё вокруг ещё неплохо освещено, но на небе уже проглядывают редкие звезды."
     th "Хорошо тут. Дышится легко, и энергии много. Я как будто помолодел лет на 8, хех."
 
-    stop music fadeout 1.0
+    stop music fadeout 2.0
 
     mip "Ой, привет! А я тебя раньше не видела!"
     "Я опустил взгляд."
@@ -2388,7 +2399,7 @@ label simple_happiness_mod_day1:
 
     th "Так. А это что ещё за импортный пионер?"
 
-    play music music_list["so_good_to_be_careless"] fadein 1.0 volume 0.9
+    play music music_list["so_good_to_be_careless"] fadein 2.0 volume 0.9
 
     "Передо мной стояла пионерка. Волосы её были лазурные, скорее даже, цвета морской волны."
     "И приятное на вид, с явными азиатскими чертами лицо."
@@ -2469,18 +2480,23 @@ label simple_happiness_mod_day1:
     "Успел только я кинуть в след."
 
     stop music fadeout 2.0
-    stop ambience fadeout 3.0
+    stop ambience fadeout 1.0
 
     th "Да, девочка ураган прямо. Только словесный."
 
+    window hide
+
     call set_time("night")
+
+    play ambience ambience_camp_center_night fadein 2.0 volume 0.9
+
+    pause(1.0)
 
     show bg ext_square_night with dissolve
 
     pause(2.0)
 
-    play ambience ambience_camp_center_night fadein 2.0 volume 0.9
-    play music music_list["trapped_in_dreams"] fadein 3.0 volume 0.75
+    play music music_list["trapped_in_dreams"] fadein 2.0 volume 0.75
 
     th "Похоже, темнеет. Ну, значит и мне пора."
     "Я встал со скамейки, и направился к домику."
@@ -2567,11 +2583,12 @@ label simple_happiness_mod_day1:
     th "А вожатой всё нет. Куда это она, интересно, бегает, на ночь глядя, в одной ночнушке?"
 
     stop music fadeout 5.0
-    stop ambience fadeout 5.0
 
     th "Ох, не простая вы, Ольга Дмитриевна, ох не простая."
     "..."
     "Повертев ещё пару минут в голове всякое, я начал проваливаться в сон…"
+
+    stop ambience fadeout 1.0
 
     show blink
 
@@ -2588,10 +2605,10 @@ label simple_happiness_mod_day2:
     $ new_chapter(2, u"Простое Счастье. День 2")
 
     call set_time
+    call to_adv_mode
 
-    $ set_mode_adv()
-
-    play music music_list["everyday_theme"] fadein 6.0 volume 0.5
+    play ambience ambience_int_cabin_day fadein 1.0
+    play music music_list["everyday_theme"] fadein 3.0 volume 0.5
 
     "Несмотря на пережитый стресс, спал я хорошо."
     "Не понятно, сказывалась накопившаяся усталость, или в этом месте просто так хорошо спится, но проснулся я полный сил."
@@ -2631,14 +2648,14 @@ label simple_happiness_mod_day2:
     "Я лишь только тоже улыбнулся в ответ, и вожатая вышла из домика."
     "..."
     "Одевшись, и кое-как заправив постель, я огляделся, и только сейчас заметил зеркало, висящее на дверце шкафа."
-    th "~ Интересно, как я выгляжу в пионерской форме?"
+    th "Интересно, как я выгляжу в пионерской форме?"
     th "Наверное, просто верх идиотизма."
-
-    stop music fadeout 2.0
-
     "Я подошел к зеркалу, и…"
 
-    play music music_list["doomed_to_be_defeated"] volume 1.0
+    stop music fadeout 1.0
+    pause(0.5)
+
+    play music music_list["doomed_to_be_defeated"] fadein 0.5 volume 1.0
 
     show cg d2_mirror with dissolve
 
@@ -2663,15 +2680,17 @@ label simple_happiness_mod_day2:
     "В перемещение в пространстве и времени я ещё мог поверить, но пересадить мой разум в другое тело?"
     "Нет, это было выше моего понимания."
 
-    play music music_list["confession_oboe"] fadein 3.5 volume 0.9
+    play music music_list["confession_oboe"] fadein 2.0 volume 0.9
 
     "С другой стороны, так даже лучше. Будет меньше проблем, чем если бы я выглядел на свои 25."
     "..."
     th "Ладно, пора в столовую."
 
+    stop ambience fadeout 1.0
+
     show bg ext_house_of_mt_day with dissolve
 
-    play ambience ambience_camp_center_day fadein 2.0
+    play ambience ambience_camp_center_day fadein 1.0
     play sound sfx_dinner_horn_processed
 
     "Выйдя из домика, я закрыл его, и тут прозвучал горн."
@@ -2682,16 +2701,15 @@ label simple_happiness_mod_day2:
 
     "У входа, как обычно, толпились пионеры, заходя в помещение, но никого из знакомых я не увидел, так что, просто зашел внутрь."
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
 
     show bg int_dining_hall_people_day
     show mt pioneer normal at fright
     with dissolve
 
+    play ambience ambience_dining_hall_full fadein 1.0
+
     "На входе уже стояла Ольга Дмитриевна, и отмечала пионеров."
-
-    play ambience ambience_dining_hall_full fadein 1.5
-
     "Я кивнул ей."
     "Она чиркнула в тетради, и села за столик, который стоял чуть поодаль от остальных."
 
@@ -2720,19 +2738,17 @@ label simple_happiness_mod_day2:
     "Мы продолжили разговаривать и есть одновременно."
     "..."
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
 
+    show bg ext_dining_hall_near_day
     show sl pioneer normal at right
-    with good_dspr
+    with dissolve
 
-    show bg ext_dining_hall_near_day with dissolve
+    play ambience ambience_camp_center_day fadein 1.0 volume 0.8
 
     "Закончив приём пищи, мы вышли на крыльцо, и я спросил."
     me "Ну что, есть у нас сегодня какие-нибудь планы?"
     "Не знаю от чего, но жутко хотелось себя чем-нибудь занять."
-
-    play ambience ambience_camp_center_day fadein 2.0 volume 0.8
-
     sl "Ну-у, не знаю ещё, но сейчас нам точно нужно идти на линейку."
     th "Ох-ё… Я и забыл, что в подобных местах есть линейки."
     me "На площади, да?"
@@ -2749,7 +2765,7 @@ label simple_happiness_mod_day2:
 
     "Мы вышли на площадь."
 
-    play music music_list["sweet_darkness"] fadein 2.0
+    play music music_list["sweet_darkness"] fadein 2.0 fadein 0.9
 
     "По всему периметру рядами стояли отряды пионеров перед своими вожатыми."
     "Кто-то уже был построен, кто-то ещё подходил."
@@ -2892,15 +2908,17 @@ label simple_happiness_mod_day2:
 
     "..."
 
+    show black with clocks_in
+
     hide sl
     show bg ext_clubs_day
     show sl pioneer normal at right
-    with dissolve
+    hide black
+    with clocks_out
+
+    play music music_list["tried_to_bring_it_back"] fadein 2.0 volume 0.75
 
     "Мы стояли перед зданием клубов."
-
-    play music music_list["tried_to_bring_it_back"] fadein 3.0 volume 0.75
-
     sl "Кстати, Семён, ещё не решил, куда будешь записываться?"
     me "Откровенно говоря, привлекает только музыкальный клуб. Я немного играю на гитаре…"
 
@@ -2922,17 +2940,16 @@ label simple_happiness_mod_day2:
     sl "Ну что, зайдем в клуб кибернетики, поставим роспись?"
     me "Да, а то уж несколько минут перед входом стоим, хах."
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
 
     hide sl
     show bg int_clubs_male_day
     show sl pioneer normal at fright
     with dissolve
 
+    play ambience ambience_clubs_inside_day fadein 1.0 volume 0.95
+
     "Мы зашли в помещение, и оказались в месте, которое принято называть «мужыцкой» берлогой."
-
-    play ambience ambience_clubs_inside_day fadein 2.0 volume 0.95
-
     "Повсюду валялись всякие провода, микросхемы, паяльники, лампочки, и Бог знает, что ещё."
     "Честно говоря, название «Клуб Кибернетики» звучало интригующе, но вряд ли меня заинтересовала бы техника времён СССР."
     "Да и вообще, если уж на то пошло, я бы позанимался чем-нибудь по части кода, а не пайки."
@@ -2966,14 +2983,13 @@ label simple_happiness_mod_day2:
     show sl pioneer normal with dspr
 
     me "Мне нужно обходной подписать… Вот. {w}Ольга Дмитриевна отправила."
+    el "Конечно подпишем! После того, как к нам в клуб вступишь!"
 
     stop music fadeout 1.0
 
-    el "Конечно подпишем! После того, как к нам в клуб вступишь!"
-
     show el pioneer grin
     show sh pioneer normal_smile
-    with good_dspr
+    with dissolve
 
     play music music_list["heather"] fadein 1.0
 
@@ -2984,7 +3000,7 @@ label simple_happiness_mod_day2:
     sh "Конечно, нам всегда нужны молодые, сильные, мужские руки вроде твоих!"
     sh "Тебе найдется чем заняться, вот увидишь!"
 
-    stop music fadeout 0.5
+    stop music fadeout 1.0
 
     th "Твою-мать…"
 
@@ -2993,7 +3009,6 @@ label simple_happiness_mod_day2:
     show sl pioneer serious with dspr
 
     sl "Одну минуточку!"
-
     "Славя, стоящая до этого в стороне, одернула назад волосы, и вышла передо мной."
 
     hide sl
@@ -3042,14 +3057,16 @@ label simple_happiness_mod_day2:
 
     "Мне ничего не оставалось, кроме как бросить взгляд на парней, и двинуться за ней."
 
-    stop ambience fadeout 2.0
-    stop music fadeout 3.0
+    stop ambience fadeout 1.0
+    stop music fadeout 2.0
 
     hide el
     hide sh
     show bg ext_clubs_day
     show sl pioneer normal at cright
     with dissolve1
+
+    play ambience ambience_camp_center_day fadein 1.0
 
     pause(1.0)
 
@@ -3062,7 +3079,7 @@ label simple_happiness_mod_day2:
     "Я заметил, что её сейчас как будто разорвёт от желания засмеяться."
     me "Славь, ты чего?"
 
-    play music music_list["gentle_predator"] fadein 3.0
+    play music music_list["gentle_predator"] fadein 2.0
 
     show sl pioneer smile2 with dspr
 
@@ -3097,12 +3114,10 @@ label simple_happiness_mod_day2:
     show sl pioneer smile at right
     with dissolve
 
-    play ambience ambience_camp_center_day fadein 2.0
-
     "Давно я так хорошо не смеялся, и себя не чувствовал тоже."
     "С этой девушкой не пропадёшь, однозначно."
 
-    play music music_list["my_daily_life"] fadein 3.0 volume 0.9
+    play music music_list["my_daily_life"] fadein 2.0 volume 0.9
 
     "Мы шли по лагерю, в приподнятом настроении, весело болтали, и иногда перешучивались, хихикая."
     "Я чувствовал почти осязаемое тепло от Слави."
@@ -3137,14 +3152,14 @@ label simple_happiness_mod_day2:
 
     sl "Ладно, давай зайдём."
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
 
     hide sl
     show bg int_musclub_mattresses_day
     show sl pioneer normal at cleft
     with dissolve
 
-    play ambience ambience_music_club_day fadein 3.0
+    play ambience ambience_music_club_day fadein 1.0
 
     "Мы вошли внутрь, и оказались в очень уютном, залитом светом помещении."
     "У дальней стены располагалось большое количество разных инструментов, на доске там же были расписаны ноты, а левее виднелся проход, наверное, в подсобные помещения."
@@ -3203,7 +3218,7 @@ label simple_happiness_mod_day2:
     show mi pioneer grin at right
     with half_good_dspr
 
-    play music music_list["so_good_to_be_careless"]
+    play music music_list["so_good_to_be_careless"] fadein 2.0 volume 0.83
 
     "Выбравшись, наконец, из-под рояля, девочка оправилась, и защебетала."
     mi "Ой, Славечка, и ты здесь! Приветики!"
@@ -3332,10 +3347,9 @@ label simple_happiness_mod_day2:
     with dspr
 
     mi "Пока, ребята!"
-
     "Славя тоже попрощалась, и мы вышли из клуба."
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
     stop music fadeout 3.0
 
     hide mi
@@ -3344,11 +3358,11 @@ label simple_happiness_mod_day2:
     show sl pioneer smile at right
     with dissolve1
 
-    pause(1.5)
+    play ambience ambience_camp_center_day fadein 1.0
+
+    $ renpy.pause(2.5, hard=True)
 
     show bg ext_musclub_day with dissolve
-
-    play ambience ambience_camp_center_day fadein 2.0 volume 0.7
 
     "Сделав пару шагов от клуба, Славя заговорила."
 
@@ -3423,7 +3437,7 @@ label simple_happiness_mod_day2:
 
     "Мы вошли внутрь, и оказались в очень светлом и чистом помещении."
 
-    play ambience ambience_medstation_inside_day fadein 2.0
+    play ambience ambience_medstation_inside_day fadein 1.0
 
     "Каждый уголок буквально сверкал."
     "А ещё тут сидела… Э-э, Лена?"
@@ -3454,7 +3468,7 @@ label simple_happiness_mod_day2:
     un "Да. Виолетта отошла ненадолго, так что я пока за неё."
     th "Вот так тут медики работают?"
 
-    stop music fadeout 4.0
+    stop music fadeout 2.0
 
     me "Ну мне надо обходной лист подписать, так что в любом случае наверное придется ждать… Виолетту."
     cs "Уже не придётся."
@@ -3544,7 +3558,7 @@ label simple_happiness_mod_day2:
     "Это время нужно было нам всем. Что я, что Славя были красные, как помидоры."
     "..."
 
-    stop music fadeout 5.0
+    stop music fadeout 2.0
 
     pause(1.5)
     show sl pioneer normal at fright
@@ -3568,7 +3582,7 @@ label simple_happiness_mod_day2:
     cs "До свидания."
     "Мы вышли из медпункта."
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
 
     hide sl
     hide cs
@@ -3576,8 +3590,8 @@ label simple_happiness_mod_day2:
     show sl pioneer normal at right
     with dissolve
 
-    play ambience ambience_camp_center_day fadein 2.0 volume 0.75
-    play music music_list["dance_of_fireflies"] fadein 2.5
+    play ambience ambience_camp_center_day fadein 1.0
+    play music music_list["dance_of_fireflies"] fadein 2.0 volume 0.8
 
     me "Медсестра очень…"
 
@@ -3627,8 +3641,8 @@ label simple_happiness_mod_day2:
 
     "Мы зашли внутрь."
 
-    stop ambience fadeout 2.0
-    stop music fadeout 3.0
+    stop ambience fadeout 1.0
+    stop music fadeout 2.0
 
     hide sl
     show bg int_library_day
@@ -3637,11 +3651,11 @@ label simple_happiness_mod_day2:
 
     'Нас встретила…'
 
-    play ambience ambience_library_day fadein 1.5
+    play ambience ambience_library_day fadein 1.0
 
     "А что нас должно было встретить? Библиотека, она и в Африке библиотека."
 
-    play music music_list["your_bright_side"] fadein 3.0 volume 0.9
+    play music music_list["your_bright_side"] fadein 2.0 volume 0.9
 
     "Половина большого зала была отведена под стеллажи с книгами, вторая под читальный зал."
     th "А где же библиотекарша?"
@@ -3699,7 +3713,7 @@ label simple_happiness_mod_day2:
     sl "Пойдем."
     "Я двинулся вслед за ней."
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
     stop music fadeout 2.0
 
     hide sl
@@ -3707,10 +3721,9 @@ label simple_happiness_mod_day2:
     show sl pioneer smile at cright
     with dissolve
 
+    play ambience ambience_camp_center_day fadein 1.0
+
     me "Чем же она по ночам занимается, что днём спит."
-
-    play ambience ambience_camp_center_day fadein 2.0 volume 0.9
-
     sl "Даже не знаю. Наверное, книжки читает. Мы хоть и общаемся, но не очень много."
     me "Да, девочка-загадка прям."
     sl "И не говори… {w}Ну что."
@@ -3724,7 +3737,7 @@ label simple_happiness_mod_day2:
     "Я взял лист, и проверил. Все поля заполнены."
     me "Фух, ну наконец-то. Спасибо большое, без тебя бы до вечера бродил!"
 
-    play music music_list["forest_maiden"] fadein 3.0 volume 0.7
+    play music music_list["forest_maiden"] fadein 3.0 volume 0.67
 
     hide obhod
     show sl pioneer smile2
@@ -3832,9 +3845,7 @@ label simple_happiness_mod_day2:
 
     window hide
 
-    stop ambience fadeout 2.0
-    stop music fadeout 3.0
-
+    stop music fadeout 2.0
     play sound sfx_clocks fadein 0.5 volume 0.55
 
     show black with clocks_in
@@ -3849,9 +3860,8 @@ label simple_happiness_mod_day2:
     hide black with clocks_out
     show black with clocks_in
 
-    stop sound fadeout 2.5
-    play ambience ambience_camp_center_day fadein 3.0 volume 0.8
-    play music music_list["my_daily_life"] fadein 3.0 volume 0.8
+    stop sound fadeout 0.5
+    play music music_list["my_daily_life"] fadein 2.0 volume 0.8
 
     hide sl
     show bg ext_dining_hall_near_day
@@ -3926,7 +3936,7 @@ label simple_happiness_mod_day2:
     "Я выдохнул, и пошел в сторону домика."
     "..."
 
-    play music music_list["your_bright_side"] fadein 3.0
+    play music music_list["your_bright_side"] fadein 2.0 volume 0.8
 
     show bg ext_houses_day with dissolve1
 
@@ -3937,13 +3947,13 @@ label simple_happiness_mod_day2:
     th "Что?"
     th "Это я сейчас подумал? {w}Ладно…"
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
 
     "В общем да, в прекрасном месте, и вместе со Славей. Она успокаивала не хуже любой сигареты."
 
-    show bg ext_path_day with dissolve
+    play ambience ambience_forest_day fadein 1.0
 
-    play ambience ambience_forest_day fadein 3.0 volume 0.95
+    show bg ext_path_day with dissolve
 
     "Ведя внутренний монолог, я свернул на ближайшую тропинку, уходящую куда-то в лес, и встал за дерево."
 
@@ -3971,7 +3981,7 @@ label simple_happiness_mod_day2:
     "Она, конечно, моих извинений не поняла, да так и продолжила на меня смотреть, и дёргать носиком, пока я курил."
     th "Пора возвращаться в домик."
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
 
     "..."
 
@@ -3981,7 +3991,7 @@ label simple_happiness_mod_day2:
 
     "Подходя к порогу домика, я, всё ещё погруженный в свои мысли, просто дернул за ручку и вошёл внутрь."
 
-    play ambience ambience_int_cabin_day fadein 3.0
+    play ambience ambience_int_cabin_day fadein 1.0
     play sound sfx_open_door_1
     play music music_list["doomed_to_be_defeated"] fadein 1.0
 
@@ -4004,10 +4014,9 @@ label simple_happiness_mod_day2:
     show bg ext_house_of_mt_day
     with dissolve
 
+    play ambience ambience_camp_center_day fadein 1.0
+
     "Я вылетел из домика."
-
-    play ambience ambience_camp_center_day fadein 2.0
-
     th "Откровенно говоря, конечно, зрелище пришлось мне по нраву."
     th "Но, в любом случае, это было некрасиво."
 
@@ -4019,6 +4028,8 @@ label simple_happiness_mod_day2:
     me "Извините, я что-то… Задумался."
 
     show mt pioneer smile with dspr
+
+    play music music_list["everyday_theme"] fadein 2.0 volume 0.72
 
     mt "Ладно, ничего страшного. Ты отдыхать пришел?"
     me "Да, думал вздремнуть часик, а потом обязательно в клуб!"
@@ -4049,8 +4060,7 @@ label simple_happiness_mod_day2:
 
     show bg int_house_of_mt_day with dissolve
 
-    play ambience ambience_int_cabin_day fadein 2.0
-    play music music_list["everyday_theme"] fadein 2.0 volume 0.72
+    play ambience ambience_int_cabin_day fadein 1.0
 
     "На столе и правда лежал какой-то пакет."
     "Я подошёл и повертел его в руках: мочалка, мыло, зубная щетка… {w}И какая-то баночка."
@@ -4066,9 +4076,11 @@ label simple_happiness_mod_day2:
     "В голову решительно не шли никакие мысли, поэтому лёжа с закрытыми глазами, уже через пару минут я начал дремать."
 
     show black with clocks_in
+
     show bg int_house_of_mt_day
     show mt pioneer normal at right
-    hide black with clocks_out
+    hide black
+    with clocks_out
 
     play music music_list["confession_oboe"] fadein 4.0 volume 0.75
 
@@ -4087,19 +4099,24 @@ label simple_happiness_mod_day2:
     "Ощущение было такое, словно бы и не спал, но чувствовал себя пободрее. По ощущениям, прошло минут 40."
     "Я обулся, поправил форму, и вышел из домика."
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
 
     hide mt
     show bg ext_house_of_mt_day
     with dissolve
+
+    play ambience ambience_camp_center_day fadein 1.0
 
     th "Покурить бы не помешало."
     "Я задумался."
     "Судя из того, что я успел понять касательно расположения объектов в лагере, если я сейчас обогну крайний ряд домов, и пойду примерно на юго-запад, то как раз выйду к музыкальному клубу."
     "А в лесу мне никто не помешает посмолить. {w}Отлично."
 
+    stop ambience fadeout 1.0
+
     show bg ext_path_day with dissolve1
 
+    play ambience ambience_forest_day fadein 1.0
     play sound sfx_smoking_cigaret
 
     "Так я и сделал, и курил, идя по лесной тропинке."
@@ -4107,7 +4124,11 @@ label simple_happiness_mod_day2:
     "..."
     th "Ну, наверное сейчас. В любом случае не заблужусь."
 
+    stop ambience fadeout 1.0
+
     show bg ext_musclub_verandah_day with dissolve1
+
+    play ambience ambience_camp_center_day fadein 1.0
 
     "Интуиция меня не подвела."
     "Через пару минут я оказался перед зданием музклуба, только с другой стороны."
@@ -4120,7 +4141,7 @@ label simple_happiness_mod_day2:
 
     show cg d5_mi with dissolve1
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
     stop music fadeout 2.0
 
     "Я открыл дверь, и меня встретила Мику, которая вытирала тряпкой рояль."
@@ -4130,11 +4151,11 @@ label simple_happiness_mod_day2:
     show bg int_musclub_mattresses_day
     with dissolve
 
-    play ambience ambience_music_club_day fadein 2.0
+    play ambience ambience_music_club_day fadein 1.0
     
     "Она оставила тряпку, и подошла ко мне."
 
-    play music music_list["so_good_to_be_careless"] fadeout 3.0 volume 0.85
+    play music music_list["so_good_to_be_careless"] fadeout 2.0 volume 0.85
 
     show mi pioneer grin with dspr
 
@@ -4171,7 +4192,7 @@ label simple_happiness_mod_day2:
     mi "А ещё я рада, что у меня теперь появился помощник и товарищ по клубу!"
     "Я улыбнулся."
 
-    stop music fadeout 1.5
+    stop music fadeout 2.0
 
     me "Я тоже рад, Мику. Ну что, начнём?"
 
@@ -4320,6 +4341,8 @@ label simple_happiness_mod_day2:
 
     play music miku_song_mi_learn1 noloop
 
+    $ renpy.pause(1.0, hard=True)
+
     call calc_music_how_much_play
 
     window show
@@ -4338,6 +4361,8 @@ label simple_happiness_mod_day2:
     window hide
 
     play music miku_song_bad_learn noloop
+
+    $ renpy.pause(1.0, hard=True)
 
     call calc_music_how_much_play
 
@@ -4376,9 +4401,10 @@ label simple_happiness_mod_day2:
 
     mi "А ты тем более!"
     me "Спасибо…"
-    "Честно говоря, я был довольно смущён."
 
     play music music_list["so_good_to_be_careless"] fadein 2.0 volume 0.95
+
+    "Честно говоря, я был довольно смущён."
 
     show mi pioneer grin with dspr
 
@@ -4427,7 +4453,7 @@ label simple_happiness_mod_day2:
     window hide
 
     play sound sfx_clocks fadein 0.5 volume 0.5
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
     stop music fadeout 2.0
 
     show black with clocks_in
@@ -4441,15 +4467,15 @@ label simple_happiness_mod_day2:
 
     call set_time("sunset")
 
-    stop sound fadeout 3.0
+    stop sound fadeout 1.0
+    play ambience ambience_dining_hall_full fadein 1.0
 
     show bg ext_dining_hall_near_sunset
     show mi pioneer normal at cleft
     hide black
     with clocks_out
 
-    play music music_list["dance_of_fireflies"] fadein 3.0 volume 0.85
-    play ambience ambience_dining_hall_full fadein 3.0
+    play music music_list["dance_of_fireflies"] fadein 2.0 volume 0.85
 
     "На удивление, перед входом в столовую всё ещё были пионеры."
     mi "Фух, не опоздали!"
@@ -4603,7 +4629,7 @@ label simple_happiness_mod_day2:
 
     "Все единогласно ответили да, поэтому мы сдали подносы, и все вместе вышли из столовой."
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
 
     hide sl
     hide mi
@@ -4614,6 +4640,8 @@ label simple_happiness_mod_day2:
     show mi pioneer normal at left
     with dissolve1
 
+    play ambience ambience_camp_center_evening fadein 1.0
+
     "Мы вышли из столовой."
 
     show mi pioneer shocked with dspr
@@ -4622,8 +4650,6 @@ label simple_happiness_mod_day2:
     mi "Ладно, я постараюсь успеть!"
 
     show mi pioneer normal with dspr
-
-    play ambience ambience_camp_center_evening fadein 3.0
 
     me "Тебе помочь?"
     mi "Не-е, спасибо. Ключ-то у меня, только вот крюк теперь делать."
@@ -4652,7 +4678,7 @@ label simple_happiness_mod_day2:
 
     "Девушки удалились."
 
-    play music music_list["she_is_kind"] fadein 3.0 volume 0.9
+    play music music_list["she_is_kind"] fadein 2.0 volume 0.9
 
     show sl pioneer smile with dspr
 
@@ -4708,17 +4734,17 @@ label simple_happiness_mod_day2:
     "Я постучал."
     mt "Заходи, Семён."
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
 
     show bg int_house_of_mt_sunset
     show mt pioneer normal at center
     with dissolve
 
+    play ambience ambience_int_cabin_evening fadein 1.0
+
     "Я зашёл."
     "Не зная, как начать разговор, я мялся, и начал говорить что-то не вполне внятное."
-    me "Ольг Дмитрив, а я, а мы тут, это…"
-
-    play ambience ambience_int_cabin_evening fadein 2.0
+    me "Ольг Дмитрвн, а я, а мы тут, это…"
 
     show mt pioneer grin with dspr
 
@@ -4781,7 +4807,7 @@ label simple_happiness_mod_day2:
     "Я открыл коробочку, и полистал колоду. Ну да. {w}Есть и двойки и пятерки. Пятьдесят две карты."
     "Сразу я подумал, что на пляже было бы неплохо перекинуться в картишки."
     "А если вожатая узнает, что я у неё карты взял?"
-    $ renpy.pause(1.0, hard=True)
+    $ renpy.pause(1.5, hard=True)
     "На несколько секунд я задумался, взвешивая за и против."
     th "Ай, чёрт с ним! Была не была!"
     "Я убрал карты в карман."
@@ -4794,18 +4820,19 @@ label simple_happiness_mod_day2:
     "На мобильнике, тем временем, оставалось уже 75%% заряда."
     th "Ну ладно, побреду потихоньку."
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
     stop music fadeout 2.0
 
     show bg ext_house_of_mt_sunset with dissolve
+
+    play ambience ambience_camp_center_evening fadein 1.0
 
     "Я выключил свет, вышел из домика, закрыл его, и направился в сторону пляжа."
     "..."
 
     show bg ext_square_sunset with dissolve
 
-    play ambience ambience_camp_center_evening fadein 2.0
-    play music music_list["everyday_theme"] fadein 3.0 volume 0.7
+    play music music_list["everyday_theme"] fadein 2.0 volume 0.7
 
     "На площади я пересёкся с Мику и Леной."
 
@@ -4827,9 +4854,11 @@ label simple_happiness_mod_day2:
     me "Ну, тогда не будем терять время!"
     "Мы немного прибавили шаг."
 
-    stop ambience fadeout 2.0
+    stop ambience fadeout 1.0
 
     show black with clocks_in
+
+    play ambience ambience_lake_shore_evening fadein 1.0
 
     hide mi
     hide un
@@ -4840,11 +4869,7 @@ label simple_happiness_mod_day2:
     with clocks_out
 
     "И вскоре оказались на пляже."
-
-    play ambience ambience_lake_shore_evening fadein 2.0
-
     "Вечернее солнце заливало воду и всё вокруг приятным, красно-розовым светом."
-
     "А чуть поодаль, возле дерева мы увидели Славю, которая махала нам рукой."
 
     show sl pioneer smile at left
@@ -4898,8 +4923,8 @@ label simple_happiness_mod_day2:
     hide mi
     hide un
     show sl pioneer smile at left
-    show un pioneer normal at right
     show mi pioneer far normal at center
+    show un pioneer normal at right
     with good_dspr
 
     "Спустя пару минут, и закончившееся у всех яблоко, мы кинули остатки под куст, после чего, как-то так само получилось, расселись кружком, кроме Мику, которая легонько вскочила, и сказала."
@@ -4919,7 +4944,7 @@ label simple_happiness_mod_day2:
 
     show un pioneer smile with dspr
 
-    stop music fadeout 3.0
+    stop music fadeout 2.0
 
     "Никто не возражал."
     "Секунд десять Мику потратила на то, чтобы сесть поудобнее и настроиться играть."
@@ -4927,7 +4952,7 @@ label simple_happiness_mod_day2:
 
     play music memories_guitar_only noloop
 
-    $ renpy.pause(5.0, hard=True)
+    $ renpy.pause(2.0, hard=True)
 
     "Она играла какую-то очень красивую, но, как мне казалось, немного грустную мелодию…"
 
@@ -4951,8 +4976,6 @@ label simple_happiness_mod_day2:
 
     "Что-то очень теплое и душевное навевает эта композиция…"
 
-    $ renpy.pause(1.0, hard=True)
-
     show cg mi_guitar_yam with dissolve
 
     "Я посмотрел на Мику. {w}Она играла с закрытыми глазами, полностью сосредоточившись на музыке."
@@ -4961,15 +4984,12 @@ label simple_happiness_mod_day2:
 
     call calc_music_how_much_play
 
-    stop music fadeout 1.0
-
-    hide cg with dissolve
-
-    window show
-
+    hide cg
     hide mi
     show mi pioneer smile at center
-    with good_dspr
+    with dissolve
+
+    window show
 
     "Когда её пальцы сыграли последние аккорды, а звук совсем затих, она открыла глаза, и посмотрела на нас."
     "Я очнулся первый."
@@ -5006,12 +5026,12 @@ label simple_happiness_mod_day2:
     show mi pioneer happy
     with dspr
 
+    play music music_list["sweet_darkness"] fadein 2.5 volume 0.85
+
     un "Мику, очень красиво! А она как-нибудь называется?"
     mi "Да. Я назвала её «Воспоминания». Это воспоминания о моей родине."
     sl "Ты её ещё и сама сочинила? Очень здорово!"
     "Ещё обменявшись любезностями, и порасспрашивав Мику о песне, мы переключились на другую тему."
-
-    play music music_list["sweet_darkness"] fadein 2.5 volume 0.85
 
     show mi pioneer smile
     show sl pioneer normal
@@ -5198,14 +5218,13 @@ label simple_happiness_mod_day2:
     me "Значит нам с тобой играть."
     "Я выдохнул, и мир вновь стал преобретать чёткость."
 
-    show bg ext_beach_sunset with dissolve1
-
+    show bg ext_beach_sunset
     show un pioneer smile at deblurring
     hide un
     show sl pioneer smile at left
     show mi pioneer normal at right
     show un pioneer smile at center
-    with long_dspr
+    with dissolve1
 
     sl "А мы с Мику."
 
@@ -5282,10 +5301,10 @@ label d2_card_game_r1_me_win:
 
     $ game_starts_r1 = False
 
-    window show
-
     show un pioneer normal at right
     with dspr
+
+    window show
 
     "Я обыграл Лену."
     "Но мне показалось, что это было совсем не просто."
@@ -5366,10 +5385,10 @@ label d2_card_game_r1_me_fail:
 
     $ game_starts_r1 = False
 
-    window show
-
     show un pioneer normal at right
     with dspr
+
+    window show
 
     "Я проиграл. {w}Вот же блин!"
     "Сложно играть в игру, которую не ты придумал, и правила которой узнал 10 минут назад."
@@ -5436,10 +5455,12 @@ label d2_card_game_r1_me_fail:
 label d2_card_game_r1_draw:
     show bg ext_beach_sunset
 
-    window show
+    pause(1.0)
 
     show un pioneer normal at center
-    with dspr
+    with dissolve
+
+    window show
 
     "Мы сыграли в ничью."
     me "Не-е, так дело не пойдёт."
@@ -5503,10 +5524,10 @@ label d2_card_game_r2_me_win:
     $ game_starts_r2 = False
     $ card_game_d2_win = True
 
-    window show
-
     show cg d2_cards_scheme_r2_me_win
     with dissolve
+
+    window show
 
     "Фух, это было непросто, но я выиграл!"
 
@@ -5577,10 +5598,10 @@ label d2_card_game_r2_me_fail:
 
     $ game_starts_r2 = False
 
-    window show
-
     show cg d2_cards_scheme_r2_sl_win
     with dissolve
+
+    window show
 
     "Славя обыграла меня."
     "Я выдохнул, и откинулся назад, как после тяжелой катки за компом."
@@ -5612,10 +5633,12 @@ label d2_card_game_r2_me_fail:
 label d2_card_game_r2_draw:
     show bg ext_beach_sunset
 
-    window show
+    pause(1.0)
 
     show sl pioneer smile at center
     with dspr
+
+    window show
 
     me "Как это? Ничья?"
     sl "Переигрываем!"
@@ -5754,9 +5777,12 @@ label simple_happiness_mod_day2_continue:
     sl "Ой, давай! Спасибо большое!"
     me "Не стоит."
 
+    window hide
+
+    hide sl with dspr
+
     call set_time("night")
 
-    hide sl
     show bg ext_beach_night
     show mi pioneer normal at fleft
     show un pioneer smile at left
@@ -5775,9 +5801,12 @@ label simple_happiness_mod_day2_continue:
     sl "Тогда действительно пойдёмте."
     "Лена также ответила положительно, и мы двинулись в сторону домиков…"
 
-    stop ambience fadeout 3.0
+    stop ambience fadeout 1.0
 
     show black with clocks_in
+
+    play ambience ambience_camp_center_night fadein 1.0
+
     hide mi
     hide sl
     hide un
@@ -5787,8 +5816,6 @@ label simple_happiness_mod_day2_continue:
     show sl pioneer normal at right
     hide black
     with clocks_out
-
-    play ambience ambience_camp_center_night fadein 3.0
 
     "По пути мы обсуждали общие увлечения."
     "Оказалось, например, что Я, как и Славя, в разной степени увлечены садоводчеством, а Лена училась в музыкальной школе на духовые, и умеет играть на флейте."
@@ -5888,7 +5915,7 @@ label simple_happiness_mod_day2_continue:
     "..."
     th "Пора {i}домой{/i}."
 
-    stop music fadeout 3.0
+    stop music fadeout 2.0
 
     show black with clocks_in
     show bg ext_house_of_mt_night_without_light
@@ -5897,14 +5924,14 @@ label simple_happiness_mod_day2_continue:
 
     play music music_list["goodbye_home_shores"] fadein 2.0 volume 0.75
 
-    stop ambience fadeout 1.0
-
     "Сделав несколько поворотов, я оказался перед нашим с вожатой домиком."
     "Свет был выключен."
 
+    stop ambience fadeout 1.0
+
     show bg int_house_of_mt_night2 with dissolve
 
-    play ambience ambience_int_cabin_night fadein 1.0 volume 0.8
+    play ambience ambience_int_cabin_night fadein 1.0
 
     "Я тихонько открыл дверь, зашёл внутрь и повернул ключ."
     "Но, вожатая, кажется, спала очень чутко, потому как я разглядел шевеление под одеялом."
@@ -5939,12 +5966,13 @@ label simple_happiness_mod_day2_continue:
     "И Славя… {w}Что же между нами происходит? Я накручиваю себе что-то, или…"
     "Я боялся даже подумать это слово. Больно колол первый и единственный опыт."
 
-    stop music fadeout 5.0
-    stop ambience fadeout 3.0
+    stop music fadeout 2.0
 
     nvl clear
     "Постепенно я начал засыпать."
     "А мысли так и продолжили крутиться вокруг девушки с золотыми волосами и глазами голубого цвета, как самое чистое на свете море. {w}В которых хотелось утонуть."
+
+    stop ambience fadeout 1.0
 
     jump simple_happiness_mod_day3
 
@@ -5959,7 +5987,7 @@ label simple_happiness_mod_day3:
 
     $ set_mode_adv()
 
-    play ambience ambience_int_cabin_day fadein 3.0 volume 0.9
+    play ambience ambience_int_cabin_day fadein 1.0
 
     "Спал я, как убитый."
     "Мне даже ничего не снилось."
@@ -6061,7 +6089,7 @@ label simple_happiness_mod_day3:
 
     show bg int_dining_hall_people_day with dissolve
 
-    play ambience ambience_dining_hall_full fadein 1.5
+    play ambience ambience_dining_hall_full fadein 1.0
 
     "Никого из знакомых я не увидел, так что сразу зашел в столовую, получил порцию, и занял своё место…"
     "Столовая всё больше заполнялась пионерами, а я сидел за столом один, и потихоньку жевал кашу, по всей видимости «Геркулес»."
@@ -7916,7 +7944,7 @@ label simple_happiness_mod_day4:
 
     $ set_mode_adv()
 
-    play ambience ambience_int_cabin_day fadein 3.0 volume 0.9
+    play ambience ambience_int_cabin_day fadein 1.0 volume 0.9
     play music music_list["everyday_theme"] fadein 5.0 volume 0.8
 
     "Судя по ощущениям, проснулся я довольно рано."
@@ -8780,7 +8808,7 @@ label simple_happiness_mod_day4:
     show mi pioneer normal at fright
     with dissolve
 
-    play ambience ambience_music_club_day
+    play ambience ambience_music_club_day fadein 1.0
 
     mi "Сёма, ты как раз вовремя! У меня уже всё готово!"
 
@@ -9349,6 +9377,7 @@ label simple_happiness_mod_day4:
 
     hide sl
     show sl pioneer smile close at right
+    with good_dspr
 
     "Взявшись за руки, мы пошли в произвольном направлении, беседуя по дороге."
 
@@ -9700,7 +9729,7 @@ label simple_happiness_mod_day_none:
 
     play sound sfx_light_candle volume 0.7
 
-    "Внезапно, я услышал, как кто-то поджигает спичку."
+    "Внезапно, я услышал, как кто-то чиркает зажигалкой."
     th "У меня уже галлюцинации?"
     "Моё сознание вырисовывало странную картину."
 
@@ -9734,11 +9763,12 @@ label simple_happiness_mod_day_none:
     "Полностью отдышавшись, я наконец выпрямился, и посмотрел перед собой."
 
     stop sound3 fadeout 2.0
-    play music music_list["door_to_nightmare"] fadein 2.5
+    play music music_list["door_to_nightmare"] fadein 4.0 volume 0.9
 
+    hide prologue_dream
     show pi normal far at center
     show uv guilty far at fright
-    with long_dspr
+    with dissolve
 
     "В другом конце комнаты стоял пионер."
     th "Так, ну по крайней мере можно с уверенностью говорить о том, что я всё ещё в Совёнке. Это радует."
@@ -9959,7 +9989,7 @@ label simple_happiness_mod_day_none:
     th "Я просто хочу свалить отсюда."
     me "Что ж… Очень мило с вашей стороны, но с меня достаточно."
 
-    show uv normal
+    show uv normal with dspr
 
     uv "Просто предупреждаю."
     uv "Неправильные витки обычно сразу исчезают, но твой кажется удивительно стабильным, но останется ли он таким, вопрос открытый."
@@ -9994,7 +10024,7 @@ label simple_happiness_mod_day_none:
 label simple_happiness_mod_day5:
     $ renpy.block_rollback()
     $ backdrop = "days"
-    $ new_chapter(6, u"Простое Счастье. День 5")
+    $ new_chapter(5, u"Простое Счастье. День 5")
 
     call set_time
 
@@ -16768,7 +16798,9 @@ label simple_happiness_mod_epilogue:
     "Поэтому, оставалось решить лишь бытовые «мелочи» …"
     nvl clear
 
-    pause(1.0)
+    nvl hide dissolve
+    $ renpy.pause(1.0, hard=True)
+    call to_nvl_mode
 
     "Прошёл месяц."
     "После похода по нескольким государственным инстанциям, мы убедились, что все её документы подлинные, но следов её родителей так и не нашли. Их как будто никогда и не существовало в нашем мире."
@@ -16961,7 +16993,7 @@ label simple_happiness_mod_epilogue:
 
     show bg int_semen_room_evening_new
     show sl civil2 smile at fright
-    with dissolve
+    with dissolve1
 
     pause(1.0)
 
