@@ -100,11 +100,14 @@ init:
     image cg ep_summer_walk = "mods/simple_happiness_mod_efim/images/cg/simple_happiness_epilogue_summer_walk.png"
 
     #   Спрайты
-    image sl veryfar = ConditionSwitch(
-        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_veryfar_normal.png", im.matrix.tint(0.94, 0.82, 1.0)),
+    image sl veryfar = Transform(
+        ConditionSwitch(
+        "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_veryfar_normal.png", im.matrix.tint(0.94, 0.82, 1.0),),
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_veryfar_normal.png", im.matrix.tint(0.63, 0.78, 0.82)),
         True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_veryfar_normal.png"
-    )
+        ),
+    zoom=0.75,
+    bilinear=True)
     image sl civil normal = ConditionSwitch(
         "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_normal.png", im.matrix.tint(0.94, 0.82, 1.0)),
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_normal.png", im.matrix.tint(0.63, 0.78, 0.82)),
@@ -115,16 +118,20 @@ init:
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_smile.png", im.matrix.tint(0.63, 0.78, 0.82)),
         True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_smile.png"
     )
-    image sl civil2 smile = ConditionSwitch(
+    image sl civil2 smile = Transform(
+        ConditionSwitch(
         "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil2_smile.png", im.matrix.tint(0.94, 0.82, 1.0)),
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil2_smile.png", im.matrix.tint(0.63, 0.78, 0.82)),
         True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil2_smile.png"
-    )
-    image sl civil2 smile2 = ConditionSwitch(
+    ),
+    bilinear=True)
+    image sl civil2 smile2 = Transform(
+        ConditionSwitch(
         "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_civil2_smile2.png", im.matrix.tint(0.94, 0.82, 1.0)),
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_civil2_smile2.png", im.matrix.tint(0.63, 0.78, 0.82)),
         True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_civil2_smile2.png"
-    )
+    ),
+    bilinear=True)
     image sl pioneer_wet smile = ConditionSwitch(
         "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_wet_smile.png", im.matrix.tint(0.94, 0.82, 1.0)),
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_wet_smile.png", im.matrix.tint(0.63, 0.78, 0.82)),
@@ -1093,6 +1100,8 @@ label simple_happiness_mod_day1:
     "Точно не знаю, но наверняка всё вместе."
     "В конце концов, мы направились в сторону столовой и разговорились."
 
+    window hide
+
     show black with clocks_in
 
     show bg ext_square_day
@@ -1105,6 +1114,8 @@ label simple_happiness_mod_day1:
     hide black
     with clocks_out
 
+    window show
+
     "За беседой я и не заметил, как мы миновали площадь, и повернув налево, оказались на тропинке перед невысоким одноэтажным строением, в котором легко угадывалась столовая."
     "Типичная такая, постсоветская столовка, где подают слипшиеся несоленые макароны и прочие гастрономические шедевры."
     "У крыльца столовой толпилась небольшая кучка пионеров, спешно заходящих внутрь."
@@ -1116,10 +1127,11 @@ label simple_happiness_mod_day1:
     slp "Конечно можно, и даже нужно! Хи-хи. {w}Кормят прекрасно, тебе понравится!"
     me "Ну что же, будем поглядеть…"
 
-    stop ambience fadeout 2.0
-    play ambience ambience_dining_hall_full fadein 1.5
+    stop ambience fadeout 1.0
 
     show bg int_dining_hall_people_day with dissolve1
+
+    play ambience ambience_dining_hall_full fadein 1.0
 
     "Мы поднялись по ступенькам, и открыв дверь, оказались в… Столовой."
     "Самой обыкновенной. {w}Кафельный пол, такие же стены, металлические конструкции линии выдачи, и простенькие стулья, по типу тех, что стоят в школах, техникумах и институтах…"
@@ -1127,6 +1139,10 @@ label simple_happiness_mod_day1:
     "Всё было очень чисто и аккуратно, ничего не побито и не заляпано, плитка аж сверкала."
     "Уж не знаю, проводили ли тут на днях генеральную уборку, или всё действительно новое, но состояние помещения уже придавало уверенности."
     slp "Ну вот. Ты поищи пока свободный столик, а я пойду отмечу нас у вожатого другого отряда."
+
+    show sl pioneer smile at walk_away_right
+
+    pause(1.0)
 
     hide sl with good_dspr
 
@@ -1431,7 +1447,7 @@ label simple_happiness_mod_day1:
     th "Или девушку?.."
     "Такая же заботливая, готовая помочь."
     "..."
-    "Когда дело дошло до обхвата талии, я почувствовал, что её неудобно."
+    "Когда дело дошло до обхвата талии, я почувствовал, что ей неудобно."
     "Она, видимо из-за разницы в росте, не могла полностью меня обхватить, и ей приходилось всё сильнее и сильнее ко мне прижиматься…"
 
     show sl pioneer shy close with dspr
@@ -1638,9 +1654,12 @@ label simple_happiness_mod_day1:
 
     call smoking_process(with_pause=1.0)
 
+    stop music fadeout 2.0
+
+    pause(1.0)
+
     "Погружаясь в водоворот мыслей, я достал из кармана сигареты, и закурил."
 
-    stop music fadeout 2.0
     play music music_list["reflection_on_water"] fadein 2.0 volume 0.5
 
     "Мысли опять потекли в сторону решения загадки касательно моего положения здесь."
@@ -2228,7 +2247,7 @@ label simple_happiness_mod_day1:
     dv "Да. {w}Одна сигарета, и твой должок закрыт."
     me "Хорошо. Но при одном условии. {w}Ты дашь мне жвачку. Пару ломтиков."
     th "Не знаю, откуда я был уверен, что она у неё есть."
-    th "Нно Алиса походила на бунтарку, которая лет, этак, десять назад, сошла бы за контингент, обитающий у подъезда, и сидящий на корточках."
+    th "Но Алиса походила на бунтарку, которая лет, этак, десять назад, сошла бы за контингент, обитающий у подъезда, и сидящий на корточках."
     th "Ну, или на панкуху."
 
     show dv pioneer smile with dspr
@@ -3718,10 +3737,12 @@ label simple_happiness_mod_day2:
 
     hide sl
     show bg ext_library_day
-    show sl pioneer smile at cright
     with dissolve
 
     play ambience ambience_camp_center_day fadein 1.0
+
+    show sl pioneer smile at cright
+    with good_dspr
 
     me "Чем же она по ночам занимается, что днём спит."
     sl "Даже не знаю. Наверное, книжки читает. Мы хоть и общаемся, но не очень много."
@@ -3865,7 +3886,6 @@ label simple_happiness_mod_day2:
 
     hide sl
     show bg ext_dining_hall_near_day
-    show sl pioneer normal at right
     hide black with clocks_out
 
     window show
@@ -3874,7 +3894,8 @@ label simple_happiness_mod_day2:
     "Мы также сидели со Славей, но уже отсутствовало всякое напряжение, и мы весело болтали."
     "Вместе же, мы вышли из столовой."
 
-    show sl pioneer smile with dspr
+    show sl pioneer smile at right
+    with dspr
 
     sl "Ну что, Семён, теперь ты полноправный пионер в этом лагере."
     sl "Уже не походишь с тобой весь день, да и обязанности у тебя появились."
@@ -3915,7 +3936,7 @@ label simple_happiness_mod_day2:
     usp "Во те раз! Они тут уже чуть ли не целуются!"
 
     show us pioneer smile at center
-    with dspr
+    with half_good_dspr
 
     "Я вздрогнул от неожиданности, и обернулся. Позади меня стояла Ульяна."
     "Я нахмурился, и сказал."
@@ -3926,6 +3947,7 @@ label simple_happiness_mod_day2:
     us "Ой, боюсь-боюсь. А ты догони сначала! Бе-е!"
 
     show us pioneer grin at run_away_left
+    pause(0.5)
     hide us with dspr
 
     "После этих слов Ульяна умчалась прочь."
@@ -4593,10 +4615,10 @@ label simple_happiness_mod_day2:
 
     "Я вспомнил сегодняшний инцидент, и посмотрел на Славю. Она, кажется, сделала то же самое, и тихонько хихикла."
 
-    show sl pioneer smile
-    show un pioneer smile
     hide mi
+    show sl pioneer smile
     show mi pioneer grin far at fleft
+    show un pioneer smile
     with good_dspr
 
     "Мику встала."
@@ -5008,7 +5030,7 @@ label simple_happiness_mod_day2:
     play sound2 "<from 0.2>" + sfx_simon_applause fadein 0.5 volume 0.8 loop
     play sound3 "<from 0.5>" + sfx_simon_applause fadein 0.5 volume 0.55 loop
 
-    "Буквально через секунду подключились и всё остальные."
+    "Буквально через секунду подключились и все остальные."
 
     hide mi
     show mi pioneer shy at center
@@ -5076,12 +5098,12 @@ label simple_happiness_mod_day2:
 
     me "Вот как… Ну теперь у нас две колоды. Чьей будем играть?"
 
-    show un pioneer smile2
+    show un pioneer smile2 with dspr
 
     un "А у меня есть идея!"
     "Все посмотрели на Лену."
 
-    show un pioneer smile3
+    show un pioneer smile3 with dspr
 
     un "Нас четверо, и две колоды. Давайте небольшой турнир сыграем! А то тогда ничего не выгорело."
 
@@ -5350,6 +5372,7 @@ label d2_card_game_r1_me_win:
 
     show sl pioneer smile
     show mi pioneer smile
+    with dspr
 
     mi "Ну, что, теперь финал! Кто из вас победил?"
     "Она обратилась ко мне и Лене."
@@ -5825,7 +5848,7 @@ label simple_happiness_mod_day2_continue:
     hide mi
     hide un
     show sl pioneer smile at cright
-    with good_dspr
+    with dissolve
 
     me "Давай я тебя провожу прям до домика. А то поздно уже."
 
@@ -5908,7 +5931,7 @@ label simple_happiness_mod_day2_continue:
 
     "Славя поднялась на ступеньки, и открыв дверь, обернулась на меня."
 
-    hide sl with good_dspr
+    hide sl with long_dspr
 
     "Только после этого она зашла в домик."
     "А я ещё несколько секунд стоял, переполняемый непонятным чувством."
@@ -5972,6 +5995,12 @@ label simple_happiness_mod_day2_continue:
     "Постепенно я начал засыпать."
     "А мысли так и продолжили крутиться вокруг девушки с золотыми волосами и глазами голубого цвета, как самое чистое на свете море. {w}В которых хотелось утонуть."
 
+    call to_adv_mode
+
+    show blink
+
+    pause(1.0)
+
     stop ambience fadeout 1.0
 
     jump simple_happiness_mod_day3
@@ -5994,11 +6023,15 @@ label simple_happiness_mod_day3:
     "Сказывалась вчерашняя беготня и поздний отбой."
     th "Вставать, что-ли?"
 
+    hide blink
     show bg int_house_of_mt_day
     show mt nightdress normal at fright
+    show unblink
     with dissolve2
 
     play music music_list["dance_of_fireflies"] fadein 3.5 volume 0.9
+
+    hide unblink
 
     "Я открыл глаза."
     "По домику уже ходила вожатая в халате."
@@ -6745,11 +6778,11 @@ label simple_happiness_mod_day3:
     "Вместо этого лёг в кровать, дождался пока вожатая выйдет, и завел в телефоне таймер на полтора часа."
 
     stop music fadeout 2.0
-    pause(1.0)
+    pause(2.0)
     play sound sfx_clocks fadein 0.25
 
     show black with clocks_in
-    pause(0.5)
+    pause(1.5)
     hide black with clocks_out
 
     stop sound fadeout 0.25
@@ -7313,7 +7346,7 @@ label simple_happiness_mod_day3:
     show mi pioneer normal at cright
     with long_dspr
 
-    "Я подошёл ближе."
+    "Я подошёл ближе к Мику."
     me "Мику! Целый день не виделись. А ты чего здесь, за пультом, я имею в виду?"
 
     show mi pioneer happy with dspr
@@ -7789,6 +7822,8 @@ label simple_happiness_mod_day3:
     "Отпрянув от девушки, я вернул её в вертикальное положение, и посмотрел в глаза."
     "Они излучали бесконечную влюблённость."
 
+    hide unblink
+
     stop music fadeout 5.0
     
     hide sl
@@ -7887,6 +7922,8 @@ label simple_happiness_mod_day3:
     "Через пару минут, от накопившейся усталости и расслабившей сигареты, мысли потекли вяло."
     "Я решил оставить все размышления на утро, которое, как известно, вечера мудренее, и пошел в сторону домика."
 
+    window hide
+
     show black with clocks_in
     
     show bg ext_house_of_mt_night_without_light
@@ -7900,6 +7937,8 @@ label simple_happiness_mod_day3:
 
     show bg int_house_of_mt_night2
     hide black with clocks_out
+
+    window show
 
     "Я зашёл в домик."
 
@@ -8505,7 +8544,7 @@ label simple_happiness_mod_day4:
 
     "Из приоткрытого окна донёсся звук горна."
     "Я отложил гитару, хлопнул себя по коленям, и встал."
-    "Ну, игра игрой, а обед по расписанию! Идём?"
+    me "Ну, игра игрой, а обед по расписанию! Идём?"
     mi "Да, идём!"
     "Она тоже встала с матрасов, и выйдя из клуба, мы направились в столовую."
 
@@ -8659,7 +8698,7 @@ label simple_happiness_mod_day4:
     call to_nvl_mode
 
     "Женя выдала нам экспозицию того, что нужно делать, и мы принялись за работу."
-    "Оказалось, что книги нужно было правильно расставить в правильном порядке по первой букве названия книги на всех полках."
+    "Оказалось, что книги нужно было расставить в правильном порядке по первой букве названия книги на всех полках."
     "Поэтому, Женя взяла на себя низкие стеллажи, которые стояли по периметру, а мы со Славей те, что стояли посреди помещения, высокие."
     "Славя сверялась со списком, и говорила мне, какую книгу куда переставить."
     "Иногда было довольно высоко, так что даже мне приходилось время от времени вставать на стул, чтобы дотянуться до верхних полок."
@@ -8914,7 +8953,7 @@ label simple_happiness_mod_day4:
 
     "Докурив сигарету, я вышел на тропинку перед входом, и пригляделся."
 
-    show un pioneer normal far with long_dspr
+    show un pioneer normal far with dissolve
 
     th "Лена!"
     th "А что она тут забыла? Ну ладно, подождём. Гостем будет."
@@ -8922,7 +8961,7 @@ label simple_happiness_mod_day4:
     pause(1.0)
 
     hide un
-    show un pioneer normal with good_dspr
+    show un pioneer normal with long_dspr
 
     "Скоро Лена подошла и заговорила."
     un "Привет, Семён. Я тебя еще только подходя увидела."
@@ -9221,7 +9260,7 @@ label simple_happiness_mod_day4:
     with clocks_out
 
     "Вскоре пришла Мику. На подносе у неё было четыре чашечки чая."
-    "Я встал, и помог её раздать их, после чего сел обратно, а Мику облокотилась на пианино."
+    "Я встал, и помог ей раздать их, после чего сел обратно, а Мику облокотилась на пианино."
     "Славя отпила глоток, и сказала."
     sl "Слушайте, ребята, вы же какие-нибудь песни разучиваете?"
     sl "Не хотели бы организовать небольшой концерт, хотя бы тут, прямо перед зданием клуба?"
@@ -13636,7 +13675,7 @@ label simple_happiness_mod_day6:
 
     "Я разблокировал телефон, и открыл последнюю сохранённую заметку."
     "Когда я прочёл содержимое, то обомлел."
-    "В заметке была всего одно предложение:"
+    "В заметке было всего одно предложение:"
     "{i}Ты здесь не просто так.{/i}"
     th "Что за?.."
     "Не мог же это я написать?"
@@ -14458,7 +14497,9 @@ label simple_happiness_mod_day7:
 
     stop music fadeout 2.0
 
-    show bg ext_square_day with dissolve
+    pause(1.0)
+
+    show bg ext_square_day with dissolve1
 
     play music music_list["forest_maiden"] fadein 2.0 volume 0.95
 
