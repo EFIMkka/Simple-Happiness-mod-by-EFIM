@@ -106,8 +106,7 @@ init:
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_veryfar_normal.png", im.matrix.tint(0.63, 0.78, 0.82)),
         True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_veryfar_normal.png"
         ),
-    zoom=0.75,
-    bilinear=True)
+    zoom=0.75)
     image sl civil normal = ConditionSwitch(
         "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_normal.png", im.matrix.tint(0.94, 0.82, 1.0)),
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_normal.png", im.matrix.tint(0.63, 0.78, 0.82)),
@@ -118,20 +117,16 @@ init:
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_smile.png", im.matrix.tint(0.63, 0.78, 0.82)),
         True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_smile.png"
     )
-    image sl civil2 smile = Transform(
-        ConditionSwitch(
+    image sl civil2 smile = ConditionSwitch(
         "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil2_smile.png", im.matrix.tint(0.94, 0.82, 1.0)),
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil2_smile.png", im.matrix.tint(0.63, 0.78, 0.82)),
         True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil2_smile.png"
-    ),
-    bilinear=True)
-    image sl civil2 smile2 = Transform(
-        ConditionSwitch(
+    )
+    image sl civil2 smile2 = ConditionSwitch(
         "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_civil2_smile2.png", im.matrix.tint(0.94, 0.82, 1.0)),
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_civil2_smile2.png", im.matrix.tint(0.63, 0.78, 0.82)),
         True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_2_civil2_smile2.png"
-    ),
-    bilinear=True)
+    )
     image sl pioneer_wet smile = ConditionSwitch(
         "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_wet_smile.png", im.matrix.tint(0.94, 0.82, 1.0)),
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_wet_smile.png", im.matrix.tint(0.63, 0.78, 0.82)),
