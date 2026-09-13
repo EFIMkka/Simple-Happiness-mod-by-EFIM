@@ -106,7 +106,8 @@ init:
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_veryfar_normal.png", im.matrix.tint(0.63, 0.78, 0.82)),
         True, "mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_pioneer_veryfar_normal.png"
         ),
-    zoom=0.75)
+    zoom=0.75,
+    yanchor=1.0)
     image sl civil normal = ConditionSwitch(
         "persistent.sprite_time == 'sunset'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_normal.png", im.matrix.tint(0.94, 0.82, 1.0)),
         "persistent.sprite_time == 'night'", im.MatrixColor("mods/simple_happiness_mod_efim/images/sp/sl/simple_happiness_sl_1_civil_normal.png", im.matrix.tint(0.63, 0.78, 0.82)),
