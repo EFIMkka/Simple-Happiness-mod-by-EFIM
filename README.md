@@ -32,11 +32,15 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3796377212
 
 !! Для корректной работы модификации необходимо иметь установленный и активированный Hentai Patch. Его можно найти в мастерской Steam !! (https://steamcommunity.com/sharedfiles/filedetails/?id=1118110148)
 
-
 Но, если вы решили ставить вручную:
 1) Папку из архива "simple_happiness_mod_efim" целиком поместить по пути "...\Everlasting Summer\game\mods"
 2) Запустить игру, перейти в настройки, "Моды и пользовательские сценарии"
 3) Играть
+
+
+**ПРО КОНФЛИКТЫ МОДОВ**
+
+В виду особенностей работы движка Ren'Py, моды для игр на этом движке очень часто конфликтуют друг с другом. Во избежание этого крайне рекомендую пользоваться <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1826799366">менеджером модов</a>
 
 
 **БЛАГОДАРНОСТИ**
@@ -53,7 +57,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3796377212
 
 Модификация, скорее всего, будет не раз обновляться. Предлагаю вам ознакомиться с Roadmap на картинке ниже:
 
-![image](https://i.ibb.co/gMf95ffr/mod-roadmap.png)
+![image](https://i.ibb.co/84DwkVH3/mod-roadmap-1-2.png)
 
 Также, у меня есть идеи для расширения контента, но случиться это не раньше декабря 2026 года.
 
